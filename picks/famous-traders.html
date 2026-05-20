@@ -157,12 +157,12 @@
     <button class="filter-btn active" data-cat="all">All · 26</button>
     <button class="filter-btn" data-cat="value">Value · 8</button>
     <button class="filter-btn" data-cat="macro">Macro · 5</button>
-    <button class="filter-btn" data-cat="tiger">Tiger Cubs · 5</button>
+    <button class="filter-btn" data-cat="growth">Tiger Cubs · 5</button>
     <button class="filter-btn" data-cat="activist">Activist · 2</button>
-    <button class="filter-btn" data-cat="ai">AI / new-gen · 3</button>
-    <button class="filter-btn" data-cat="founder">Founder · 1</button>
+    <button class="filter-btn" data-cat="new-gen-ai">AI / new-gen · 3</button>
+    <button class="filter-btn" data-cat="founder-philanthropy">Founder · 1</button>
     <button class="filter-btn" data-cat="political">Political · 1</button>
-    <button class="filter-btn" data-cat="private">Private · 1</button>
+    <button class="filter-btn" data-cat="honesty-entry">Private · 1</button>
   </div>
 
   <div class="trader-grid reveal-stagger" id="trader-grid" style="margin-top:32px;">
@@ -257,24 +257,32 @@
 const CAT_COLORS = {
   value:'var(--cat-value)',
   macro:'var(--cat-macro)',
+  growth:'var(--cat-tiger)',         // Tiger Cubs / growth tech
   tiger:'var(--cat-tiger)',
   activist:'var(--cat-activist)',
   contrarian:'var(--cat-contrarian)',
+  'new-gen-ai':'var(--cat-ai)',
   ai:'var(--cat-ai)',
   political:'var(--cat-political)',
+  'founder-philanthropy':'var(--cat-founder)',
   founder:'var(--cat-founder)',
+  'honesty-entry':'var(--cat-private)',
   private:'var(--cat-private)',
 };
 
 const CAT_LABELS = {
   value:'Value',
   macro:'Macro',
+  growth:'Tiger Cub / growth',
   tiger:'Tiger Cub',
   activist:'Activist',
   contrarian:'Contrarian',
+  'new-gen-ai':'AI / new-gen',
   ai:'AI / new-gen',
   political:'Congressional',
+  'founder-philanthropy':'Founder · philanthropy',
   founder:'Founder',
+  'honesty-entry':'Private — not disclosed',
   private:'Private — not disclosed',
 };
 
