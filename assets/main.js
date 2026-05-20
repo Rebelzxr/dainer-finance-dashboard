@@ -95,20 +95,35 @@ function setupCursorMark(){
   });
 }
 
-// Inject Mars-horizon backdrop layers if missing (so every page has them)
+// Detect relative path to assets/ — '' from root, '../' from picks/ + newsletter/
+function assetPath(name){
+  const p = window.location.pathname;
+  const inSubdir = /\/(picks|newsletter|mockup)\//.test(p);
+  return (inSubdir ? '../' : '') + 'assets/' + name;
+}
+
+// Inject Mars-horizon backdrop layers + sandstorm video if missing (so every page has them)
 function injectBackdrop(){
   if (document.querySelector('.horizon')) return;
+  // 6 ambient layers (gradient sky, ridges, haze, grain, grid)
   const layers = ['horizon','ridge far','ridge','haze','grain','bg-grid'];
   layers.forEach(cls => {
     const el = document.createElement('div');
     el.className = cls;
     document.body.insertBefore(el, document.body.firstChild);
   });
-  // Mars hero photo only if body has class
-  if (document.body.classList.contains('has-mars-hero')){
-    const m = document.createElement('div');
-    m.className = 'mars-hero-bg';
-    document.body.insertBefore(m, document.body.firstChild);
+  // Mars sandstorm VIDEO on every page (auto-injected) with photo as poster fallback
+  if (!document.querySelector('.mars-hero-video')){
+    const v = document.createElement('video');
+    v.className = 'mars-hero-video';
+    v.src = assetPath('mars-sandstorm.webm');
+    v.poster = assetPath('mars-horizon.jpg');
+    v.autoplay = true;
+    v.loop = true;
+    v.muted = true;
+    v.setAttribute('playsinline','');
+    v.setAttribute('aria-hidden','true');
+    document.body.insertBefore(v, document.body.firstChild);
   }
 }
 
