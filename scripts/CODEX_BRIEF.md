@@ -269,7 +269,7 @@ git add newsletter/ data/
 git commit -m "Publish issue ${DATE}"
 git push
 
-echo "Published. Live at https://dainer.github.io/dainer-finance-dashboard/newsletter/${BASE}"
+echo "Published. Live at https://rebelzxr.github.io/dainer-finance-dashboard/newsletter/${BASE}"
 ```
 
 Plus `scripts/update-archive.py` and `scripts/regen-rss.py` — small helpers that:
@@ -390,20 +390,20 @@ git commit -m "feat: DAINER Finance dashboard v0.1 — 4 reports + calculator + 
 # Create remote (use gh CLI; Dainer's gh is authenticated for his alphaquant.ai@gmail.com account)
 gh repo create dainer-finance-dashboard --public \
   --description "A builder's weekly read on markets, picks, and capital." \
-  --homepage "https://dainer.github.io/dainer-finance-dashboard/"
+  --homepage "https://rebelzxr.github.io/dainer-finance-dashboard/"
 
-git remote add origin "https://github.com/$(gh api user --jq .login)/dainer-finance-dashboard.git"
+git remote add origin "https://github.com/Rebelzxr/dainer-finance-dashboard.git"
 git branch -M main
 git push -u origin main
 
 # Enable Pages
-gh api -X POST "/repos/$(gh api user --jq .login)/dainer-finance-dashboard/pages" \
+gh api -X POST "/repos/Rebelzxr/dainer-finance-dashboard/pages" \
   -f source.branch=main \
   -f source.path=/
 
 # Verify
 echo "Site will be live in 2-5 min at:"
-echo "https://$(gh api user --jq .login).github.io/dainer-finance-dashboard/"
+echo "https://rebelzxr.github.io/dainer-finance-dashboard/"
 ```
 
 **Acceptance:**
