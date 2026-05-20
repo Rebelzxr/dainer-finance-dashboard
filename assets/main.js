@@ -112,8 +112,16 @@ function injectBackdrop(){
     el.className = cls;
     document.body.insertBefore(el, document.body.firstChild);
   });
+  // Static Mars photo sits behind the video and remains visible for reduced motion.
+  if (!document.querySelector('.mars-hero-bg')){
+    const bg = document.createElement('div');
+    bg.className = 'mars-hero-bg';
+    bg.setAttribute('aria-hidden','true');
+    document.body.insertBefore(bg, document.body.firstChild);
+  }
   // Mars sandstorm VIDEO on every page (auto-injected) with photo as poster fallback
-  if (!document.querySelector('.mars-hero-video')){
+  const reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!reduceMotion && !document.querySelector('.mars-hero-video')){
     const v = document.createElement('video');
     v.className = 'mars-hero-video';
     v.src = assetPath('mars-sandstorm.webm');
@@ -121,9 +129,13 @@ function injectBackdrop(){
     v.autoplay = true;
     v.loop = true;
     v.muted = true;
+    v.setAttribute('autoplay','');
+    v.setAttribute('loop','');
+    v.setAttribute('muted','');
     v.setAttribute('playsinline','');
     v.setAttribute('aria-hidden','true');
     document.body.insertBefore(v, document.body.firstChild);
+    v.play().catch(e => console.warn('Mars sandstorm autoplay blocked:', e));
   }
 }
 

@@ -120,13 +120,13 @@ body{
 
 /* Mars backdrop — video (preferred) or photo (fallback). Shown on every page. */
 .mars-hero-bg,.mars-hero-video{
-  position:fixed;top:0;left:0;width:100%;height:100vh;z-index:0;pointer-events:none;
+  position:fixed;top:0;left:0;width:100%;height:100vh;z-index:5;pointer-events:none;
   opacity:.62;
   -webkit-mask-image:linear-gradient(180deg, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 55%, rgba(0,0,0,.4) 80%, transparent 100%);
   mask-image:linear-gradient(180deg, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 55%, rgba(0,0,0,.4) 80%, transparent 100%);
 }
 .mars-hero-bg{background-image:url("../assets/mars-horizon.jpg");background-size:cover;background-position:center 65%;}
-.mars-hero-video{object-fit:cover;object-position:center 60%;}
+.mars-hero-video{object-fit:cover;object-position:center 60%;z-index:6;}
 [data-theme="light"] .mars-hero-bg,[data-theme="light"] .mars-hero-video{opacity:.45;}
 
 /* Content above background */
@@ -609,4 +609,5 @@ a.tv-link:hover{border-bottom-color:var(--oxide);color:var(--oxide);}
 /* Reduced motion */
 @media (prefers-reduced-motion: reduce){
   *,*::before,*::after{animation:none !important;transition:none !important;}
+  .mars-hero-video{display:none;}
 }
