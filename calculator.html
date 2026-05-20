@@ -11,7 +11,10 @@
 <link rel="stylesheet" href="assets/style.css">
 <style>
 .calc-wrap{display:grid;grid-template-columns:1fr 1.4fr;gap:48px;align-items:start;margin-top:32px;}
+.calc-wrap > *{min-width:0;}
+.calc-output{overflow:hidden;}
 @media(max-width:900px){.calc-wrap{grid-template-columns:1fr;}}
+canvas{display:block;max-width:100%;}
 .calc-inputs{display:flex;flex-direction:column;gap:24px;border:1px solid var(--line);background:var(--bg-elev);padding:32px;}
 .calc-input{display:flex;flex-direction:column;gap:8px;}
 .calc-input label{font-family:var(--mono);font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:var(--ink-dim);display:flex;justify-content:space-between;}
