@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Compound Calculator · DAINER Finance</title>
+<meta name="description" content="Interactive compound interest calculator. See how a portfolio compounds over 5, 10, 20 years. Your inputs stay private.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Instrument+Sans:ital,wght@0,400..700;1,400..700&family=JetBrains+Mono:wght@300;400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+<style>
+.calc-wrap{display:grid;grid-template-columns:1fr 1.4fr;gap:48px;align-items:start;margin-top:32px;}
+@media(max-width:900px){.calc-wrap{grid-template-columns:1fr;}}
+.calc-inputs{display:flex;flex-direction:column;gap:24px;border:1px solid var(--line);background:var(--bg-elev);padding:32px;}
+.calc-input{display:flex;flex-direction:column;gap:8px;}
+.calc-input label{font-family:var(--mono);font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:var(--ink-dim);display:flex;justify-content:space-between;}
+.calc-input label em{color:var(--accent);font-family:var(--serif);font-style:italic;font-size:18px;letter-spacing:-.01em;text-transform:none;}
+.calc-input input[type=range]{appearance:none;-webkit-appearance:none;height:4px;background:var(--bg-elev-2);outline:none;}
+.calc-input input[type=range]::-webkit-slider-thumb{appearance:none;-webkit-appearance:none;width:18px;height:18px;border-radius:50%;background:var(--accent);cursor:pointer;border:none;}
+.calc-input input[type=range]::-moz-range-thumb{width:18px;height:18px;border-radius:50%;background:var(--accent);cursor:pointer;border:none;}
+.calc-input input[type=number]{background:var(--bg);border:1px solid var(--line);color:var(--ink);padding:10px 14px;font-family:var(--mono);font-size:14px;outline:none;}
+.calc-input input[type=number]:focus{border-color:var(--accent);}
+.calc-currency{display:flex;gap:8px;}
+.calc-currency button{flex:1;padding:8px;border:1px solid var(--line);background:var(--bg);color:var(--ink-dim);font-family:var(--mono);font-size:11px;letter-spacing:.12em;cursor:pointer;transition:all .2s var(--ease);}
+.calc-currency button.active{border-color:var(--accent);color:var(--accent);background:color-mix(in srgb,var(--accent) 8%,transparent);}
+
+.calc-output{display:flex;flex-direction:column;gap:24px;}
+.calc-result-card{border:1px solid var(--accent);background:var(--bg-elev-2);padding:32px;position:relative;overflow:hidden;}
+.calc-result-card::before{content:'';position:absolute;top:0;left:0;width:100%;height:2px;background:var(--accent);}
+.calc-result-label{font-family:var(--mono);font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:var(--ink-dim);margin-bottom:8px;}
+.calc-result-value{font-family:var(--serif);font-size:64px;font-weight:300;letter-spacing:-.02em;color:var(--accent);line-height:1;font-variant-numeric:tabular-nums;}
+.calc-result-sub{font-family:var(--mono);font-size:11px;color:var(--ink-dim);margin-top:8px;letter-spacing:.06em;}
+.calc-result-sub em{color:var(--bull);font-style:normal;}
+
+.calc-stat-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;}
+@media(max-width:640px){.calc-stat-row{grid-template-columns:1fr;}}
+.calc-stat{border:1px solid var(--line);background:var(--bg-elev);padding:20px;}
+.calc-stat-label{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-dim);}
+.calc-stat-val{font-family:var(--serif);font-size:28px;font-weight:400;color:var(--ink);letter-spacing:-.015em;margin-top:6px;font-variant-numeric:tabular-nums;}
+.calc-stat-val.pos{color:var(--bull);}
+.calc-stat-sub{font-family:var(--mono);font-size:10px;color:var(--ink-faint);margin-top:4px;}
+
+.chart-wrap{border:1px solid var(--line);background:var(--bg-elev);padding:24px;height:280px;position:relative;}
+#chart{width:100%;height:100%;}
+.chart-legend{display:flex;gap:18px;margin-top:14px;font-family:var(--mono);font-size:10px;letter-spacing:.12em;color:var(--ink-dim);}
+.chart-legend span{display:flex;align-items:center;gap:6px;}
+.chart-legend span::before{content:'';width:10px;height:2px;background:var(--c);}
+
+.preset-buttons{display:flex;flex-wrap:wrap;gap:8px;}
+.preset-buttons button{padding:8px 14px;border:1px solid var(--line);background:transparent;color:var(--ink-dim);font-family:var(--mono);font-size:11px;letter-spacing:.1em;cursor:pointer;transition:all .25s var(--ease);}
+.preset-buttons button:hover{border-color:var(--accent);color:var(--accent);}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <div class="brand"><span class="brand-dot"></span><a href="index.html"><span>DAINER <em>Finance</em></span></a></div>
+    <div class="nav-right">
+      <ul class="nav-links">
+        <li><a href="index.html">Dashboard</a></li>
+        <li><a href="picks/swing-3-5yr.html">US Picks</a></li>
+        <li><a href="picks/swing-msia.html">Malaysia</a></li>
+        <li><a href="picks/dividends.html">Dividends</a></li>
+        <li><a href="picks/famous-traders.html">Traders</a></li>
+        <li><a href="calculator.html" class="active">Calculator</a></li>
+        <li><a href="newsletter/index.html">Newsletter</a></li>
+      </ul>
+      <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
+        <svg class="sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.93 4.93l1.41 1.41m11.32 11.32l1.41 1.41M2 12h2m16 0h2M4.93 19.07l1.41-1.41m11.32-11.32l1.41-1.41"/></svg>
+        <svg class="moon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="hero-meta-top">
+    <span>Tool · interactive</span>
+    <span>All inputs stay <em>client-side</em></span>
+    <span>Nothing saved, nothing shared</span>
+  </div>
+  <h1 class="hero-title">
+    Compound,<br>
+    <em>over</em> <span class="amp">×</span> Time.
+  </h1>
+  <p class="hero-sub">
+    The single chart every investor needs to internalize. Punch in your starting amount, monthly add, expected return, and time horizon. <em>The math doesn't lie.</em> Your inputs never leave this page.
+  </p>
+</header>
+
+<section class="section">
+  <div class="section-head reveal">
+    <div>
+      <div class="section-label">01 · Run the math</div>
+      <h2 class="section-title">Inputs <em>×</em> outputs</h2>
+    </div>
+    <div class="preset-buttons">
+      <button onclick="loadPreset('conservative')">Conservative · 6%</button>
+      <button onclick="loadPreset('balanced')">Balanced · 8%</button>
+      <button onclick="loadPreset('aggressive')">Aggressive · 12%</button>
+    </div>
+  </div>
+
+  <div class="calc-wrap">
+    <div class="calc-inputs">
+      <div class="calc-input">
+        <label>Currency <em id="curr-label">USD</em></label>
+        <div class="calc-currency">
+          <button onclick="setCurrency('USD')" class="active" id="btn-usd">USD ($)</button>
+          <button onclick="setCurrency('MYR')" id="btn-myr">MYR (RM)</button>
+        </div>
+      </div>
+
+      <div class="calc-input">
+        <label>Starting amount <em><span id="initial-out">10,000</span></em></label>
+        <input type="range" id="initial" min="0" max="500000" step="1000" value="10000">
+        <input type="number" id="initial-num" value="10000" min="0" step="100">
+      </div>
+
+      <div class="calc-input">
+        <label>Monthly contribution <em><span id="monthly-out">500</span></em></label>
+        <input type="range" id="monthly" min="0" max="10000" step="50" value="500">
+        <input type="number" id="monthly-num" value="500" min="0" step="50">
+      </div>
+
+      <div class="calc-input">
+        <label>Annual return <em><span id="rate-out">8</span>%</em></label>
+        <input type="range" id="rate" min="0" max="20" step="0.5" value="8">
+      </div>
+
+      <div class="calc-input">
+        <label>Time horizon <em><span id="years-out">25</span> years</em></label>
+        <input type="range" id="years" min="1" max="50" step="1" value="25">
+      </div>
+
+      <p style="font-size:11px;color:var(--ink-faint);font-family:var(--mono);letter-spacing:.05em;line-height:1.5;border-top:1px solid var(--line);padding-top:14px;">
+        Annual compounding · monthly contributions added at end of each year for simplicity. Inputs stored in your browser only — nothing transmitted, nothing logged.
+      </p>
+    </div>
+
+    <div class="calc-output">
+      <div class="calc-result-card">
+        <div class="calc-result-label">Final portfolio value</div>
+        <div class="calc-result-value" id="final-val">$1,000,000</div>
+        <div class="calc-result-sub">≈ <em><span id="multiple">12</span>×</em> your principal · <span id="cagr">8%</span> CAGR</div>
+      </div>
+
+      <div class="calc-stat-row">
+        <div class="calc-stat">
+          <div class="calc-stat-label">You contributed</div>
+          <div class="calc-stat-val" id="contributed">$160,000</div>
+          <div class="calc-stat-sub">total cash in</div>
+        </div>
+        <div class="calc-stat">
+          <div class="calc-stat-label">Compound gain</div>
+          <div class="calc-stat-val pos" id="gain">$840,000</div>
+          <div class="calc-stat-sub">growth from compounding</div>
+        </div>
+        <div class="calc-stat">
+          <div class="calc-stat-label">% of value from compounding</div>
+          <div class="calc-stat-val pos" id="compound-pct">84%</div>
+          <div class="calc-stat-sub">vs cash contributed</div>
+        </div>
+      </div>
+
+      <div class="chart-wrap">
+        <canvas id="chart"></canvas>
+      </div>
+      <div class="chart-legend">
+        <span style="--c:var(--ink-dim);">Cash contributed</span>
+        <span style="--c:var(--accent);">Portfolio value</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section-head reveal">
+    <div>
+      <div class="section-label">02 · What the numbers say</div>
+      <h2 class="section-title">The <em>three lessons</em></h2>
+    </div>
+  </div>
+
+  <div class="exec-grid reveal">
+    <div class="exec-card">
+      <h4>Lesson 1</h4>
+      <h3>Time beats amount</h3>
+      <ul>
+        <li><em>20 years at 8%:</em> $1,000/mo → ~$590K. You contributed $240K.</li>
+        <li><em>30 years at 8%:</em> $1,000/mo → ~$1.49M. You contributed $360K.</li>
+        <li><em>The extra decade:</em> 50% more cash in for 150% more value. The last 10 years compound the first 20.</li>
+        <li><em>Implication:</em> start now beats start optimal.</li>
+      </ul>
+    </div>
+    <div class="exec-card">
+      <h4>Lesson 2</h4>
+      <h3>Return rate is non-linear</h3>
+      <ul>
+        <li><em>$500/mo for 30 yrs:</em> 6% → $500K · 8% → $750K · 10% → $1.13M · 12% → $1.74M</li>
+        <li><em>4% extra return = 3× the value.</em> Not 4% extra. Three times.</li>
+        <li><em>What costs you 4% return:</em> 1.5% advisor fee + 1% fund expense + tax drag + behavioural mistakes.</li>
+        <li><em>Implication:</em> fees compound against you the same way returns compound for you.</li>
+      </ul>
+    </div>
+    <div class="exec-card">
+      <h4>Lesson 3</h4>
+      <h3>Monthly add matters more than first deposit</h3>
+      <ul>
+        <li><em>$50K start + $0/mo:</em> at 8% × 30yr = $503K. Boring.</li>
+        <li><em>$0 start + $500/mo:</em> at 8% × 30yr = $745K. Beats above.</li>
+        <li><em>$50K start + $500/mo:</em> at 8% × 30yr = $1.25M. The combination compounds.</li>
+        <li><em>Implication:</em> the monthly habit is what builds wealth. Lump-sum head-start helps but isn't decisive.</li>
+      </ul>
+    </div>
+    <div class="exec-card">
+      <h4>Realistic assumptions</h4>
+      <h3>What return rate to use</h3>
+      <ul>
+        <li><em>6%:</em> Treasury-heavy / bond-leaning conservative portfolio. Real after-inflation ~3%.</li>
+        <li><em>8%:</em> US S&P 500 long-run nominal average (1928-2024 = ~10%; recent decade higher; expect mean reversion). Use 8% for forward planning.</li>
+        <li><em>10%:</em> Active-managed equity with some alpha. Optimistic for retail without edge.</li>
+        <li><em>12%+:</em> Concentrated growth / individual-stock portfolio. Achievable for short windows; very hard to sustain 20+ years. Don't plan around this.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer-grid">
+    <div>
+      <h4>Privacy</h4>
+      <p>This calculator runs entirely in your browser. Your inputs are not transmitted to any server, not stored in any cookie, not logged anywhere. Refresh the page and all inputs reset to defaults. The site uses no analytics that would capture these values.</p>
+      <span class="status-tag">Client-side only · no tracking</span>
+    </div>
+    <div>
+      <h4>Companion pages</h4>
+      <ul>
+        <li><a href="picks/swing-3-5yr.html">US 3-5yr picks (potential 10-15% CAGR)</a></li>
+        <li><a href="picks/dividends.html">Dividend income (4-5% net yield base)</a></li>
+        <li><a href="picks/swing-msia.html">Malaysia (MYR-denominated)</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Connect</h4>
+      <ul>
+        <li><a href="newsletter/index.html">Weekly newsletter</a></li>
+        <li><a href="https://github.com/dainer/dainer-finance-dashboard">GitHub source</a></li>
+      </ul>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/main.js"></script>
+<script>
+let CURRENCY = 'USD';
+const SYMBOL = {USD:'$', MYR:'RM'};
+
+function setCurrency(c){
+  CURRENCY = c;
+  document.getElementById('curr-label').textContent = c;
+  document.getElementById('btn-usd').classList.toggle('active', c==='USD');
+  document.getElementById('btn-myr').classList.toggle('active', c==='MYR');
+  calc();
+}
+
+function fmt(n){
+  const sym = SYMBOL[CURRENCY];
+  if (n >= 1e6) return sym + (n/1e6).toFixed(2) + 'M';
+  if (n >= 1e3) return sym + Math.round(n/1e3).toLocaleString() + 'K';
+  return sym + Math.round(n).toLocaleString();
+}
+function fmtSlim(n){
+  if (n >= 1e6) return (n/1e6).toFixed(1) + 'M';
+  if (n >= 1e3) return Math.round(n/1e3) + 'K';
+  return Math.round(n).toLocaleString();
+}
+
+function calc(){
+  const initial = parseFloat(document.getElementById('initial').value) || 0;
+  const monthly = parseFloat(document.getElementById('monthly').value) || 0;
+  const rate = parseFloat(document.getElementById('rate').value) / 100;
+  const years = parseInt(document.getElementById('years').value);
+
+  // Sync sliders + number inputs
+  document.getElementById('initial-num').value = initial;
+  document.getElementById('monthly-num').value = monthly;
+  document.getElementById('initial-out').textContent = fmtSlim(initial);
+  document.getElementById('monthly-out').textContent = fmtSlim(monthly);
+  document.getElementById('rate-out').textContent = (rate*100).toFixed(1);
+  document.getElementById('years-out').textContent = years;
+
+  // Annual compounding with monthly contributions modeled as 12 × monthly end-of-year
+  let value = initial;
+  const series = [{year:0, value:initial, contributed:initial}];
+  let contributed = initial;
+  for (let y=1; y<=years; y++){
+    // Add monthly contributions across year (simplification: add 12*monthly mid-year then grow remainder)
+    const annualAdd = monthly * 12;
+    // Method: grow current value 1 year, then add annual contribution at end
+    value = value * (1 + rate) + annualAdd;
+    contributed += annualAdd;
+    series.push({year:y, value, contributed});
+  }
+
+  const finalVal = series[series.length-1].value;
+  const gain = finalVal - contributed;
+  const multiple = contributed > 0 ? finalVal/contributed : 0;
+  const compoundPct = finalVal > 0 ? (gain/finalVal)*100 : 0;
+
+  document.getElementById('final-val').textContent = fmt(finalVal);
+  document.getElementById('multiple').textContent = multiple.toFixed(1);
+  document.getElementById('cagr').textContent = (rate*100).toFixed(1) + '%';
+  document.getElementById('contributed').textContent = fmt(contributed);
+  document.getElementById('gain').textContent = fmt(gain);
+  document.getElementById('compound-pct').textContent = compoundPct.toFixed(0) + '%';
+
+  drawChart(series);
+}
+
+function drawChart(series){
+  const canvas = document.getElementById('chart');
+  const dpr = window.devicePixelRatio || 1;
+  const rect = canvas.parentElement.getBoundingClientRect();
+  canvas.width = rect.width * dpr;
+  canvas.height = (rect.height - 48) * dpr;
+  canvas.style.width = rect.width + 'px';
+  canvas.style.height = (rect.height - 48) + 'px';
+  const ctx = canvas.getContext('2d');
+  ctx.scale(dpr, dpr);
+  const w = rect.width, h = rect.height - 48;
+
+  const pad = {l:50, r:20, t:20, b:30};
+  const cw = w - pad.l - pad.r;
+  const ch = h - pad.t - pad.b;
+  const maxV = Math.max(...series.map(s => s.value), 1);
+  const minV = 0;
+
+  // CSS variable readout
+  const styles = getComputedStyle(document.documentElement);
+  const accent = styles.getPropertyValue('--accent').trim();
+  const inkDim = styles.getPropertyValue('--ink-dim').trim();
+  const inkFaint = styles.getPropertyValue('--ink-faint').trim();
+  const line = styles.getPropertyValue('--line').trim();
+
+  ctx.clearRect(0,0,w,h);
+
+  // Y gridlines
+  ctx.strokeStyle = line;
+  ctx.lineWidth = 1;
+  ctx.font = '10px JetBrains Mono';
+  ctx.fillStyle = inkFaint;
+  ctx.textAlign = 'right';
+  for (let i=0; i<=4; i++){
+    const y = pad.t + ch * (1 - i/4);
+    ctx.beginPath();
+    ctx.moveTo(pad.l, y);
+    ctx.lineTo(pad.l + cw, y);
+    ctx.stroke();
+    const labelV = maxV * (i/4);
+    ctx.fillText(fmtSlim(labelV), pad.l - 8, y + 3);
+  }
+
+  // X labels
+  ctx.textAlign = 'center';
+  const years = series[series.length-1].year;
+  const xStep = Math.max(1, Math.floor(years / 6));
+  for (let y=0; y<=years; y+=xStep){
+    const x = pad.l + (cw * y / years);
+    ctx.fillText('Y' + y, x, pad.t + ch + 18);
+  }
+
+  // Contributed line
+  ctx.strokeStyle = inkDim;
+  ctx.lineWidth = 1.5;
+  ctx.setLineDash([4,4]);
+  ctx.beginPath();
+  series.forEach((s,i) => {
+    const x = pad.l + (cw * s.year / years);
+    const y = pad.t + ch * (1 - s.contributed/maxV);
+    if (i===0) ctx.moveTo(x,y); else ctx.lineTo(x,y);
+  });
+  ctx.stroke();
+  ctx.setLineDash([]);
+
+  // Portfolio value area
+  const grad = ctx.createLinearGradient(0, pad.t, 0, pad.t+ch);
+  grad.addColorStop(0, accent + '40');
+  grad.addColorStop(1, accent + '00');
+  ctx.fillStyle = grad;
+  ctx.beginPath();
+  series.forEach((s,i) => {
+    const x = pad.l + (cw * s.year / years);
+    const y = pad.t + ch * (1 - s.value/maxV);
+    if (i===0) ctx.moveTo(x, pad.t + ch);
+    ctx.lineTo(x, y);
+  });
+  ctx.lineTo(pad.l + cw, pad.t + ch);
+  ctx.closePath();
+  ctx.fill();
+
+  // Portfolio value line
+  ctx.strokeStyle = accent;
+  ctx.lineWidth = 2;
+  ctx.beginPath();
+  series.forEach((s,i) => {
+    const x = pad.l + (cw * s.year / years);
+    const y = pad.t + ch * (1 - s.value/maxV);
+    if (i===0) ctx.moveTo(x,y); else ctx.lineTo(x,y);
+  });
+  ctx.stroke();
+}
+
+function loadPreset(p){
+  const presets = {
+    conservative: {initial:50000, monthly:1000, rate:6, years:25},
+    balanced: {initial:25000, monthly:1500, rate:8, years:25},
+    aggressive: {initial:10000, monthly:2000, rate:12, years:25},
+  };
+  const v = presets[p];
+  if (!v) return;
+  document.getElementById('initial').value = v.initial;
+  document.getElementById('monthly').value = v.monthly;
+  document.getElementById('rate').value = v.rate;
+  document.getElementById('years').value = v.years;
+  calc();
+}
+
+// Bindings
+['initial','monthly','rate','years'].forEach(id => {
+  document.getElementById(id).addEventListener('input', calc);
+});
+document.getElementById('initial-num').addEventListener('input', e => {
+  document.getElementById('initial').value = e.target.value; calc();
+});
+document.getElementById('monthly-num').addEventListener('input', e => {
+  document.getElementById('monthly').value = e.target.value; calc();
+});
+
+window.addEventListener('resize', calc);
+document.addEventListener('DOMContentLoaded', () => { setTimeout(calc, 100); });
+</script>
+</body>
+</html>

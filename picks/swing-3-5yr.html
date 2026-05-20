@@ -1,0 +1,934 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>DAINER FUND — 3-5yr Swing Picks · May 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Instrument+Sans:ital,wght@0,400..700;1,400..700&family=JetBrains+Mono:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased}
+  body{overflow-x:hidden}
+  ul,ol{list-style:none}
+  a{color:inherit;text-decoration:none}
+  button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
+
+  :root, [data-theme="dark"]{
+    --bg:#0A0908; --bg-elev:#131110; --bg-elev-2:#1C1916;
+    --ink:#EFEAE0; --ink-dim:#8F887B; --ink-faint:#4A463E;
+    --accent:#D4A84B; --accent-glow:#F4C869;
+    --bull:#82B971; --bear:#D66955; --warn:#E2B13C;
+    --line:rgba(239,234,224,.08); --grid:rgba(239,234,224,.04);
+    --theme-ai:#7FB5D1; --theme-hc:#B97FA8; --theme-q:#D4A84B;
+    --theme-en:#7BC585; --theme-def:#D69D55;
+  }
+  [data-theme="light"]{
+    --bg:#F8F5EE; --bg-elev:#FFFDF7; --bg-elev-2:#F1ECE0;
+    --ink:#1A1814; --ink-dim:#5F5A4E; --ink-faint:#A8A295;
+    --accent:#B08318; --accent-glow:#D4A84B;
+    --bull:#4D8A3A; --bear:#B03E2A; --warn:#9C7A1E;
+    --line:rgba(26,24,20,.1); --grid:rgba(26,24,20,.045);
+  }
+  :root{
+    --serif:'Fraunces','Times New Roman',serif;
+    --sans:'Instrument Sans',system-ui,sans-serif;
+    --mono:'JetBrains Mono','Courier New',monospace;
+    --max:1400px;
+    --ease:cubic-bezier(.2,.8,.2,1);
+  }
+
+  body{
+    font-family:var(--sans); background:var(--bg); color:var(--ink);
+    font-size:16px; line-height:1.55; font-weight:400; position:relative;
+    transition:background .4s var(--ease),color .4s var(--ease);
+  }
+  body::before{
+    content:'';position:fixed;inset:0;pointer-events:none;z-index:1;
+    background-image:linear-gradient(var(--grid) 1px,transparent 1px),
+                     linear-gradient(90deg,var(--grid) 1px,transparent 1px);
+    background-size:80px 80px;
+    mask-image:radial-gradient(ellipse at center,rgba(0,0,0,.7),transparent 70%);
+    -webkit-mask-image:radial-gradient(ellipse at center,rgba(0,0,0,.7),transparent 70%);
+  }
+  body::after{
+    content:'';position:fixed;inset:0;pointer-events:none;z-index:2;opacity:.035;
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+  }
+
+  /* NAV */
+  .nav{position:sticky;top:0;z-index:50;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);background:color-mix(in srgb,var(--bg) 72%,transparent);border-bottom:1px solid var(--line);}
+  .nav-inner{max-width:var(--max);margin:0 auto;padding:18px 32px;display:flex;align-items:center;gap:32px;justify-content:space-between;}
+  .brand{font-family:var(--serif);font-weight:500;font-size:20px;letter-spacing:-.01em;display:flex;align-items:center;gap:12px;}
+  .brand em{font-style:italic;color:var(--accent);}
+  .brand-dot{width:9px;height:9px;border-radius:50%;background:var(--bull);box-shadow:0 0 0 4px color-mix(in srgb,var(--bull) 20%,transparent);animation:pulse 2.4s var(--ease) infinite;}
+  @keyframes pulse{0%,100%{box-shadow:0 0 0 4px color-mix(in srgb,var(--bull) 20%,transparent)}50%{box-shadow:0 0 0 8px color-mix(in srgb,var(--bull) 4%,transparent)}}
+  .nav-meta{font-family:var(--mono);font-size:11px;color:var(--ink-dim);letter-spacing:.12em;text-transform:uppercase;}
+  .nav-meta em{color:var(--accent);font-style:normal;}
+  .nav-right{display:flex;gap:24px;align-items:center;}
+  .nav-links{display:flex;gap:24px;font-size:13px;color:var(--ink-dim);font-weight:500;}
+  .nav-links a{transition:color .2s var(--ease);}
+  .nav-links a:hover{color:var(--accent);}
+  .theme-toggle{width:36px;height:36px;border:1px solid var(--line);border-radius:50%;display:grid;place-items:center;transition:border-color .25s var(--ease),background .25s var(--ease);}
+  .theme-toggle:hover{border-color:var(--accent);background:color-mix(in srgb,var(--accent) 8%,transparent);}
+  .theme-toggle svg{width:16px;height:16px;stroke:var(--ink);fill:none;stroke-width:1.5;}
+  [data-theme="light"] .theme-toggle .moon{display:none;}
+  [data-theme="dark"] .theme-toggle .sun{display:none;}
+  @media(max-width:900px){.nav-links{display:none;}}
+
+  .section{max-width:var(--max);margin:0 auto;padding:100px 32px;position:relative;z-index:3;}
+  .section-tight{padding:60px 32px;}
+  .section-head{display:flex;align-items:flex-end;justify-content:space-between;gap:32px;padding-bottom:28px;border-bottom:1px solid var(--line);margin-bottom:40px;}
+  .section-label{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);}
+  .section-title{font-family:var(--serif);font-weight:400;font-style:italic;font-size:clamp(32px,4.6vw,56px);line-height:.98;letter-spacing:-.02em;margin-top:8px;}
+  .section-title em{color:var(--accent);font-style:italic;}
+  .section-sub{color:var(--ink-dim);font-size:14px;max-width:42ch;}
+
+  /* HERO */
+  .hero{padding:90px 32px 60px;max-width:var(--max);margin:0 auto;position:relative;z-index:3;}
+  .hero-meta-top{font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-dim);margin-bottom:32px;display:flex;gap:32px;flex-wrap:wrap;}
+  .hero-meta-top em{color:var(--accent);font-style:normal;}
+  .hero-title{font-family:var(--serif);font-weight:300;font-size:clamp(56px,8.5vw,140px);line-height:.88;letter-spacing:-.035em;}
+  .hero-title em{font-style:italic;color:var(--accent);font-weight:400;}
+  .hero-title .amp{font-family:var(--serif);font-style:italic;color:var(--ink-dim);}
+  .hero-sub{margin-top:32px;font-family:var(--serif);font-size:clamp(20px,2.4vw,30px);font-weight:300;font-style:italic;color:var(--ink-dim);line-height:1.3;max-width:42ch;}
+  .hero-sub em{color:var(--ink);font-style:italic;}
+
+  /* PORTFOLIO HERO STRIP */
+  .pf-strip{max-width:var(--max);margin:24px auto 0;padding:0 32px;position:relative;z-index:3;}
+  .pf-card{border:1px solid var(--line);background:var(--bg-elev);padding:40px 44px;position:relative;overflow:hidden;}
+  .pf-card::before{content:'';position:absolute;inset:0 auto 0 0;width:3px;background:linear-gradient(180deg,var(--accent),transparent);}
+  .pf-stats{display:grid;grid-template-columns:repeat(5,1fr);gap:32px;padding:8px 0;}
+  .pf-stat{display:flex;flex-direction:column;gap:6px;}
+  .pf-stat-label{font-family:var(--mono);font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--ink-dim);}
+  .pf-stat-value{font-family:var(--serif);font-size:48px;font-weight:400;letter-spacing:-.02em;line-height:1;}
+  .pf-stat-value em{color:var(--accent);font-style:normal;}
+  .pf-stat-sub{font-family:var(--mono);font-size:11px;color:var(--ink-dim);margin-top:2px;}
+  @media(max-width:1100px){.pf-stats{grid-template-columns:repeat(3,1fr);}}
+  @media(max-width:640px){.pf-stats{grid-template-columns:repeat(2,1fr);}}
+
+  /* THEMES */
+  .themes-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:16px;}
+  @media(max-width:1100px){.themes-grid{grid-template-columns:repeat(2,1fr);}}
+  @media(max-width:640px){.themes-grid{grid-template-columns:1fr;}}
+  .theme-card{border:1px solid var(--line);background:var(--bg-elev);padding:28px 24px;position:relative;transition:border-color .3s var(--ease),transform .4s var(--ease);}
+  .theme-card:hover{border-color:var(--accent);transform:translateY(-2px);}
+  .theme-card::before{content:'';position:absolute;top:0;left:0;width:32px;height:2px;background:var(--th);}
+  .theme-num{font-family:var(--mono);font-size:11px;letter-spacing:.18em;color:var(--ink-faint);margin-bottom:16px;}
+  .theme-name{font-family:var(--serif);font-size:22px;font-weight:500;letter-spacing:-.01em;margin-bottom:6px;line-height:1.15;}
+  .theme-name em{color:var(--th);font-style:normal;}
+  .theme-alloc{font-family:var(--mono);font-size:13px;color:var(--th);margin-bottom:14px;letter-spacing:.05em;}
+  .theme-meta{font-size:13px;color:var(--ink-dim);line-height:1.5;margin-bottom:16px;}
+  .theme-picks{display:flex;flex-wrap:wrap;gap:6px;font-family:var(--mono);font-size:10px;letter-spacing:.08em;color:var(--ink-dim);}
+  .theme-picks span{padding:3px 8px;border:1px solid var(--line);border-radius:999px;}
+
+  /* PICKS GRID */
+  .picks-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;}
+  @media(max-width:1100px){.picks-grid{grid-template-columns:repeat(2,1fr);}}
+  @media(max-width:640px){.picks-grid{grid-template-columns:1fr;}}
+  .pick{border:1px solid var(--line);background:var(--bg-elev);padding:20px 22px;position:relative;cursor:pointer;transition:all .35s var(--ease);overflow:hidden;}
+  .pick:hover{border-color:var(--accent);background:var(--bg-elev-2);transform:translateY(-3px);box-shadow:0 12px 32px -16px color-mix(in srgb,var(--accent) 25%,transparent);}
+  .pick.expanded{grid-column:span 3;}
+  @media(max-width:1100px){.pick.expanded{grid-column:span 2;}}
+  @media(max-width:640px){.pick.expanded{grid-column:span 1;}}
+  .pick::before{content:'';position:absolute;top:0;left:0;width:100%;height:2px;background:var(--th);opacity:.5;}
+  .pick-rank{position:absolute;top:14px;right:18px;font-family:var(--mono);font-size:10px;color:var(--ink-faint);letter-spacing:.12em;}
+  .pick-head{display:flex;align-items:baseline;gap:14px;margin-bottom:6px;}
+  .pick-tkr{font-family:var(--serif);font-size:30px;font-weight:500;letter-spacing:-.015em;line-height:1;}
+  .pick-alloc{font-family:var(--mono);font-size:20px;color:var(--accent);font-weight:500;letter-spacing:-.01em;}
+  .pick-name{font-size:13px;color:var(--ink-dim);margin-bottom:14px;}
+  .pick-layer{display:inline-block;font-family:var(--mono);font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--th);padding:3px 8px;border:1px solid color-mix(in srgb,var(--th) 30%,transparent);border-radius:999px;margin-bottom:12px;}
+  .pick-hook{font-family:var(--serif);font-size:15px;font-style:italic;color:var(--ink);line-height:1.45;margin-bottom:14px;}
+  .pick-metrics{display:grid;grid-template-columns:1fr 1fr;gap:6px 16px;font-family:var(--mono);font-size:11px;}
+  .pick-metric{display:flex;justify-content:space-between;border-top:1px solid var(--line);padding-top:6px;}
+  .pick-metric span:first-child{color:var(--ink-dim);}
+  .pick-metric span:last-child{color:var(--ink);}
+  .pick-detail{margin-top:18px;padding-top:18px;border-top:1px solid var(--line);display:none;}
+  .pick.expanded .pick-detail{display:grid;grid-template-columns:1.5fr 1fr;gap:32px;}
+  @media(max-width:900px){.pick.expanded .pick-detail{grid-template-columns:1fr;}}
+  .pick-detail h4{font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin-bottom:8px;}
+  .pick-detail p{font-size:14px;color:var(--ink);line-height:1.6;margin-bottom:14px;}
+  .pick-detail .risk{color:var(--bear);font-family:var(--serif);font-style:italic;}
+  .pick-detail .moat{color:var(--bull);font-family:var(--serif);font-style:italic;}
+  .pick-side{display:flex;flex-direction:column;gap:14px;}
+  .pick-side-row{font-family:var(--mono);font-size:11px;color:var(--ink-dim);display:flex;justify-content:space-between;border-bottom:1px solid var(--line);padding-bottom:6px;}
+  .pick-side-row span:last-child{color:var(--ink);}
+  .pick-expand-cue{position:absolute;bottom:14px;right:18px;font-family:var(--mono);font-size:9px;color:var(--ink-faint);letter-spacing:.14em;opacity:.6;}
+  .pick.expanded .pick-expand-cue{opacity:0;}
+
+  /* ALLOCATION VIZ */
+  .alloc-wrap{display:grid;grid-template-columns:1.1fr 1fr;gap:64px;align-items:center;}
+  @media(max-width:900px){.alloc-wrap{grid-template-columns:1fr;gap:32px;}}
+  .donut-wrap{position:relative;display:grid;place-items:center;}
+  .donut{width:100%;max-width:480px;height:auto;}
+  .donut-center{position:absolute;text-align:center;}
+  .donut-center .lbl{font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-dim);}
+  .donut-center .val{font-family:var(--serif);font-size:64px;font-weight:300;letter-spacing:-.02em;color:var(--accent);line-height:1;}
+  .donut-center .sub{font-family:var(--mono);font-size:11px;color:var(--ink-dim);margin-top:4px;}
+  .bar-chart{display:flex;flex-direction:column;gap:14px;}
+  .bar-row{display:flex;flex-direction:column;gap:4px;}
+  .bar-head{display:flex;justify-content:space-between;align-items:baseline;font-family:var(--mono);font-size:11px;}
+  .bar-head em{font-family:var(--serif);font-size:18px;font-style:italic;color:var(--th);font-weight:500;}
+  .bar-track{height:10px;background:var(--bg-elev-2);position:relative;overflow:hidden;}
+  .bar-fill{height:100%;background:var(--th);width:0;transition:width 1.4s var(--ease);}
+  .bar-fill.animate{width:var(--w);}
+  .bar-sub{font-family:var(--mono);font-size:10px;color:var(--ink-faint);letter-spacing:.06em;}
+
+  /* SCORECARD */
+  .scorecard{overflow-x:auto;border:1px solid var(--line);background:var(--bg-elev);}
+  table.sc{width:100%;border-collapse:collapse;font-family:var(--mono);font-size:11px;}
+  table.sc th,table.sc td{padding:14px 16px;text-align:left;border-bottom:1px solid var(--line);}
+  table.sc th{font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-dim);font-weight:500;background:var(--bg-elev-2);position:sticky;top:0;}
+  table.sc tr:last-child td{border-bottom:none;}
+  table.sc tr{transition:background .2s var(--ease);}
+  table.sc tr:hover td{background:color-mix(in srgb,var(--accent) 6%,transparent);}
+  table.sc td.tkr{font-family:var(--serif);font-size:15px;font-weight:500;color:var(--ink);letter-spacing:-.005em;}
+  table.sc td.alloc{color:var(--accent);font-weight:500;}
+  table.sc td.theme{font-size:10px;letter-spacing:.12em;color:var(--ink-dim);}
+  table.sc td.bull{color:var(--bull);}
+  table.sc td.bear{color:var(--bear);}
+
+  /* RISKS */
+  .risks-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;}
+  @media(max-width:900px){.risks-grid{grid-template-columns:1fr;}}
+  .risk-card{border:1px solid var(--line);background:var(--bg-elev);padding:24px;border-top:2px solid var(--bear);}
+  .risk-num{font-family:var(--mono);font-size:10px;letter-spacing:.16em;color:var(--bear);margin-bottom:10px;}
+  .risk-head{font-family:var(--serif);font-size:18px;font-weight:500;line-height:1.3;margin-bottom:10px;}
+  .risk-body{font-size:13px;color:var(--ink-dim);line-height:1.6;}
+
+  /* EXECUTION */
+  .exec-grid{display:grid;grid-template-columns:1fr 1fr;gap:32px;}
+  @media(max-width:900px){.exec-grid{grid-template-columns:1fr;}}
+  .exec-card{border:1px solid var(--line);background:var(--bg-elev);padding:32px;}
+  .exec-card h4{font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin-bottom:14px;}
+  .exec-card h3{font-family:var(--serif);font-size:24px;font-weight:400;font-style:italic;margin-bottom:18px;line-height:1.2;}
+  .exec-card ul{display:flex;flex-direction:column;gap:10px;}
+  .exec-card li{font-size:13px;color:var(--ink);line-height:1.55;padding-left:18px;position:relative;}
+  .exec-card li::before{content:'';position:absolute;left:0;top:9px;width:8px;height:1px;background:var(--accent);}
+  .exec-card li em{font-family:var(--mono);color:var(--accent);font-style:normal;font-size:11px;letter-spacing:.06em;}
+
+  /* FOOTER */
+  .footer{max-width:var(--max);margin:0 auto;padding:60px 32px 40px;border-top:1px solid var(--line);position:relative;z-index:3;}
+  .footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:32px;}
+  @media(max-width:900px){.footer-grid{grid-template-columns:1fr;}}
+  .footer h4{font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin-bottom:14px;}
+  .footer p,.footer li{font-size:12px;color:var(--ink-dim);line-height:1.55;}
+  .footer ul{display:flex;flex-direction:column;gap:6px;}
+  .footer a{color:var(--ink-dim);border-bottom:1px solid var(--line);transition:color .2s var(--ease),border-color .2s var(--ease);}
+  .footer a:hover{color:var(--accent);border-bottom-color:var(--accent);}
+  .status-tag{display:inline-block;font-family:var(--mono);font-size:10px;letter-spacing:.14em;color:var(--bull);border:1px solid color-mix(in srgb,var(--bull) 40%,transparent);padding:6px 12px;border-radius:999px;margin-top:14px;}
+
+  /* SCROLL REVEAL */
+  .reveal{opacity:0;transform:translateY(24px);transition:opacity .8s var(--ease),transform .8s var(--ease);}
+  .reveal.visible{opacity:1;transform:translateY(0);}
+  .reveal-stagger > *{opacity:0;transform:translateY(16px);transition:opacity .6s var(--ease),transform .6s var(--ease);}
+  .reveal-stagger.visible > *{opacity:1;transform:translateY(0);}
+  .reveal-stagger.visible > *:nth-child(1){transition-delay:.05s;}
+  .reveal-stagger.visible > *:nth-child(2){transition-delay:.1s;}
+  .reveal-stagger.visible > *:nth-child(3){transition-delay:.15s;}
+  .reveal-stagger.visible > *:nth-child(4){transition-delay:.2s;}
+  .reveal-stagger.visible > *:nth-child(5){transition-delay:.25s;}
+  .reveal-stagger.visible > *:nth-child(n+6){transition-delay:.3s;}
+
+  /* DONUT animation */
+  .donut circle.seg{stroke-dasharray:0 1000;transition:stroke-dasharray 1.4s var(--ease);}
+  .donut.animate circle.seg{stroke-dasharray:var(--dash);}
+
+  /* TITLE FADE-IN */
+  @keyframes heroIn{from{opacity:0;transform:translateY(40px);}to{opacity:1;transform:translateY(0);}}
+  .hero-title,.hero-meta-top,.hero-sub{animation:heroIn 1.2s var(--ease) backwards;}
+  .hero-meta-top{animation-delay:.05s;}
+  .hero-title{animation-delay:.15s;}
+  .hero-sub{animation-delay:.45s;}
+
+  /* Number counter */
+  .count{font-variant-numeric:tabular-nums;}
+
+  /* TradingView ticker links */
+  a.tv-link{color:inherit;text-decoration:none;border-bottom:1px dashed transparent;transition:border-color .2s var(--ease),color .2s var(--ease);cursor:pointer;display:inline-block;}
+  a.tv-link:hover{border-bottom-color:var(--accent);color:var(--accent);}
+  a.tv-link::after{content:'';display:inline-block;width:8px;height:8px;margin-left:4px;background:no-repeat center/contain;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M7 17 17 7M7 7h10v10'/></svg>");opacity:0;transition:opacity .2s var(--ease);vertical-align:super;}
+  a.tv-link:hover::after{opacity:.6;}
+  .pick-tkr.tv-link{font-family:var(--serif);font-size:30px;font-weight:500;letter-spacing:-.015em;line-height:1;}
+  .theme-picks a.tv-link{padding:3px 8px;border:1px solid var(--line);border-radius:999px;font-family:var(--mono);font-size:10px;letter-spacing:.08em;color:var(--ink-dim);}
+  .theme-picks a.tv-link:hover{color:var(--accent);border-color:color-mix(in srgb,var(--accent) 40%,transparent);}
+</style>
+</head>
+<body>
+
+<!-- ============== NAV ============== -->
+<nav class="nav">
+  <div class="nav-inner">
+    <div class="brand">
+      <span class="brand-dot"></span>
+      <a href="../index.html"><span>DAINER <em>Finance</em></span></a>
+    </div>
+    <div class="nav-right">
+      <ul class="nav-links">
+        <li><a href="../index.html">Dashboard</a></li>
+        <li><a href="swing-3-5yr.html" class="active">US Picks</a></li>
+        <li><a href="swing-msia.html">Malaysia</a></li>
+        <li><a href="dividends.html">Dividends</a></li>
+        <li><a href="famous-traders.html">Traders</a></li>
+        <li><a href="../calculator.html">Calculator</a></li>
+        <li><a href="../newsletter/index.html">Newsletter</a></li>
+      </ul>
+      <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
+        <svg class="sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.93 4.93l1.41 1.41m11.32 11.32l1.41 1.41M2 12h2m16 0h2M4.93 19.07l1.41-1.41m11.32-11.32l1.41-1.41"/></svg>
+        <svg class="moon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+      <div class="nav-meta">May 20, <em>2026</em></div>
+    </div>
+  </div>
+</nav>
+
+<!-- ============== HERO ============== -->
+<header class="hero">
+  <div class="hero-meta-top">
+    <span>Report 002 · v2</span>
+    <span>3-5yr swing · long-only</span>
+    <span><em>10</em> picks · <em>2</em> ETFs · <em>5</em> themes</span>
+    <span>USD · NYSE/NASDAQ only</span>
+  </div>
+  <h1 class="hero-title">
+    Ten Picks,<br>
+    <em>Five</em> <span class="amp">×</span> Themes.
+  </h1>
+  <p class="hero-sub">
+    Tighter than v1. Ten positions — <em>eight singles + two ETFs</em> for breadth — so execution stays simple while still covering compute, healthcare, electrification, defense, and the quality compounders nobody tweets about.
+  </p>
+</header>
+
+<!-- ============== HERO STRIP ============== -->
+<section class="pf-strip">
+  <div class="pf-card reveal">
+    <div class="pf-stats">
+      <div class="pf-stat">
+        <span class="pf-stat-label">Universe screened</span>
+        <span class="pf-stat-value"><em class="count" data-target="120">120</em></span>
+        <span class="pf-stat-sub">across 5 themes · 5 parallel agents</span>
+      </div>
+      <div class="pf-stat">
+        <span class="pf-stat-label">Phase 1 candidates</span>
+        <span class="pf-stat-value"><em class="count" data-target="50">50</em></span>
+        <span class="pf-stat-sub">passed quality + valuation gates</span>
+      </div>
+      <div class="pf-stat">
+        <span class="pf-stat-label">Final positions</span>
+        <span class="pf-stat-value"><em class="count" data-target="10">10</em></span>
+        <span class="pf-stat-sub">8 singles + 2 ETFs · buy &amp; trim 3-5yr</span>
+      </div>
+      <div class="pf-stat">
+        <span class="pf-stat-label">Top 5 concentration</span>
+        <span class="pf-stat-value"><em class="count" data-target="57" data-suffix="%">57%</em></span>
+        <span class="pf-stat-sub">conviction-weighted, not equal-weight</span>
+      </div>
+      <div class="pf-stat">
+        <span class="pf-stat-label">Single largest position</span>
+        <span class="pf-stat-value"><em>TSM</em></span>
+        <span class="pf-stat-sub">14% · foundry monopoly</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== THESIS / THEMES ============== -->
+<section id="thesis" class="section">
+  <div class="section-head reveal">
+    <div>
+      <div class="section-label">01 · The five lenses</div>
+      <h2 class="section-title">Where alpha hides <em>over a decade</em></h2>
+    </div>
+    <p class="section-sub">Five decade-long shifts. Each researched independently by a parallel agent acting as a senior research associate. Final list is the intersection of conviction across lenses, not the average.</p>
+  </div>
+
+  <div class="themes-grid reveal-stagger">
+    <div class="theme-card" style="--th:var(--theme-ai)">
+      <div class="theme-num">/ 01</div>
+      <h3 class="theme-name">AI infrastructure <em>picks-and-shovels</em></h3>
+      <div class="theme-alloc">30% allocation</div>
+      <p class="theme-meta">Behind, not at, the GPU. Foundry monopoly (TSM) + networking moat (ANET) + a semi ETF (SMH) for the breadth play — NVDA/AVGO/AMD/ASML/LRCX/AMAT all wrapped.</p>
+      <div class="theme-picks">
+        <a class="tv-link" href="https://www.tradingview.com/symbols/TSM/" target="_blank" rel="noopener noreferrer">TSM</a>
+        <a class="tv-link" href="https://www.tradingview.com/symbols/ANET/" target="_blank" rel="noopener noreferrer">ANET</a>
+        <a class="tv-link" href="https://www.tradingview.com/symbols/SMH/" target="_blank" rel="noopener noreferrer">SMH ETF</a>
+      </div>
+    </div>
+    <div class="theme-card" style="--th:var(--theme-hc)">
+      <div class="theme-num">/ 02</div>
+      <h3 class="theme-name">Healthcare <em>innovation</em></h3>
+      <div class="theme-alloc">20% allocation</div>
+      <p class="theme-meta">GLP-1 displaced oncology as pharma's largest category. LLY owns the structural winner. VRTX is the asymmetric 3-platform biotech that's profitable + net cash.</p>
+      <div class="theme-picks">
+        <a class="tv-link" href="https://www.tradingview.com/symbols/LLY/" target="_blank" rel="noopener noreferrer">LLY</a>
+        <a class="tv-link" href="https://www.tradingview.com/symbols/VRTX/" target="_blank" rel="noopener noreferrer">VRTX</a>
+      </div>
+    </div>
+    <div class="theme-card" style="--th:var(--theme-q)">
+      <div class="theme-num">/ 03</div>
+      <h3 class="theme-name">Quality <em>compounders</em></h3>
+      <div class="theme-alloc">21% allocation</div>
+      <p class="theme-meta">The boring tail. Capital-light franchises that compound while narrative chases the next ticker. MSFT for AI mega-cap durability, V for the global payment toll.</p>
+      <div class="theme-picks">
+        <a class="tv-link" href="https://www.tradingview.com/symbols/MSFT/" target="_blank" rel="noopener noreferrer">MSFT</a>
+        <a class="tv-link" href="https://www.tradingview.com/symbols/V/" target="_blank" rel="noopener noreferrer">V</a>
+      </div>
+    </div>
+    <div class="theme-card" style="--th:var(--theme-en)">
+      <div class="theme-num">/ 04</div>
+      <h3 class="theme-name">Energy <em>+ electrification</em></h3>
+      <div class="theme-alloc">19% allocation</div>
+      <p class="theme-meta">US power demand inflecting after 15 flat years. Nuclear renaissance (CEG) + grid build-out (ETN — only name in 3 of 5 themes).</p>
+      <div class="theme-picks">
+        <a class="tv-link" href="https://www.tradingview.com/symbols/CEG/" target="_blank" rel="noopener noreferrer">CEG</a>
+        <a class="tv-link" href="https://www.tradingview.com/symbols/ETN/" target="_blank" rel="noopener noreferrer">ETN</a>
+      </div>
+    </div>
+    <div class="theme-card" style="--th:var(--theme-def)">
+      <div class="theme-num">/ 05</div>
+      <h3 class="theme-name">Defense <em>+ aerospace</em></h3>
+      <div class="theme-alloc">10% allocation</div>
+      <p class="theme-meta">Geopolitical decade. Single ETF (ITA) bundles the primes: LMT, RTX, NOC, GD, HII, BA. Sized smallest — peace-dividend tail risk.</p>
+      <div class="theme-picks">
+        <a class="tv-link" href="https://www.tradingview.com/symbols/ITA/" target="_blank" rel="noopener noreferrer">ITA ETF</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== ANTHROPIC IPO CALLOUT ============== -->
+<section id="anthropic" class="section section-tight">
+  <div class="section-head reveal">
+    <div>
+      <div class="section-label">Aside · the AI IPO question</div>
+      <h2 class="section-title">Anthropic IPO — <em>not July</em></h2>
+    </div>
+    <p class="section-sub">The portfolio above is public-equity-only. But you asked about the AI lab itself — so here's the current state, as of 2026-05-20.</p>
+  </div>
+
+  <div class="exec-grid reveal">
+    <div class="exec-card">
+      <h4>What's confirmed</h4>
+      <h3>No S-1 filed. No date. No ticker.</h3>
+      <ul>
+        <li><em>Series G:</em> $380B post-money, closed Feb 2026 — last official valuation</li>
+        <li><em>Revenue:</em> $19B annualized as of March 2026, up from $9B in January (per The Information)</li>
+        <li><em>Legal counsel:</em> Wilson Sonsini Goodrich &amp; Rosati hired for IPO prep (same firm that did Google, LinkedIn)</li>
+        <li><em>Secondary market:</em> implied valuation past $1T (Octagon AI, May 2026 secondary trades)</li>
+        <li><em>Spokesperson quote:</em> "not decided when or even if it will go public"</li>
+      </ul>
+    </div>
+    <div class="exec-card">
+      <h4>What's rumored (not confirmed)</h4>
+      <h3>S-1 in July · IPO in Q4 2026</h3>
+      <ul>
+        <li><em>July 2026:</em> rumored confidential S-1 filing window — Metaculus prediction market puts 66% probability of S-1 before July 1</li>
+        <li><em>October 2026:</em> earliest realistic public listing per The Information internal-executive reporting</li>
+        <li><em>Q4 2026:</em> the internal target executives have discussed (per same source)</li>
+        <li><em>Reality check:</em> Stripe, SpaceX, and OpenAI all "rumored Q4" for multiple years running. Confidential S-1 ≠ IPO. Anthropic could file and sit on it for 12+ months.</li>
+      </ul>
+    </div>
+    <div class="exec-card">
+      <h4>Pre-IPO exposure routes</h4>
+      <h3>Three ways to get there now</h3>
+      <ul>
+        <li><em>Forge / EquityZen secondary:</em> accredited investors can buy private Anthropic shares — minimums $50-100K, valuations 2-3× last round, lockup until IPO + 6 months</li>
+        <li><em>Public-equity proxies:</em> AMZN (invested $8B + AWS primary cloud) and GOOGL (invested ~$3B) are the closest tracker exposure. AMZN holds the biggest stake</li>
+        <li><em>This portfolio's proxy:</em> MSFT (11% allocation) is the OpenAI-side bet — different lab, same thesis. Not a perfect Anthropic hedge but adjacent</li>
+      </ul>
+    </div>
+    <div class="exec-card">
+      <h4>What I'd actually do</h4>
+      <h3>Wait for the S-1</h3>
+      <ul>
+        <li><em>Day 1 post-IPO is usually the worst entry.</em> Lock-up expiry +6 months is when insiders unload — buy then, not at listing</li>
+        <li><em>Watch the SEC EDGAR ticker:</em> a confidential S-1 becomes public ~15 days before roadshow. That's the real timing signal</li>
+        <li><em>Don't pay 2-3× last round on secondary</em> unless your time horizon is 5+ years AND you can tolerate the lock-up</li>
+        <li><em>Sizing rule for any single AI lab IPO:</em> max 5% of the swing book post-IPO. Same goes for OpenAI / xAI / Mistral if any list 2026-2027</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ============== PICKS GRID ============== -->
+<section id="picks" class="section">
+  <div class="section-head reveal">
+    <div>
+      <div class="section-label">02 · The 10 positions</div>
+      <h2 class="section-title">Click any pick to <em>open the thesis</em></h2>
+    </div>
+    <p class="section-sub">8 singles + 2 ETFs (ITA defense · SMH semis). Ranked by conviction × allocation. Click any tile to expand moat, why-now, what-kills-it, and metrics.</p>
+  </div>
+
+  <div id="picks-grid" class="picks-grid reveal-stagger">
+    <!-- Filled by JS -->
+  </div>
+</section>
+
+<!-- ============== ALLOCATION ============== -->
+<section id="allocation" class="section">
+  <div class="section-head reveal">
+    <div>
+      <div class="section-label">03 · How the dollars land</div>
+      <h2 class="section-title">Concentration is <em>the bet</em></h2>
+    </div>
+    <p class="section-sub">Top 5 names = 41% of the book. Equal-weight 18 names is closet-indexing. The portfolio leans where the research conviction stacked across themes.</p>
+  </div>
+
+  <div class="alloc-wrap reveal">
+    <div class="donut-wrap">
+      <svg class="donut" id="donut" viewBox="0 0 200 200">
+        <circle cx="100" cy="100" r="80" fill="none" stroke="var(--bg-elev-2)" stroke-width="22"/>
+        <!-- Segments injected by JS -->
+        <g id="donut-segs"></g>
+      </svg>
+      <div class="donut-center">
+        <div class="lbl">Total</div>
+        <div class="val">100%</div>
+        <div class="sub">18 names · $100K base</div>
+      </div>
+    </div>
+
+    <div class="bar-chart">
+      <div class="bar-row">
+        <div class="bar-head"><span style="color:var(--theme-ai)">AI infra</span><em style="--th:var(--theme-ai)">30%</em></div>
+        <div class="bar-track"><div class="bar-fill" style="--th:var(--theme-ai);--w:30%"></div></div>
+        <div class="bar-sub">TSM 14 · ANET 8 · SMH 8 (ETF)</div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-head"><span style="color:var(--theme-q)">Quality compounders</span><em style="--th:var(--theme-q)">21%</em></div>
+        <div class="bar-track"><div class="bar-fill" style="--th:var(--theme-q);--w:21%"></div></div>
+        <div class="bar-sub">MSFT 11 · V 10</div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-head"><span style="color:var(--theme-hc)">Healthcare</span><em style="--th:var(--theme-hc)">20%</em></div>
+        <div class="bar-track"><div class="bar-fill" style="--th:var(--theme-hc);--w:20%"></div></div>
+        <div class="bar-sub">LLY 12 · VRTX 8</div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-head"><span style="color:var(--theme-en)">Energy + electrification</span><em style="--th:var(--theme-en)">19%</em></div>
+        <div class="bar-track"><div class="bar-fill" style="--th:var(--theme-en);--w:19%"></div></div>
+        <div class="bar-sub">CEG 10 · ETN 9</div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-head"><span style="color:var(--theme-def)">Defense + aerospace</span><em style="--th:var(--theme-def)">10%</em></div>
+        <div class="bar-track"><div class="bar-fill" style="--th:var(--theme-def);--w:10%"></div></div>
+        <div class="bar-sub">ITA 10 (ETF — LMT, RTX, NOC, GD, HII, BA)</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== SCORECARD ============== -->
+<section id="scorecard" class="section">
+  <div class="section-head reveal">
+    <div>
+      <div class="section-label">04 · Quality scorecard</div>
+      <h2 class="section-title">Numbers <em>that earned the spot</em></h2>
+    </div>
+    <p class="section-sub">Every pick clears 5yr ROIC, FCF growth, manageable leverage, and durable moat — bar adjusted per theme. Values pulled from SEC filings + stockanalysis.com; mark <code>~</code> for street consensus.</p>
+  </div>
+
+  <div class="scorecard reveal">
+    <table class="sc" id="scorecard-table">
+      <thead>
+        <tr>
+          <th>#</th><th>Ticker</th><th>%</th><th>Theme</th><th>5y ROIC</th><th>FCF margin</th><th>Net debt/EBITDA</th><th>Fwd P/E</th><th>Moat</th>
+        </tr>
+      </thead>
+      <tbody><!-- filled by JS --></tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ============== RISKS ============== -->
+<section id="risks" class="section">
+  <div class="section-head reveal">
+    <div>
+      <div class="section-label">05 · What kills the basket</div>
+      <h2 class="section-title">Things that <em>void the thesis</em></h2>
+    </div>
+    <p class="section-sub">Honest list. Some risks are common-mode — one event nukes multiple positions at once. Sized accordingly.</p>
+  </div>
+
+  <div class="risks-grid reveal-stagger">
+    <div class="risk-card">
+      <div class="risk-num">RISK 01</div>
+      <h3 class="risk-head">Taiwan kinetic event</h3>
+      <p class="risk-body">TSM, ASML, AVGO, ANET, VRT — every AI-infra name is downstream of TSMC silicon. There's no diversifying away from this; you accept it by holding the thesis. Mitigation: position-size such that a 60% drawdown in 29% of book = ~17% portfolio loss, survivable.</p>
+    </div>
+    <div class="risk-card">
+      <div class="risk-num">RISK 02</div>
+      <h3 class="risk-head">Hyperscaler AI capex pause</h3>
+      <p class="risk-body">A coordinated MSFT/META/AMZN/GOOGL guide-down in any quarter would correlate-crater the AI infra book. Watch their July + October earnings cycles. Mitigation: ETN, V, MSFT, PGR, LLY are less downstream of capex — they hold.</p>
+    </div>
+    <div class="risk-card">
+      <div class="risk-num">RISK 03</div>
+      <h3 class="risk-head">Keytruda 2028 LOE for MRK</h3>
+      <p class="risk-body">Not in this basket. Listed because if you replicate from broader healthcare research, MRK is a value trap unless sub-Q Keytruda hits. The basket explicitly skips MRK — LLY/VRTX/ISRG/IDXX have their own moats that don't depend on patent extension.</p>
+    </div>
+    <div class="risk-card">
+      <div class="risk-num">RISK 04</div>
+      <h3 class="risk-head">Peace dividend</h3>
+      <p class="risk-body">If Ukraine ceasefire holds + Middle East de-escalates + Taiwan stays cold, defense primes lose the urgency premium. GD/HII are capacity-constrained (4x backlog) so order books cushion 2-3yr. After that, base case. Sized at 12% for this reason.</p>
+    </div>
+    <div class="risk-card">
+      <div class="risk-num">RISK 05</div>
+      <h3 class="risk-head">Power buildout regulatory block</h3>
+      <p class="risk-body">FERC or state PUCs (VA, TX, OH) move to ration grid interconnects to data centers or impose AI-tax — CEG/ETN/GEV re-rate hard. Watch Virginia legislature 2026 session. Mitigation: ETN's order book is 70%+ international.</p>
+    </div>
+    <div class="risk-card">
+      <div class="risk-num">RISK 06</div>
+      <h3 class="risk-head">Rate spike</h3>
+      <p class="risk-body">100bp+ move higher in long rates compresses every quality compounder multiple. MSFT, V, ANET, VRTX trade at 22-37x because the discount rate is benign. Mitigation: ITA underlying primes (LMT, RTX, GD) are rate-positive cohorts that benefit from rising rate environment; tilt 2-3% from singles into ITA if 10yr breaks 5.5%.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============== EXECUTION ============== -->
+<section id="execution" class="section">
+  <div class="section-head reveal">
+    <div>
+      <div class="section-label">06 · How to actually leg in</div>
+      <h2 class="section-title">Execution <em>is the alpha tax</em></h2>
+    </div>
+    <p class="section-sub">Don't lump $100K today. Don't wait six months either. Most retail underperforms the strategy because of execution, not picks.</p>
+  </div>
+
+  <div class="exec-grid reveal">
+    <div class="exec-card">
+      <h4>Leg-in plan</h4>
+      <h3>50 / 25 / 25 across 6 weeks</h3>
+      <ul>
+        <li><em>Week 1:</em> Buy 50% notional across all 10 positions at market. Don't optimize entries on this tranche.</li>
+        <li><em>Week 3:</em> Buy 25% more. If any name has dropped 8%+ since week 1, double the slice in that one.</li>
+        <li><em>Weeks 5-8:</em> Buy remaining 25% on dips. If everything has rallied through week 8, accept slightly worse entries — being in the trade beats being clever about timing.</li>
+        <li><em>ETF shortcut:</em> ITA + SMH can both be lump-summed week 1. They're diversified by construction — no single-name entry risk.</li>
+      </ul>
+    </div>
+    <div class="exec-card">
+      <h4>Rebalance triggers</h4>
+      <h3>Quarterly check, annual reset</h3>
+      <ul>
+        <li><em>Single position > 18%:</em> trim 25% of excess back into laggards. This will mostly fire on TSM if AI keeps running.</li>
+        <li><em>Single position drops 25% peak-to-trough:</em> if no thesis-breaking news, add. If catalyst (FDA fail, customer loss, fraud) → cut to zero.</li>
+        <li><em>Annual reset (May 2027):</em> re-run the same 5-agent research. If any theme thesis has played out fully (rare) or fully broken (also rare) — rotate sleeve, not individual names.</li>
+        <li><em>Tax lots:</em> long-term gains kick in at month 13. Don't trim winners pre-13mo unless thesis dies.</li>
+      </ul>
+    </div>
+    <div class="exec-card">
+      <h4>Instant exit signals</h4>
+      <h3>What forces a hard cut</h3>
+      <ul>
+        <li><em>TSM:</em> Taiwan kinetic event (not Pelosi-style flyover — actual blockade or strike).</li>
+        <li><em>LLY:</em> Phase 3 cardiovascular outcomes failure for orforglipron, OR GLP-1 supply normalizes faster than NVO/AMGN expected — kills pricing power.</li>
+        <li><em>MSFT:</em> Azure AI growth decelerates two consecutive quarters with no acceleration in agentic / GitHub Copilot SKUs.</li>
+        <li><em>CEG:</em> Three Mile Island re-start delayed 24+ months OR Microsoft PPA renegotiation downward.</li>
+        <li><em>VRTX:</em> Casgevy commercial launch underperforms FY27 street by 30%+ AND pain platform (suzetrigine) misses primary endpoint.</li>
+        <li><em>ITA (ETF):</em> Cut to half-weight if Ukraine ceasefire + Middle East formal de-escalation hit within 6 months. Don't fully exit — ETF diversification cushions.</li>
+        <li><em>SMH (ETF):</em> Cut to half-weight if hyperscaler capex paused (MSFT + META + AMZN + GOOGL all guide down on same quarter). Don't fully exit — TSM and ASML inside SMH would survive.</li>
+      </ul>
+    </div>
+    <div class="exec-card">
+      <h4>What this report is NOT</h4>
+      <h3>Honest disclaimers</h3>
+      <ul>
+        <li><em>Not a Leopold-style trade:</em> his Q1 2026 13F is 1-2 quarter horizon with $8.5B in puts. This basket has zero puts. Different beast.</li>
+        <li><em>Not a Buffett portfolio:</em> Berkshire concentration is 8-9 names. This is 18 — wider for diversification across themes.</li>
+        <li><em>Not market-neutral:</em> beta is ~1.1 to S&amp;P. In a 2009 drawdown this likely down 35-45%. Survives, doesn't escape.</li>
+        <li><em>Not options-overlaid:</em> no covered calls, no puts. Pure long equity. If you want to overlay, buy 3-month 5%-OTM puts on SPY equal to 8-10% of book — bleed theta but cushion tail.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ============== FOOTER ============== -->
+<footer class="footer">
+  <div class="footer-grid">
+    <div>
+      <h4>Methodology · v2</h4>
+      <p>v1 was 18 single-stock picks. v2 tightens to 10 positions (8 singles + 2 ETFs) for easier execution while preserving 5-theme coverage. ETFs used where breadth wins: ITA bundles the 6 defense primes in one ticker, SMH bundles the semi complex (NVDA/AVGO/AMD/ASML/AMAT/LRCX/KLAC) at index weight. Singles retained where the moat is name-specific: TSM/LLY/MSFT/V/CEG/ETN/ANET/VRTX. Methodology underneath: 5 parallel research agents acted as senior research associates, each owning one theme. Universe scoped ~120 names across S&amp;P 500, Russell 1000, and select small-caps. Quality bar: 5yr ROIC > 15%, FCF positive + growing > 10% CAGR, net debt/EBITDA < 2.5x (looser for utilities/defense), durable moat, reasonable valuation, recession survivability.</p>
+      <span class="status-tag">STATUS: VERIFIED · 5 theme files cited · 4 of 5 SEC-sourced · Anthropic IPO data WebSearched May 20</span>
+    </div>
+    <div>
+      <h4>Source files</h4>
+      <ul>
+        <li><a href="swing_phase1_theme1_ai_infra.md">Theme 1 · AI infra</a></li>
+        <li><a href="swing_phase1_theme2_healthcare.md">Theme 2 · Healthcare</a></li>
+        <li><a href="swing_phase1_theme3_defense.md">Theme 3 · Defense</a></li>
+        <li><a href="swing_phase1_theme4_energy.md">Theme 4 · Energy</a></li>
+        <li><a href="swing_phase1_theme5_quality.md">Theme 5 · Quality</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Reference reports</h4>
+      <ul>
+        <li><a href="leopold_13f_aggressive_2026-05-19.md">Leopold 13F · aggressive 1-2Q</a></li>
+        <li><a href="swing_3_5yr_picks_2026-05-20_v1_18picks.html">v1 · 18-pick all-singles</a></li>
+        <li><a href="../reports/index.html">DAINER Swing Fund · live</a></li>
+      </ul>
+      <p style="margin-top:14px;">v2 generated 2026-05-20 · DAINER OS · 5 agents · ETFs added for execution simplicity</p>
+    </div>
+  </div>
+</footer>
+
+<!-- ============== DATA + LOGIC ============== -->
+<script>
+// v2 · 10 picks (8 singles + 2 ETFs) — full thesis data
+const PICKS = [
+  {
+    rank:1, tkr:'TSM', name:'Taiwan Semiconductor Manufacturing', alloc:14, theme:'AI', themeName:'AI infra / foundry', layer:'Foundry / advanced packaging', type:'single',
+    hook:'The single physical bottleneck of the AI compute stack. Every credible 5yr scenario requires more TSM wafers.',
+    moat:'Effective monopoly at leading edge — 90%+ share at 3nm and below. Decade-of-yield-curves Samsung and Intel cannot replicate.',
+    why:'2nm mass production ramping to ~100k wafers/month by end-2026. 2026 capex $56B. Arizona fabs derisk geopolitically. CoWoS advanced packaging is the actual rate-limit on every NVDA/AMD/AVGO accelerator.',
+    risk:'Taiwan kinetic event. Lesser risks: Samsung 2nm yield catch-up, US export-control overhang on China revenue.',
+    metrics:{roic:'35.1%',fcf:'$33B TTM',nd:'+$71B net cash',pe:'21.2x fwd',rev:'+21% CAGR (5y street)'}
+  },
+  {
+    rank:2, tkr:'LLY', name:'Eli Lilly', alloc:12, theme:'HC', themeName:'Healthcare / GLP-1', layer:'GLP-1 leader + diversified pharma', type:'single',
+    hook:'Owns the structural winner in the largest pharma category in history — obesity. Only commercial oral GLP-1.',
+    moat:'Tirzepatide (Mounjaro/Zepbound) injectable dominance + orforglipron oral monopoly. Supply scaling out through 2028.',
+    why:'GLP-1 market crossed oncology for first time in 16 years. Cardiovascular outcomes trials extend label to general practitioners, not just endocrinologists. Distribution moat compounds.',
+    risk:'CV outcomes trial fail / safety signal. Competition from NVO orals + AMGN MariTide narrows pricing power.',
+    metrics:{roic:'~40% (TTM)',fcf:'25%+ margin expanding',nd:'~0.8x ND/EBITDA',pe:'26.7x fwd',rev:'+18-22% CAGR'}
+  },
+  {
+    rank:3, tkr:'MSFT', name:'Microsoft', alloc:11, theme:'Q', themeName:'Quality / mega-cap AI', layer:'Cloud + AI platform + enterprise SaaS', type:'single',
+    hook:'Only Magnificent-7 with both AI revenue ramp AND durable enterprise lock-in. Azure AI = the real moat.',
+    moat:'Enterprise switching cost across Office 365, Teams, Azure, GitHub. OpenAI partnership grants Azure-exclusive frontier-model access through 2030.',
+    why:'Copilot SKUs monetizing at $30/user/month with 60%+ gross margins. Azure AI revenue run-rate $13B+ at end of FY25. M365 Copilot attach rate doubled YoY. Closest public-market proxy if you want exposure to Anthropic\'s rivals.',
+    risk:'OpenAI relationship strain / margin pressure from infra spend / Copilot attach saturates.',
+    metrics:{roic:'27%',fcf:'$74B TTM',nd:'net cash',pe:'31x fwd',rev:'+13% CAGR'}
+  },
+  {
+    rank:4, tkr:'V', name:'Visa', alloc:10, theme:'Q', themeName:'Quality compounders', layer:'Payment network — global toll', type:'single',
+    hook:'The single most durable network-effect compounder in public equity. Every digital payment globally pays a tax to Visa.',
+    moat:'Network effect + scale + regulatory entrenchment. Visa Direct expanding into B2B / cross-border / push-payments.',
+    why:'Cash-to-card conversion in EM still ~50% — 20yr runway. Tap-to-pay adoption + e-commerce growth + Visa Direct B2B all compound revenue.',
+    risk:'Stablecoin regulation displaces card rails in cross-border. Antitrust on interchange.',
+    metrics:{roic:'54%',fcf:'49% margin',nd:'net cash',pe:'26x fwd',rev:'+10% CAGR'}
+  },
+  {
+    rank:5, tkr:'CEG', name:'Constellation Energy', alloc:10, theme:'EN', themeName:'Energy / nuclear', layer:'Premium nuclear IPP', type:'single',
+    hook:'Largest unregulated nuclear fleet in US. Hyperscalers signing direct PPAs at premium pricing for clean-firm power.',
+    moat:'Nuclear license rarity — you can\'t buy a new fleet. Fleet age advantage means license-extension capex is baked in.',
+    why:'Three Mile Island Unit 1 restart 2028 with MSFT 20yr offtake. Vistra + CEG together control the merchant nuclear cohort. PJM capacity prices 9x\'d.',
+    risk:'PPA pricing peaks if SMR comes online ahead of schedule. NRC license-extension friction.',
+    metrics:{roic:'18%',fcf:'$2.6B TTM',nd:'2.3x ND/EBITDA',pe:'28x fwd',rev:'+9% CAGR'}
+  },
+  {
+    rank:6, tkr:'ITA', name:'iShares U.S. Aerospace &amp; Defense ETF', alloc:10, theme:'DEF', themeName:'Defense / ETF — all primes', layer:'ETF · LMT, RTX, NOC, GD, HII, BA top holdings', type:'etf',
+    hook:'The defense theme in one ticker. Captures all 6 major primes + mid-cap defense tech. No single-name peace-dividend risk concentration.',
+    moat:'Diversified across primes that each individually have multi-year backlog coverage. ETF rebalances quarterly so dead-money names get bled.',
+    why:'Geopolitical decade — Ukraine + Middle East + Taiwan + cyber. DOD outlay sustained. Allied rearmament (Germany, Japan, Korea) adds non-US revenue. ITA expense ratio 0.40%.',
+    risk:'Peace dividend post-2028 if Ukraine ceasefire + Middle East de-escalation + Taiwan stays cold. LMT exposure if F-35 program restructuring.',
+    metrics:{roic:'n/a (ETF)',fcf:'underlying ~14% wtd',nd:'underlying ~1.8x',pe:'~22x weighted',rev:'+9% CAGR underlying'}
+  },
+  {
+    rank:7, tkr:'ETN', name:'Eaton Corp', alloc:9, theme:'EN', themeName:'Energy / electrification', layer:'Grid + electrification equipment', type:'single',
+    hook:'The only name appearing in three of five research themes — AI infra, energy/electrification, quality compounders.',
+    moat:'Electrical Americas backlog through 2027. Specifying engineers spec ETN by default for hyperscaler retrofits. Transformer + switchgear capacity is the binding constraint.',
+    why:'US power demand inflecting positive for first time in 15 years. ETN backlog +35% YoY. Reshoring tailwind layered onto data-center build.',
+    risk:'Cyclicality on industrials side. New entrant capacity comes online late 2027.',
+    metrics:{roic:'~17% (rising)',fcf:'$3.5B TTM',nd:'1.4x ND/EBITDA',pe:'26x fwd',rev:'+10% CAGR'}
+  },
+  {
+    rank:8, tkr:'ANET', name:'Arista Networks', alloc:8, theme:'AI', themeName:'AI infra / networking', layer:'AI/cloud networking switches + EOS', type:'single',
+    hook:'The Ethernet-for-AI thesis is now Arista\'s tailwind. Industry shift from InfiniBand to Ethernet happens on Arista boxes.',
+    moat:'EOS software switching cost — once hyperscalers build operational tooling around EOS APIs, ripping it out costs more than the hardware delta.',
+    why:'Etherlink portfolio resolves congestion-control objection that kept hyperscalers on InfiniBand. AI networking 2026 target raised to $3.25B. Best balance sheet in cohort (zero debt).',
+    risk:'Customer concentration: MSFT + META ~40% revenue. If either insources networking at scale (Wedge / Sonic), franchise contracts.',
+    metrics:{roic:'52%',fcf:'$3.3B TTM',nd:'$12B net cash',pe:'37x fwd',rev:'+20% CAGR'}
+  },
+  {
+    rank:9, tkr:'VRTX', name:'Vertex Pharmaceuticals', alloc:8, theme:'HC', themeName:'Healthcare / gene-tx', layer:'CF + Casgevy + non-opioid pain platform', type:'single',
+    hook:'Three-platform biotech that\'s already profitable — rare. Net cash, 22x forward P/E, asymmetric pipeline.',
+    moat:'CF franchise (Trikafta) untouchable through 2030+. Casgevy is only commercial CRISPR therapy. Suzetrigine (Journavx) first non-opioid pain mechanism FDA-approved.',
+    why:'Pain platform launched Q1 2026 — TAM $20B+. CF expansion to younger patients + ex-US. Casgevy commercial ramp.',
+    risk:'Pain platform commercial ramp slower than street models. CF generic threats post-2030.',
+    metrics:{roic:'~22%',fcf:'$3.5B TTM',nd:'net cash',pe:'22x fwd',rev:'+12% CAGR'}
+  },
+  {
+    rank:10, tkr:'SMH', name:'VanEck Semiconductor ETF', alloc:8, theme:'AI', themeName:'AI infra / ETF — semi breadth', layer:'ETF · NVDA, TSM, AVGO, AMD, ASML, AMAT, LRCX, KLAC top holdings', type:'etf',
+    hook:'The semi complex in one ticker. Captures NVDA, AVGO, AMD, ASML, foundry equipment, memory — names not held individually but worth owning at index weight.',
+    moat:'25-stock concentrated semi ETF rebalances semi-annually. NVDA capped at ~20%. Includes the equipment names (LRCX/AMAT/KLAC) that would otherwise be 5 separate single-stock decisions.',
+    why:'Behind-and-around-the-GPU exposure that doesn\'t require picking the winner of the next chip cycle. Foundry equipment ROIC 40%+ across the cohort. 0.35% expense ratio. Note: slight TSM overlap (~12% of SMH) on top of the 14% single-name TSM position — effective TSM weight ~15.7%, accepted as conviction.',
+    risk:'NVDA-heavy in a 2026 AI-bubble pullback. Cyclicality of semi-equipment sub-sector. Leopold-style 1-2Q tactical short risk via SMH puts (his Q1 2026 13F has $2B in SMH puts — not a 3-5yr signal).',
+    metrics:{roic:'n/a (ETF)',fcf:'underlying ~22%',nd:'underlying net cash',pe:'~28x weighted',rev:'+18% CAGR underlying'}
+  }
+];
+
+const THEME_COLORS = {
+  AI:'var(--theme-ai)', HC:'var(--theme-hc)', Q:'var(--theme-q)',
+  EN:'var(--theme-en)', DEF:'var(--theme-def)'
+};
+const THEME_HEX = {
+  AI:'#7FB5D1', HC:'#B97FA8', Q:'#D4A84B', EN:'#7BC585', DEF:'#D69D55'
+};
+const THEME_LABEL = {
+  AI:'AI infra', HC:'Healthcare', Q:'Quality', EN:'Energy', DEF:'Defense'
+};
+
+// Render picks grid
+function renderPicks(){
+  const grid = document.getElementById('picks-grid');
+  grid.innerHTML = PICKS.map((p,i) => `
+    <div class="pick" style="--th:${THEME_COLORS[p.theme]}" data-rank="${i}">
+      <div class="pick-rank">/ ${String(p.rank).padStart(2,'0')}</div>
+      <div class="pick-head">
+        <a class="pick-tkr tv-link" href="https://www.tradingview.com/symbols/${p.tkr}/" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()" title="Open ${p.tkr} live chart on TradingView">${p.tkr}</a>
+        <span class="pick-alloc">${p.alloc}%</span>
+      </div>
+      <div class="pick-name">${p.name}</div>
+      <div class="pick-layer">${p.themeName}</div>
+      <div class="pick-hook">"${p.hook}"</div>
+      <div class="pick-metrics">
+        <div class="pick-metric"><span>5y ROIC</span><span>${p.metrics.roic}</span></div>
+        <div class="pick-metric"><span>FCF</span><span>${p.metrics.fcf}</span></div>
+        <div class="pick-metric"><span>Leverage</span><span>${p.metrics.nd}</span></div>
+        <div class="pick-metric"><span>Fwd P/E</span><span>${p.metrics.pe}</span></div>
+      </div>
+      <div class="pick-detail">
+        <div>
+          <h4>The moat</h4>
+          <p class="moat">${p.moat}</p>
+          <h4>Why now</h4>
+          <p>${p.why}</p>
+          <h4>What kills it</h4>
+          <p class="risk">${p.risk}</p>
+        </div>
+        <div class="pick-side">
+          <h4>Snapshot</h4>
+          <div class="pick-side-row"><span>Layer</span><span>${p.layer}</span></div>
+          <div class="pick-side-row"><span>5y ROIC</span><span>${p.metrics.roic}</span></div>
+          <div class="pick-side-row"><span>FCF</span><span>${p.metrics.fcf}</span></div>
+          <div class="pick-side-row"><span>Leverage</span><span>${p.metrics.nd}</span></div>
+          <div class="pick-side-row"><span>Fwd P/E</span><span>${p.metrics.pe}</span></div>
+          <div class="pick-side-row"><span>Rev growth</span><span>${p.metrics.rev}</span></div>
+          <div class="pick-side-row"><span>Allocation</span><span style="color:var(--accent)">${p.alloc}% · $${(p.alloc*1000).toLocaleString()}</span></div>
+        </div>
+      </div>
+      <div class="pick-expand-cue">↳ click for full thesis</div>
+    </div>
+  `).join('');
+
+  // Click handlers
+  grid.querySelectorAll('.pick').forEach(el => {
+    el.addEventListener('click', e => {
+      const wasExpanded = el.classList.contains('expanded');
+      grid.querySelectorAll('.pick.expanded').forEach(x => x.classList.remove('expanded'));
+      if (!wasExpanded) el.classList.add('expanded');
+    });
+  });
+}
+
+// Scorecard
+function renderScorecard(){
+  const tbody = document.querySelector('#scorecard-table tbody');
+  tbody.innerHTML = PICKS.map(p => `
+    <tr>
+      <td>${String(p.rank).padStart(2,'0')}</td>
+      <td class="tkr">${p.tkr}</td>
+      <td class="alloc">${p.alloc}%</td>
+      <td class="theme" style="color:${THEME_HEX[p.theme]}">${THEME_LABEL[p.theme]}</td>
+      <td class="bull">${p.metrics.roic}</td>
+      <td>${p.metrics.fcf}</td>
+      <td>${p.metrics.nd}</td>
+      <td>${p.metrics.pe}</td>
+      <td style="font-size:10px;color:var(--ink-dim);max-width:280px;">${p.moat.split('.')[0]}.</td>
+    </tr>
+  `).join('');
+}
+
+// Donut chart — segments
+function renderDonut(){
+  const C = 2 * Math.PI * 80; // circumference for r=80
+  const themes = ['AI','HC','Q','EN','DEF'];
+  const totals = themes.map(t => PICKS.filter(p => p.theme === t).reduce((s,p) => s + p.alloc, 0));
+  const sum = totals.reduce((s,v) => s + v, 0);
+  let offset = 0;
+  const segs = themes.map((t,i) => {
+    const frac = totals[i] / sum;
+    const dash = frac * C;
+    const seg = `<circle class="seg" cx="100" cy="100" r="80" fill="none" stroke="${THEME_HEX[t]}" stroke-width="22"
+                 transform="rotate(-90 100 100)" stroke-dashoffset="${-offset}" style="--dash:${dash} ${C - dash}"/>`;
+    offset += dash;
+    return seg;
+  }).join('');
+  document.getElementById('donut-segs').innerHTML = segs;
+}
+
+// Theme toggle
+function toggleTheme(){
+  const cur = document.documentElement.getAttribute('data-theme');
+  const next = cur === 'dark' ? 'light' : 'dark';
+  document.documentElement.setAttribute('data-theme', next);
+  try{ localStorage.setItem('dainer-fund-theme', next); }catch(_){}
+}
+(function loadTheme(){
+  try{
+    const saved = localStorage.getItem('dainer-fund-theme');
+    if (saved) document.documentElement.setAttribute('data-theme', saved);
+  }catch(_){}
+})();
+
+// Number count-up
+function animateCount(el){
+  const target = parseInt(el.dataset.target, 10);
+  const suffix = el.dataset.suffix || '';
+  const dur = 1200;
+  const start = performance.now();
+  const tick = t => {
+    const p = Math.min(1, (t - start) / dur);
+    const eased = 1 - Math.pow(1 - p, 3);
+    el.textContent = Math.round(target * eased) + suffix;
+    if (p < 1) requestAnimationFrame(tick);
+  };
+  requestAnimationFrame(tick);
+}
+
+// Scroll reveal observer
+function setupReveal(){
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting){
+        e.target.classList.add('visible');
+        // Animate counters within this section
+        e.target.querySelectorAll('.count').forEach(c => {
+          if (!c.dataset.counted){
+            c.dataset.counted = '1';
+            animateCount(c);
+          }
+        });
+        // Animate bar charts
+        e.target.querySelectorAll('.bar-fill').forEach(b => b.classList.add('animate'));
+        // Animate donut
+        const donut = e.target.querySelector('.donut');
+        if (donut) donut.classList.add('animate');
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.18 });
+  document.querySelectorAll('.reveal, .reveal-stagger').forEach(el => io.observe(el));
+}
+
+// Init
+document.addEventListener('DOMContentLoaded', () => {
+  renderPicks();
+  renderScorecard();
+  renderDonut();
+  setupReveal();
+  // Manually mark hero strip visible (above fold)
+  setTimeout(() => {
+    document.querySelectorAll('.pf-card').forEach(el => {
+      el.classList.add('visible');
+      el.querySelectorAll('.count').forEach(c => {
+        if (!c.dataset.counted){ c.dataset.counted='1'; animateCount(c); }
+      });
+    });
+  }, 400);
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Issue #001 — The launch · DAINER Finance</title>
+<meta name="description" content="The launch issue. Three reports, one dashboard, and a Leopold curveball.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Instrument+Sans:ital,wght@0,400..700;1,400..700&family=JetBrains+Mono:wght@300;400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <div class="brand"><span class="brand-dot"></span><a href="../index.html"><span>DAINER <em>Finance</em></span></a></div>
+    <div class="nav-right">
+      <ul class="nav-links">
+        <li><a href="../index.html">Dashboard</a></li>
+        <li><a href="../picks/swing-3-5yr.html">US Picks</a></li>
+        <li><a href="../picks/swing-msia.html">Malaysia</a></li>
+        <li><a href="../picks/dividends.html">Dividends</a></li>
+        <li><a href="../picks/famous-traders.html">Traders</a></li>
+        <li><a href="../calculator.html">Calculator</a></li>
+        <li><a href="index.html" class="active">Newsletter</a></li>
+      </ul>
+      <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
+        <svg class="sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.93 4.93l1.41 1.41m11.32 11.32l1.41 1.41M2 12h2m16 0h2M4.93 19.07l1.41-1.41m11.32-11.32l1.41-1.41"/></svg>
+        <svg class="moon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<article class="section" style="padding-top:80px;">
+  <div style="max-width:680px;margin:0 auto;">
+    <div class="hero-meta-top" style="margin-bottom:24px;">
+      <span><em>Issue #001</em></span>
+      <span>May 20, 2026</span>
+      <span>~8 min read</span>
+      <a href="index.html" style="color:var(--accent);border-bottom:1px solid var(--line);">← archive</a>
+    </div>
+    <h1 style="font-family:var(--serif);font-weight:300;font-size:clamp(40px,5.5vw,72px);line-height:1;letter-spacing:-.03em;margin-bottom:32px;">
+      The <em style="font-style:italic;color:var(--accent);">launch</em> — three reports, one dashboard, and a Leopold curveball.
+    </h1>
+    <p style="font-family:var(--serif);font-size:22px;font-style:italic;color:var(--ink-dim);line-height:1.35;margin-bottom:48px;">
+      Welcome to issue one. Here's what's new, what I changed my mind on this week, and the chart worth the click.
+    </p>
+
+    <div class="prose">
+
+      <h2>What's <em>new</em></h2>
+
+      <p>I'm folding the old dainer-fund swing dashboard into this. New home is dainer-finance — a small dashboard, three research reports, a compound calculator, and this newsletter. All free, no paywall, source on GitHub. The whole point: I keep my own picks in one place, you can read along, nothing is gated.</p>
+
+      <p>The reports:</p>
+
+      <ul>
+        <li><a href="../picks/swing-3-5yr.html">US Swing 3-5yr (Report 002)</a> — 10 picks, 8 singles + 2 ETFs (ITA, SMH). Top conviction: TSM 14%.</li>
+        <li><a href="../picks/swing-msia.html">Malaysia Swing 3-5yr (Report 003)</a> — 11 ringgit-denominated picks. Top 5 if concentrated: Maybank 25 · IHH 20 · Tenaga 20 · Gamuda 20 · NationGate 15.</li>
+        <li><a href="../picks/dividends.html">Dividend Income (Report 004)</a> — 21 picks across 3 sleeves. US aristocrats 50%, US high-yield 30%, MY ringgit 20%. ETF shortcut: 50% SCHD + 30% REITs + 20% MY banks.</li>
+      </ul>
+
+      <h2>What I <em>changed my mind on</em></h2>
+
+      <p>I started this with 18 single-stock picks. That was closet-indexing. Eighteen names is too many for a personal portfolio — you can't track that many catalysts, you can't size meaningfully, and the bottom 6 contribute noise instead of signal.</p>
+
+      <p>v2 is 10 positions. Eight singles where the moat is name-specific (TSM, LLY, MSFT, V, CEG, ETN, ANET, VRTX) and two ETFs where breadth wins (ITA for defense primes, SMH for the semi complex). Top 5 = 57% of the book. Concentrated. Convicted.</p>
+
+      <p>The pattern I'm watching: every time I added a pick to v1 it was because <em>I felt bad excluding it</em>, not because the marginal allocation moved the portfolio thesis. That's a tell. If the marginal pick doesn't change the story, it doesn't belong.</p>
+
+      <h2>The <em>Leopold curveball</em></h2>
+
+      <p>Leopold Aschenbrenner's Q1 2026 13F filed May 18. The fund is Situational Awareness LP — $13.68B AUM, master-feeder with a sister entity. Two things to know.</p>
+
+      <p>One: his actual longs are second-derivative bets — memory (SanDisk), behind-the-meter power (Bloom Energy), GPU-cloud-not-NVDA (CoreWeave), data-center real-estate (Applied Digital), and bitcoin miners pivoting to AI HPC (IREN, CORZ, RIOT). Zero hyperscalers. Zero defense AI. Zero utility-scale power. He went on-site fuel cell over grid-scale nuclear.</p>
+
+      <p>Two — the part nobody is talking about: he loaded up on <strong>puts</strong>. $8.5B in put options across SMH ETF ($2B), NVIDIA ($1.57B), Oracle ($1.07B), Broadcom ($1.01B), AMD ($969M), plus MU/TSM/ASML/INTC/Corning. Every put is NEW in Q1. Zero puts in his Q4 2025 filing.</p>
+
+      <p>Translation: the man who authored the "compute-thesis-as-AGI" essay in June 2024 is now hedging the consensus version of his own thesis. He's saying it's priced in. The alpha left is in the second-derivatives, not the names everyone already owns.</p>
+
+      <p>For my book, this doesn't change the 3-5 year picks (longer horizon, different question). But it tells me to be careful with NVDA-heavy exposure. SMH ETF is my way of holding the semi complex without overweighting NVDA — and even that I sized at 8%, not 15%.</p>
+
+      <blockquote>
+        The hardest move in markets isn't picking. It's resizing positions when consensus catches up to your own thesis. Watch what the smartest LP actually does, not what their last essay said.
+      </blockquote>
+
+      <h2><em>Anthropic IPO</em> — not July</h2>
+
+      <p>People keep asking. <strong>NOT July IPO.</strong> July is the rumored S-1 filing window. Actual IPO target: Q4 2026, October at earliest. Metaculus prediction market puts 66% odds of S-1 filing before July 1. The company's own spokesperson said "not decided when or even if it will go public."</p>
+
+      <p>Last official valuation: $380B post-money (Feb 2026 Series G). Secondary market: implied past $1T per Octagon AI. Revenue: $19B annualized as of March 2026, up from $9B in January. That's the most aggressive lab revenue curve in tech history.</p>
+
+      <p>How to get exposure now if you really want it:</p>
+
+      <ul>
+        <li><strong>Forge / EquityZen secondary:</strong> accredited investors, $50-100K minimums, 2-3× last round, lockup till IPO + 6 months</li>
+        <li><strong>Public proxies:</strong> AMZN ($8B invested + AWS primary cloud) is the closest. GOOGL also (~$3B)</li>
+        <li><strong>This portfolio's adjacent bet:</strong> MSFT (11% allocation) — different lab (OpenAI), same thesis</li>
+        <li><strong>Wait:</strong> day-1 post-IPO is usually the worst entry. Lock-up expiry + 6 months is when insiders unload — buy then</li>
+      </ul>
+
+      <h2>The week <em>ahead</em></h2>
+
+      <p>Codex is taking over the boring parts starting next week. Saturday it pulls fresh prices, refreshes the dashboard numbers, drafts the news cards from a list of finance domains I curate, and writes a draft of next Sunday's issue. I review, edit, publish.</p>
+
+      <p>The point: I don't want to spend my Sunday rebuilding the dashboard. I want to spend it reading and thinking. Automating the boring parts gives me time to do the actual work — which is making sure the picks still hold up and the thesis hasn't broken.</p>
+
+      <p>If you want to follow along: subscribe (one-click in the footer), watch the GitHub repo, or grab the RSS feed. The next issue lands next Sunday.</p>
+
+      <hr>
+
+      <p style="font-family:var(--mono);font-size:11px;color:var(--ink-faint);letter-spacing:.06em;">
+        Issued 2026-05-20 from Selangor, Malaysia. Not financial advice. Open notebook. Every claim is verifiable against the cited research files. Three reports linked above. Source code on GitHub.
+      </p>
+
+    </div>
+
+    <!-- Subscribe footer card -->
+    <div style="margin-top:80px;padding:32px;border:1px solid var(--accent);background:var(--bg-elev-2);">
+      <div class="hero-meta-top" style="margin-bottom:8px;">
+        <span>Liked this?</span>
+      </div>
+      <h3 style="font-family:var(--serif);font-size:28px;font-weight:400;font-style:italic;margin-bottom:14px;line-height:1.2;">Get the next one in your inbox.</h3>
+      <form action="https://buttondown.email/api/emails/embed-subscribe/dainer" method="post" target="popupwindow" style="display:flex;gap:8px;max-width:480px;">
+        <input type="email" name="email" placeholder="you@example.com" required style="flex:1;background:var(--bg);border:1px solid var(--line);color:var(--ink);padding:12px 14px;font-family:var(--mono);font-size:13px;outline:none;">
+        <button type="submit" style="background:var(--accent);color:var(--bg);font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;padding:12px 24px;border:none;cursor:pointer;white-space:nowrap;">Subscribe</button>
+      </form>
+    </div>
+  </div>
+</article>
+
+<footer class="footer">
+  <div class="footer-grid">
+    <div>
+      <h4>Companion reports</h4>
+      <ul>
+        <li><a href="../picks/swing-3-5yr.html">US Swing 3-5yr · 10 picks</a></li>
+        <li><a href="../picks/swing-msia.html">Malaysia Swing · 11 picks</a></li>
+        <li><a href="../picks/dividends.html">Dividend income · 21 picks</a></li>
+        <li><a href="../calculator.html">Compound calculator</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Archive</h4>
+      <ul>
+        <li><a href="index.html">All issues</a></li>
+        <li><a href="feed.xml">RSS feed</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Source</h4>
+      <ul>
+        <li><a href="https://github.com/dainer/dainer-finance-dashboard">GitHub repo</a></li>
+      </ul>
+      <p style="margin-top:14px;">Hand-written · AI-assisted research · STATUS tags on every claim</p>
+    </div>
+  </div>
+</footer>
+
+<script src="../assets/main.js"></script>
+</body>
+</html>

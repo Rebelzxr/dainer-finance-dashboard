@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Dividend Income · DAINER Finance</title>
+<meta name="description" content="3-sleeve dividend income strategy. US aristocrats, US high-yield specialty, MY ringgit income. With tax mechanics for a Malaysian holder.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Instrument+Sans:ital,wght@0,400..700;1,400..700&family=JetBrains+Mono:wght@300;400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <div class="brand"><span class="brand-dot"></span><a href="../index.html"><span>DAINER <em>Finance</em></span></a></div>
+    <div class="nav-right">
+      <ul class="nav-links">
+        <li><a href="../index.html">Dashboard</a></li>
+        <li><a href="swing-3-5yr.html">US Picks</a></li>
+        <li><a href="swing-msia.html">Malaysia</a></li>
+        <li><a href="dividends.html" class="active">Dividends</a></li>
+        <li><a href="famous-traders.html">Traders</a></li>
+        <li><a href="../calculator.html">Calculator</a></li>
+        <li><a href="../newsletter/index.html">Newsletter</a></li>
+      </ul>
+      <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
+        <svg class="sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.93 4.93l1.41 1.41m11.32 11.32l1.41 1.41M2 12h2m16 0h2M4.93 19.07l1.41-1.41m11.32-11.32l1.41-1.41"/></svg>
+        <svg class="moon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="hero-meta-top">
+    <span>Report 004</span>
+    <span>3 sleeves · 21 names</span>
+    <span>Blended yield <em>~4.5%</em></span>
+    <span>For a Malaysian holder · tax-aware</span>
+  </div>
+  <h1 class="hero-title">
+    Dividends<br>
+    <em>Income</em> <span class="amp">×</span> Discipline.
+  </h1>
+  <p class="hero-sub">
+    The boring income sleeve. <em>3 baskets</em>: US dividend aristocrats, US high-yield specialty, MY ringgit income — net of tax. The point isn't to chase yield. The point is durable cash flow that compounds.
+  </p>
+</header>
+
+<section class="pf-strip">
+  <div class="pf-card above-fold">
+    <div class="pf-stats">
+      <div class="pf-stat">
+        <span class="pf-stat-label">Total dividend names</span>
+        <span class="pf-stat-value"><em class="count" data-target="21">21</em></span>
+        <span class="pf-stat-sub">across 3 sleeves</span>
+      </div>
+      <div class="pf-stat">
+        <span class="pf-stat-label">Sleeve A allocation</span>
+        <span class="pf-stat-value"><em class="count" data-target="50" data-suffix="%">50%</em></span>
+        <span class="pf-stat-sub">US aristocrats · 25+yr raise history</span>
+      </div>
+      <div class="pf-stat">
+        <span class="pf-stat-label">Sleeve B allocation</span>
+        <span class="pf-stat-value"><em class="count" data-target="30" data-suffix="%">30%</em></span>
+        <span class="pf-stat-sub">US high-yield specialty</span>
+      </div>
+      <div class="pf-stat">
+        <span class="pf-stat-label">Sleeve C allocation</span>
+        <span class="pf-stat-value"><em class="count" data-target="20" data-suffix="%">20%</em></span>
+        <span class="pf-stat-sub">MY ringgit · tax-free for MY-resident</span>
+      </div>
+      <div class="pf-stat">
+        <span class="pf-stat-label">Top pick per sleeve</span>
+        <span class="pf-stat-value"><em>ABBV · O · MAYBANK</em></span>
+        <span class="pf-stat-sub">if you only buy 3 names</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="sleeves" class="section">
+  <div class="section-head reveal">
+    <div>
+      <div class="section-label">01 · The three sleeves</div>
+      <h2 class="section-title">Different baskets, <em>different jobs</em></h2>
+    </div>
+    <p class="section-sub">Each sleeve has a distinct mandate. Don't mix them mentally — they pay you for different things and break in different ways.</p>
+  </div>
+
+  <div class="card-grid-3 reveal-stagger">
+    <div class="theme-card" style="--th:var(--theme-q)">
+      <div class="theme-num">/ SLEEVE A — 50%</div>
+      <h3 class="theme-name">US <em>Aristocrats</em></h3>
+      <div class="theme-alloc">~3.0-3.7% gross yield</div>
+      <p class="theme-meta">25+ year dividend growth streak. Quality moats. Payout ratio sustainable. Net yield after W-8BEN 15% withholding = ~2.5-3.1%.</p>
+      <div class="theme-picks">
+        <a class="tv-link" href="https://www.tradingview.com/symbols/JNJ/" target="_blank" rel="noopener noreferrer">JNJ</a>
+        <a class="tv-link" href="https://www.tradingview.com/symbols/PG/" target="_blank" rel="noopener noreferrer">PG</a>
+        <a class="tv-link" href="https://www.tradingview.com/symbols/KO/" target="_blank" rel="noopener noreferrer">KO</a>
+        <a class="tv-link" href="https://www.tradingview.com/symbols/PEP/" target="_blank" rel="noopener noreferrer">PEP</a>
+        <a class="tv-link" href="https://www.tradingview.com/symbols/ABBV/" target="_blank" rel="noopener noreferrer">ABBV</a>
+        <a class="tv-link" href="https://www.tradingview.com/symbols/HD/" target="_blank" rel="noopener noreferrer">HD</a>
+        <a class="tv-link" href="https://www.tradingview.com/symbols/LOW/" target="_blank" rel="noopener noreferrer">LOW</a>
+        <a class="tv-link" href="https://www.tradingview.com/symbols/ED/" target="_blank" rel="noopener noreferrer">ED</a>
+      </div>
+    </div>
+    <div class="theme-card" style="--th:var(--theme-div)">
+      <div class="theme-num">/ SLEEVE B — 30%</div>
+      <h3 class="theme-name">US <em>High-yield specialty</em></h3>
+      <div class="theme-alloc">~5-9% gross yield</div>
+      <p class="theme-meta">REITs, BDCs, pipelines, telco. Higher yield = higher risk. Coverage ratios matter more than headline yield. Net after withholding ~4.3-7.7%.</p>
+      <div class="theme-picks">
+        <a class="tv-link" href="https://www.tradingview.com/symbols/O/" target="_blank" rel="noopener noreferrer">O</a>
+        <a class="tv-link" href="https://www.tradingview.com/symbols/ARCC/" target="_blank" rel="noopener noreferrer">ARCC</a>
+        <a class="tv-link" href="https://www.tradingview.com/symbols/MAIN/" target="_blank" rel="noopener noreferrer">MAIN</a>
+        <a class="tv-link" href="https://www.tradingview.com/symbols/ENB/" target="_blank" rel="noopener noreferrer">ENB</a>
+        <a class="tv-link" href="https://www.tradingview.com/symbols/KMI/" target="_blank" rel="noopener noreferrer">KMI*</a>
+        <a class="tv-link" href="https://www.tradingview.com/symbols/VZ/" target="_blank" rel="noopener noreferrer">VZ</a>
+      </div>
+    </div>
+    <div class="theme-card" style="--th:var(--theme-my)">
+      <div class="theme-num">/ SLEEVE C — 20%</div>
+      <h3 class="theme-name">MY <em>Ringgit income</em></h3>
+      <div class="theme-alloc">~5-7% net yield</div>
+      <p class="theme-meta">Bursa Malaysia. Single-tier system = tax-free at receiver level for a Malaysian resident. Gross yield = net yield. Currency-matched income.</p>
+      <div class="theme-picks">
+        <a class="tv-link" href="https://www.tradingview.com/symbols/MYX-MAYBANK/" target="_blank" rel="noopener noreferrer">MAYBANK</a>
+        <a class="tv-link" href="https://www.tradingview.com/symbols/MYX-PBBANK/" target="_blank" rel="noopener noreferrer">PBBANK</a>
+        <a class="tv-link" href="https://www.tradingview.com/symbols/MYX-TENAGA/" target="_blank" rel="noopener noreferrer">TENAGA</a>
+        <a class="tv-link" href="https://www.tradingview.com/symbols/MYX-PETDAG/" target="_blank" rel="noopener noreferrer">PETDAG</a>
+        <a class="tv-link" href="https://www.tradingview.com/symbols/MYX-MAXIS/" target="_blank" rel="noopener noreferrer">MAXIS</a>
+        <a class="tv-link" href="https://www.tradingview.com/symbols/MYX-SUNREIT/" target="_blank" rel="noopener noreferrer">SUNREIT</a>
+        <a class="tv-link" href="https://www.tradingview.com/symbols/MYX-PAVREIT/" target="_blank" rel="noopener noreferrer">PAVREIT</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="tax" class="section">
+  <div class="section-head reveal">
+    <div>
+      <div class="section-label">02 · The tax math</div>
+      <h2 class="section-title">For a <em>Malaysian holder</em></h2>
+    </div>
+    <p class="section-sub">The reason MY names get a 20% sleeve isn't patriotism — it's net yield math.</p>
+  </div>
+
+  <div class="exec-grid reveal">
+    <div class="exec-card">
+      <h4>US dividends</h4>
+      <h3>30% withholding default · 15% with W-8BEN</h3>
+      <ul>
+        <li><em>Default:</em> 30% US federal withholding on every dividend</li>
+        <li><em>With W-8BEN form filed with broker:</em> 15% (Malaysia-US tax treaty)</li>
+        <li><em>Effective net:</em> 4% gross × 0.85 = 3.4% net</li>
+        <li><em>ETF distributions:</em> same treatment as individual stocks</li>
+        <li><em>What to do:</em> file W-8BEN with IBKR / Charles Schwab / Saxo / whichever broker. Renews every 3 years.</li>
+      </ul>
+    </div>
+    <div class="exec-card">
+      <h4>MY dividends</h4>
+      <h3>Tax-free at receiver level</h3>
+      <ul>
+        <li><em>Single-tier system:</em> dividend tax paid by company (corporate tax 24%); zero further tax on receiver</li>
+        <li><em>Effective net:</em> 5% gross × 1.00 = 5% net</li>
+        <li><em>Comparison:</em> 5% US gross becomes 4.25% net; 5% MY gross stays 5% net</li>
+        <li><em>Why MY ringgit sleeve exists:</em> pure yield favours MY at equivalent gross yield</li>
+        <li><em>Offset:</em> MYR depreciation vs USD over 5-10yr — see Risk section. The right mix balances yield-after-tax against FX</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="picks" class="section">
+  <div class="section-head reveal">
+    <div>
+      <div class="section-label">03 · All 21 names</div>
+      <h2 class="section-title">Click any pick to <em>open the thesis</em></h2>
+    </div>
+    <p class="section-sub">Sleeve colour-coded. Sleeve A green, Sleeve B gold, Sleeve C red — matching the theme card colours above. ETF shortcut at the bottom.</p>
+  </div>
+
+  <div id="picks-grid" class="card-grid-3 reveal-stagger"></div>
+</section>
+
+<section id="etf-shortcut" class="section">
+  <div class="section-head reveal">
+    <div>
+      <div class="section-label">04 · The lazy path</div>
+      <h2 class="section-title">If you'd rather <em>not pick names</em></h2>
+    </div>
+    <p class="section-sub">Three ETFs + two MY singles. ~4-5% blended net yield, zero individual stock picking, lowest decision fatigue.</p>
+  </div>
+
+  <div class="exec-grid reveal">
+    <div class="exec-card">
+      <h4>50% · Sleeve A surrogate</h4>
+      <h3>SCHD — Schwab US Dividend Equity</h3>
+      <ul>
+        <li><em>Yield:</em> ~3.5% (TTM)</li>
+        <li><em>Expense:</em> 0.06% (cheapest dividend ETF on market)</li>
+        <li><em>What it owns:</em> 100 quality US dividend names screened on growth + sustainability + balance sheet</li>
+        <li><em>Why over individual picks:</em> tracks the same universe as Sleeve A without single-name dividend-cut risk</li>
+      </ul>
+    </div>
+    <div class="exec-card">
+      <h4>30% · Sleeve B surrogate</h4>
+      <h3>O + VNQ — REITs concentrated</h3>
+      <ul>
+        <li><em>20% O</em> (Realty Income) — monthly dividends, ~5.6% yield, 30+yr raise streak</li>
+        <li><em>10% VNQ</em> (Vanguard Real Estate ETF) — broad US REIT exposure, ~4% yield</li>
+        <li><em>Why not ARCC/MAIN ETFs:</em> BDC ETFs are too narrow / illiquid for retail position-sizing</li>
+        <li><em>Trade-off:</em> sacrifices the 9% ARCC yield for diversification</li>
+      </ul>
+    </div>
+    <div class="exec-card">
+      <h4>20% · Sleeve C — keep singles</h4>
+      <h3>MAYBANK + PBBANK equal-weight</h3>
+      <ul>
+        <li><em>10% MAYBANK</em> — ~5.9% yield, ASEAN bank franchise</li>
+        <li><em>10% PBBANK</em> — ~5% yield, lowest NPL in MY</li>
+        <li><em>Why not a MY dividend ETF:</em> MY ETF coverage is thin; direct shares + tax-free yield is the cleaner trade</li>
+      </ul>
+    </div>
+    <div class="exec-card">
+      <h4>Blended outcome</h4>
+      <h3>~4.3% net yield · 5 holdings total</h3>
+      <ul>
+        <li><em>Net yield:</em> ~3.5% × 0.5 + ~5% × 0.3 + ~5.5% × 0.2 = ~4.35% blended net</li>
+        <li><em>Decision fatigue:</em> 5 positions vs 21. Quarterly rebalance is trivial.</li>
+        <li><em>Tax efficiency:</em> SCHD + VNQ + O all benefit from W-8BEN 15% rate. MY pair stays tax-free.</li>
+        <li><em>Trade-off vs picking:</em> you lose the ~50bps you might gain from active selection in Sleeve A; you avoid all single-name dividend-cut risk.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="risks" class="section">
+  <div class="section-head reveal">
+    <div>
+      <div class="section-label">05 · What kills the income</div>
+      <h2 class="section-title">Risks to the <em>dividend sleeve</em></h2>
+    </div>
+  </div>
+
+  <div class="risks-grid reveal-stagger">
+    <div class="risk-card">
+      <div class="risk-num">RISK 01</div>
+      <h3 class="risk-head">Rate spike</h3>
+      <p class="risk-body">REITs (O, VNQ), telcos (VZ), utilities (ED, TENAGA) all re-rate down hard on a 100bp+ move in long rates. Combined that's ~30% of the income sleeve. Mitigation: BDCs (ARCC, MAIN) are floating-rate and rate-positive — they cushion.</p>
+    </div>
+    <div class="risk-card">
+      <div class="risk-num">RISK 02</div>
+      <h3 class="risk-head">Tax treaty change</h3>
+      <p class="risk-body">If Malaysia-US tax treaty modified or revoked, US withholding returns to 30%. Net yield drops materially. Watch US/MY diplomatic events. Mitigation: tilt to MY sleeve if signals emerge.</p>
+    </div>
+    <div class="risk-card">
+      <div class="risk-num">RISK 03</div>
+      <h3 class="risk-head">Recession dividend cuts</h3>
+      <p class="risk-body">High-yield Sleeve B names cut first. ARCC + MAIN credit losses spike in recession. ENB / KMI commodity exposure. VZ debt servicing. Mitigation: Sleeve A names have 25+yr no-cut streaks — even GFC didn't break JNJ, PG, KO.</p>
+    </div>
+    <div class="risk-card">
+      <div class="risk-num">RISK 04</div>
+      <h3 class="risk-head">Ringgit collapse</h3>
+      <p class="risk-body">If MYR drops 20%+ vs USD (it has historically), Sleeve C income loses USD purchasing power. But MY assets gain in MYR terms — fine if MY-residing. Hurts only if planning to convert MY income to USD.</p>
+    </div>
+    <div class="risk-card">
+      <div class="risk-num">RISK 05</div>
+      <h3 class="risk-head">Yield trap individual names</h3>
+      <p class="risk-body">Examples deliberately excluded: MMM (cut Apr 2024), WBA (cut Jan 2024), T (cut 2022), KHC (peaked structurally), MO (terminal asset thesis). High yield often signals underlying business weakness. Watch payout ratio + FCF coverage every quarter.</p>
+    </div>
+    <div class="risk-card">
+      <div class="risk-num">RISK 06</div>
+      <h3 class="risk-head">Bank Negara OPR cut (MY)</h3>
+      <p class="risk-body">If BNM cuts OPR to support growth, MAYBANK + PBBANK NIM compresses → dividend coverage tightens. Both have 73-80% payout — limited buffer. Sleeve C is bank-heavy (3 of 7 names). Counterbalance: REITs (SUNREIT, PAVREIT) benefit from rate cuts.</p>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer-grid">
+    <div>
+      <h4>Methodology · Dividend report</h4>
+      <p>21 picks selected across 3 sleeves. Bar: Sleeve A yield ≥ 2.5% + 5yr DGR > 5%; Sleeve B yield ≥ 5%; Sleeve C yield ≥ 4.5%. All names: payout ratio sustainable, 5yr dividend history (no cuts for Sleeve A), business not melting. ETF shortcut path provided for low-decision-fatigue execution. Tax mechanics anchored to MY-US treaty 15% withholding rate.</p>
+      <span class="status-tag">STATUS: UNVERIFIED · yields reflect ~late 2024 data, verify live before any buy</span>
+    </div>
+    <div>
+      <h4>Sources</h4>
+      <ul>
+        <li><a href="../../trading/research/swing_phase2_dividends.md">Raw research markdown</a></li>
+        <li><a href="swing-3-5yr.html">US 3-5yr companion</a></li>
+        <li><a href="swing-msia.html">Malaysia swing</a></li>
+        <li><a href="../calculator.html">Compound calculator</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Connect</h4>
+      <ul>
+        <li><a href="../newsletter/index.html">Weekly newsletter</a></li>
+        <li><a href="https://github.com/dainer/dainer-finance-dashboard">GitHub source</a></li>
+      </ul>
+      <p style="margin-top:14px;">Generated 2026-05-20 · DAINER OS</p>
+    </div>
+  </div>
+</footer>
+
+<script src="../assets/main.js"></script>
+<script>
+const PICKS = [
+  // Sleeve A — US Aristocrats (color: theme-q gold)
+  {sleeve:'A',rank:1,tkr:'ABBV',name:'AbbVie',yield:'~3.7%',dgr:'5%+ (51 years incl. Abbott legacy)',payout:'~50% adj FCF',pe:'~14x fwd',
+   thesis:'Post-Humira-cliff survivor. Skyrizi + Rinvoq + Vraylar growth engines now ~50% of revenue. Pricing power durable, oncology pipeline + Allergan synergies.',
+   risk:'Skyrizi/Rinvoq biosimilar entry mid-2030s. Concentration risk in dermatology + rheumatology.'},
+  {sleeve:'A',rank:2,tkr:'PEP',name:'PepsiCo',yield:'~3.4%',dgr:'7%+ (51 years)',payout:'~75% FCF',pe:'~21x fwd',
+   thesis:'Frito-Lay snack moat (~25% margin) cross-subsidises beverage. GLP-1 fears overblown — snack pricing inflexion in 2025-26 quarterly results bears watching.',
+   risk:'GLP-1-driven snack volume decline if mass adoption. Mexican peso volatility on Latin American business.'},
+  {sleeve:'A',rank:3,tkr:'JNJ',name:'Johnson & Johnson',yield:'~3.0%',dgr:'6% (61 years)',payout:'~50% FCF',pe:'~16x fwd',
+   thesis:'Pharmaceutical + medical devices duopoly post-Kenvue spin (cleaner business). Innovative medicine growth offset by patent cliffs handled with M&A.',
+   risk:'Talc litigation overhang (~$10B reserve). Stelara biosimilar competition 2025-26.'},
+  {sleeve:'A',rank:4,tkr:'KO',name:'Coca-Cola',yield:'~3.0%',dgr:'5% (62 years)',payout:'~75% FCF',pe:'~22x fwd',
+   thesis:'Beverage portfolio breadth (Coke + Sprite + waters + coffees) protects from category shifts. Emerging market per-capita growth runway.',
+   risk:'GLP-1 sugar-drink decline (BMO research suggests ~2% volume drag). Currency translation drag.'},
+  {sleeve:'A',rank:5,tkr:'ED',name:'Consolidated Edison',yield:'~3.5%',dgr:'~3% (50 years)',payout:'~70% FCF',pe:'~18x fwd',
+   thesis:'NY-NJ regulated utility — ConEd has the most predictable regulated return profile in US utility sector. Rate base growth from grid modernisation + EV charging.',
+   risk:'Regulatory rate cap if customer bills inflame. Rate compression if rates drop.'},
+  {sleeve:'A',rank:6,tkr:'PG',name:'Procter & Gamble',yield:'~2.4%',dgr:'5% (68 years)',payout:'~60% FCF',pe:'~24x fwd',
+   thesis:'Consumer staples mega-brand portfolio. Pricing power proven through 2022-23 inflation cycle. Quality dividend grower below yield bar.',
+   risk:'EM volume softness. Margin pressure if commodity costs spike again.'},
+  {sleeve:'A',rank:7,tkr:'HD',name:'Home Depot',yield:'~2.4%',dgr:'15%+ (15 years post-cut)',payout:'~50% FCF',pe:'~22x fwd',
+   thesis:'Duopoly with LOW. Pro contractor channel growing share. US housing-stock-age tailwind (median home >40yr = perpetual renovation demand). DGR play.',
+   risk:'Housing turnover cycle. Tariff/import cost exposure on tools + supplies.'},
+  {sleeve:'A',rank:8,tkr:'LOW',name:"Lowe's",yield:'~2.0%',dgr:'15%+',payout:'~35% FCF',pe:'~20x fwd',
+   thesis:'Same housing-age tailwind as HD. Lower payout = more dividend growth runway. Buy for compounding-by-raises, not income.',
+   risk:'Same as HD plus pro-share gap vs HD still wide.'},
+  // Sleeve B — High-yield specialty (color: theme-div warn)
+  {sleeve:'B',rank:9,tkr:'O',name:'Realty Income',yield:'~5.6%',dgr:'4.3% (30 years)',payout:'~75% AFFO',pe:'~14x P/AFFO',
+   thesis:'Monthly-dividend REIT. Triple-net retail real estate (Walgreens, Dollar General, 7-Eleven anchor tenants). 30+yr dividend raise streak. Defensive REIT.',
+   risk:'Tenant credit (Walgreens stress 2024-25). Rate sensitivity. Single-tenant exposure to dollar-store names.'},
+  {sleeve:'B',rank:10,tkr:'ARCC',name:'Ares Capital',yield:'~9.0%',dgr:'flat',payout:'~95% NII',pe:'~10x',
+   thesis:'Largest publicly-traded BDC. Direct lending to mid-market companies. Floating-rate book → higher yield when rates rise. Tier-1 manager (Ares).',
+   risk:'Credit cycle (recession = NAV write-downs). Rate cuts compress NII. BDC structure regulatory.'},
+  {sleeve:'B',rank:11,tkr:'MAIN',name:'Main Street Capital',yield:'~5.5% reg + supplementals',dgr:'4-5%',payout:'flexible',pe:'~12x',
+   thesis:'Lower-middle-market BDC + internally managed. Regular monthly + supplemental dividends. Total yield with supplementals ~7-8%. Conservative leverage vs ARCC.',
+   risk:'Same credit cycle risk as ARCC. Smaller asset base.'},
+  {sleeve:'B',rank:12,tkr:'ENB',name:'Enbridge',yield:'~6.5%',dgr:'~3%',payout:'~65% DCF',pe:'~17x fwd',
+   thesis:'Largest North American midstream pipeline. Take-or-pay contracts cover ~95% of revenue. Renewables transition optionality.',
+   risk:'Pipeline regulatory friction (Line 5). Canadian carbon tax. Forex (CAD).'},
+  {sleeve:'B',rank:13,tkr:'KMI',name:'Kinder Morgan',yield:'~5.0%',dgr:'5-7%',payout:'~55% DCF',pe:'~17x fwd',
+   thesis:'US largest natural gas pipeline network. LNG export tailwind + data-center gas-for-power demand. Caveated because of pre-2018 dividend-cut history.',
+   risk:'Past dividend cut sets precedent. Commodity price tail. Hyper-scaler gas-PPA dependence.'},
+  {sleeve:'B',rank:14,tkr:'VZ',name:'Verizon',yield:'~6.5%',dgr:'~2% (19 years)',payout:'~50% FCF',pe:'~9x fwd',
+   thesis:'Telco yield play. 5G monetisation + fixed wireless access (FWA) growth. Debt being paid down. Defensive.',
+   risk:'Heavy debt load ($150B+). T-Mobile + cable encroachment. Sub-growth challenged.'},
+  // Sleeve C — MY Ringgit (color: theme-my)
+  {sleeve:'C',rank:15,tkr:'MAYBANK',name:'Malayan Banking · 1155.KL',yield:'~5.9%',dgr:'flat to slow growth',payout:'~73%',pe:'~11.5x',
+   thesis:'ASEAN bank franchise. Buying ASEAN deposit base at 1.3x book with 5.9% yield. Tax-free for MY-resident.',
+   risk:'BNM OPR cut compresses NIM. Indonesia exposure adds IDR vol.'},
+  {sleeve:'C',rank:16,tkr:'PBBANK',name:'Public Bank · 1295.KL',yield:'~5.0%',dgr:'4-5%',payout:'~50-55%',pe:'~12x',
+   thesis:'Lowest NPL in MY (sub-0.4%). Most conservative bank. Quality flight asset in MY market corrections.',
+   risk:'Founder-succession (Teh Hong Piow passed 2022; succession in early phase). Mortgage cycle exposure.'},
+  {sleeve:'C',rank:17,tkr:'TENAGA',name:'Tenaga Nasional · 5347.KL',yield:'~3.8%',dgr:'~3%',payout:'~50%',pe:'~16x',
+   thesis:'Monopoly grid utility. Lower yield than other MY income names but capital appreciation upside from Johor DC build cycle.',
+   risk:'Government tariff interference. Behind-the-meter solar slow leak.'},
+  {sleeve:'C',rank:18,tkr:'PETDAG',name:'Petronas Dagangan · 5681.KL',yield:'~4.7%',dgr:'~3-5%',payout:'~60%',pe:'~14x',
+   thesis:'Dominant MY fuel retail. 18%+ ROE cash machine. Mesra convenience format compounds non-fuel revenue.',
+   risk:'EV adoption (slow in MY, 2030s+ concern). Fuel subsidy reform.'},
+  {sleeve:'C',rank:19,tkr:'MAXIS',name:'Maxis Berhad · 6012.KL',yield:'~5.5%',dgr:'low',payout:'~80%',pe:'~18x',
+   thesis:'MY telco yield play. 5G monetisation + enterprise services. Conservative balance sheet.',
+   risk:'Competitive pricing from CelcomDigi. Capex cycle for 5G build.'},
+  {sleeve:'C',rank:20,tkr:'SUNREIT',name:'Sunway REIT · 5176.KL',yield:'~5.5%',dgr:'~2-3%',payout:'~95%',pe:'~17x',
+   thesis:'Diversified MY REIT — retail malls + hotels + offices + medical. Best mix in MY REIT space.',
+   risk:'Retail mall structural pressure. Hotel cycle sensitivity.'},
+  {sleeve:'C',rank:21,tkr:'PAVREIT',name:'Pavilion REIT · 5212.KL',yield:'~6.0%',dgr:'flat',payout:'~95%',pe:'~16x',
+   thesis:'Pure prime-mall MY REIT — Pavilion KL anchor. High-end retail demand sustained. Lowest-risk MY REIT.',
+   risk:'Single-asset concentration on Pavilion KL. Tourist flow (relevant for high-end retail).'},
+];
+
+const SLEEVE_COLORS = {A:'var(--theme-q)',B:'var(--theme-div)',C:'var(--theme-my)'};
+const SLEEVE_LABELS = {A:'Sleeve A · US Aristocrats',B:'Sleeve B · US High-yield',C:'Sleeve C · MY Ringgit'};
+
+function renderPicks(){
+  const grid = document.getElementById('picks-grid');
+  grid.innerHTML = PICKS.map(p => `
+    <div class="pick" style="--th:${SLEEVE_COLORS[p.sleeve]}">
+      <div class="pick-rank">/ ${String(p.rank).padStart(2,'0')}</div>
+      <div class="pick-head">
+        <a class="pick-tkr tv-link" href="https://www.tradingview.com/symbols/${p.sleeve==='C'?'MYX-':''}${p.tkr}/" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()" title="Open ${p.tkr} live chart on TradingView">${p.tkr}</a>
+        <span class="pick-alloc">${p.yield}</span>
+      </div>
+      <div class="pick-name">${p.name}</div>
+      <div class="pick-layer">${SLEEVE_LABELS[p.sleeve]}</div>
+      <div class="pick-hook">"${p.thesis.split('.')[0]}."</div>
+      <div class="pick-metrics">
+        <div class="pick-metric"><span>Yield</span><span>${p.yield}</span></div>
+        <div class="pick-metric"><span>5y DGR</span><span>${p.dgr}</span></div>
+        <div class="pick-metric"><span>Payout</span><span>${p.payout}</span></div>
+        <div class="pick-metric"><span>Fwd P/E</span><span>${p.pe}</span></div>
+      </div>
+      <div class="pick-detail">
+        <div>
+          <h4>Thesis</h4>
+          <p>${p.thesis}</p>
+          <h4>What kills it</h4>
+          <p class="risk">${p.risk}</p>
+        </div>
+        <div class="pick-side">
+          <h4>Snapshot</h4>
+          <div class="pick-side-row"><span>Sleeve</span><span style="color:${SLEEVE_COLORS[p.sleeve]}">${SLEEVE_LABELS[p.sleeve]}</span></div>
+          <div class="pick-side-row"><span>Yield (TTM)</span><span style="color:var(--accent);">${p.yield}</span></div>
+          <div class="pick-side-row"><span>Dividend growth</span><span>${p.dgr}</span></div>
+          <div class="pick-side-row"><span>Payout ratio</span><span>${p.payout}</span></div>
+          <div class="pick-side-row"><span>Forward P/E</span><span>${p.pe}</span></div>
+        </div>
+      </div>
+      <div class="pick-expand-cue">↳ click for full thesis</div>
+    </div>
+  `).join('');
+
+  grid.querySelectorAll('.pick').forEach(el => {
+    el.addEventListener('click', () => {
+      const wasExpanded = el.classList.contains('expanded');
+      grid.querySelectorAll('.pick.expanded').forEach(x => x.classList.remove('expanded'));
+      if (!wasExpanded) el.classList.add('expanded');
+    });
+  });
+}
+
+document.addEventListener('DOMContentLoaded', renderPicks);
+</script>
+</body>
+</html>

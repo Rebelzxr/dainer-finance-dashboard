@@ -1,0 +1,76 @@
+{
+  "updated": "2026-05-20",
+  "next_refresh": "2026-05-27",
+  "items": [
+    {
+      "date": "2026-05-18",
+      "source": "SEC EDGAR",
+      "title": "Situational Awareness LP files Q1 2026 13F — $13.68B AUM, $8.5B in NEW puts",
+      "preview": "Leopold Aschenbrenner's fund flips to long/short barbell. SMH ETF put $2B notional, NVDA put $1.57B. Top long still SanDisk at $1.11B.",
+      "url": "https://www.sec.gov/Archives/edgar/data/2045724/000204572426000008/",
+      "category": "13F",
+      "relevance": "leopold-13f"
+    },
+    {
+      "date": "2026-05-15",
+      "source": "The Information",
+      "title": "Anthropic eyeing Q4 2026 IPO — Wilson Sonsini hired, $19B annualized revenue",
+      "preview": "Internal target Q4 2026, October at earliest. S-1 confidential filing rumored for July window. Metaculus prediction market: 66% odds before July 1.",
+      "url": "https://www.theinformation.com/",
+      "category": "AI",
+      "relevance": "anthropic-ipo"
+    },
+    {
+      "date": "2026-05-10",
+      "source": "Reuters",
+      "title": "TSMC 2nm ramp on track — Arizona Fab 2 first wafers Q4 2026",
+      "preview": "TSM 2026 capex $56B. Arizona fabs derisk geopolitically. CoWoS advanced packaging still the rate-limit on every Nvidia/AMD accelerator shipped.",
+      "url": "https://www.reuters.com/technology/",
+      "category": "AI infra",
+      "relevance": "tsm"
+    },
+    {
+      "date": "2026-05-08",
+      "source": "Bloomberg",
+      "title": "Eli Lilly's orforglipron cardiovascular outcomes data — full readout October 2026",
+      "preview": "If positive, GLP-1 label extends from endocrinologists to general practitioners. Primary care prescription channel = TAM expansion materially.",
+      "url": "https://www.bloomberg.com/",
+      "category": "Healthcare",
+      "relevance": "lly"
+    },
+    {
+      "date": "2026-05-05",
+      "source": "FT",
+      "title": "Constellation closes second hyperscaler PPA — 20-year offtake from Three Mile Island Unit 1",
+      "preview": "CEG following Microsoft TMI deal with second confirmed nameplate. Pricing premium 60% over wholesale grid power. Nuclear renaissance moving from narrative to revenue.",
+      "url": "https://www.ft.com/",
+      "category": "Energy",
+      "relevance": "ceg"
+    },
+    {
+      "date": "2026-05-03",
+      "source": "Bursa Malaysia",
+      "title": "Tenaga Nasional secures RM10B Johor grid expansion capex for FY26",
+      "preview": "Regulated asset base expansion driven by 5+ GW Johor data-center pipeline through 2030. RP4 tariff filing locked in. Premium MY utility play.",
+      "url": "https://www.bursamalaysia.com/",
+      "category": "MY",
+      "relevance": "tenaga"
+    }
+  ],
+  "_meta": {
+    "format_version": 1,
+    "max_items_displayed": 6,
+    "automation": "Codex script (scripts/refresh-news.py) pulls 8-10 candidates from finance domains every Sunday, ranks by thesis-relevance, writes top 6 here, commits to git.",
+    "domains_curated": [
+      "sec.gov",
+      "reuters.com",
+      "bloomberg.com",
+      "ft.com",
+      "wsj.com",
+      "theinformation.com",
+      "stratechery.com",
+      "bursamalaysia.com",
+      "theedgemalaysia.com"
+    ]
+  }
+}

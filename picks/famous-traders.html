@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Famous Traders Tracker · DAINER Finance</title>
+<meta name="description" content="What 25+ legendary investors actually own. 13F filings + congressional disclosures. Updated weekly.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Instrument+Sans:ital,wght@0,400..700;1,400..700&family=JetBrains+Mono:wght@300;400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/style.css">
+<style>
+  /* Trader-specific styles */
+  .filter-bar{display:flex;flex-wrap:wrap;gap:8px;margin-top:24px;}
+  .filter-btn{padding:8px 14px;border:1px solid var(--line);background:transparent;color:var(--ink-dim);font-family:var(--mono);font-size:11px;letter-spacing:.1em;cursor:pointer;transition:all .25s var(--ease);text-transform:uppercase;}
+  .filter-btn:hover{border-color:var(--accent);color:var(--accent);}
+  .filter-btn.active{background:var(--accent);color:var(--bg);border-color:var(--accent);}
+
+  .trader-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+  @media(max-width:1100px){.trader-grid{grid-template-columns:repeat(2,1fr);}}
+  @media(max-width:640px){.trader-grid{grid-template-columns:1fr;}}
+
+  .trader{border:1px solid var(--line);background:var(--bg-elev);padding:24px;position:relative;cursor:pointer;transition:all .35s var(--ease);overflow:hidden;}
+  .trader:hover{border-color:var(--accent);background:var(--bg-elev-2);transform:translateY(-3px);box-shadow:0 12px 32px -16px color-mix(in srgb,var(--accent) 25%,transparent);}
+  .trader.expanded{grid-column:span 3;}
+  @media(max-width:1100px){.trader.expanded{grid-column:span 2;}}
+  @media(max-width:640px){.trader.expanded{grid-column:span 1;}}
+  .trader::before{content:'';position:absolute;top:0;left:0;width:100%;height:2px;background:var(--cat);opacity:.5;}
+  .trader-rank{position:absolute;top:14px;right:18px;font-family:var(--mono);font-size:10px;color:var(--ink-faint);letter-spacing:.12em;}
+  .trader-name{font-family:var(--serif);font-size:26px;font-weight:500;letter-spacing:-.015em;line-height:1.1;margin-bottom:4px;}
+  .trader-fund{font-family:var(--mono);font-size:11px;color:var(--ink-dim);letter-spacing:.06em;margin-bottom:10px;}
+  .trader-cat{display:inline-block;font-family:var(--mono);font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--cat);padding:3px 8px;border:1px solid color-mix(in srgb,var(--cat) 30%,transparent);border-radius:999px;margin-bottom:14px;}
+  .trader-tagline{font-family:var(--serif);font-size:14px;font-style:italic;color:var(--ink);line-height:1.4;margin-bottom:16px;}
+  .trader-meta{display:grid;grid-template-columns:1fr 1fr;gap:6px 16px;font-family:var(--mono);font-size:10px;border-top:1px solid var(--line);padding-top:12px;margin-bottom:14px;}
+  .trader-meta div{display:flex;justify-content:space-between;}
+  .trader-meta div span:first-child{color:var(--ink-dim);}
+  .trader-meta div span:last-child{color:var(--ink);}
+  .trader-top{display:flex;flex-direction:column;gap:5px;font-family:var(--mono);font-size:11px;}
+  .trader-top-row{display:flex;justify-content:space-between;align-items:baseline;}
+  .trader-top-row .pos-tkr{font-family:var(--serif);font-size:14px;font-weight:500;letter-spacing:-.005em;color:var(--ink);}
+  .trader-top-row .pos-pct{color:var(--accent);font-weight:500;}
+  .trader-top-row .pos-change{font-size:10px;color:var(--ink-faint);letter-spacing:.08em;}
+  .trader-top-row .pos-change.up{color:var(--bull);}
+  .trader-top-row .pos-change.down{color:var(--bear);}
+  .trader-detail{margin-top:18px;padding-top:18px;border-top:1px solid var(--line);display:none;}
+  .trader.expanded .trader-detail{display:grid;grid-template-columns:1.5fr 1fr;gap:32px;}
+  @media(max-width:900px){.trader.expanded .trader-detail{grid-template-columns:1fr;}}
+  .trader-detail h4{font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin-bottom:8px;}
+  .trader-detail p{font-size:14px;color:var(--ink);line-height:1.6;margin-bottom:14px;}
+  .trader-detail .change{color:var(--warn);font-family:var(--serif);font-style:italic;}
+  .trader-detail .thesis{color:var(--bull);font-family:var(--serif);font-style:italic;}
+  .trader-side{display:flex;flex-direction:column;gap:14px;}
+  .trader-side-row{font-family:var(--mono);font-size:11px;color:var(--ink-dim);display:flex;justify-content:space-between;border-bottom:1px solid var(--line);padding-bottom:6px;}
+  .trader-side-row span:last-child{color:var(--ink);}
+  .trader-side-row a{color:var(--accent);border-bottom:1px solid color-mix(in srgb,var(--accent) 30%,transparent);}
+  .trader-expand-cue{position:absolute;bottom:14px;right:18px;font-family:var(--mono);font-size:9px;color:var(--ink-faint);letter-spacing:.14em;opacity:.6;}
+  .trader.expanded .trader-expand-cue{opacity:0;}
+  .trader.hidden{display:none;}
+  .trader.unverified .trader-top{opacity:.4;font-style:italic;}
+
+  /* Category colors */
+  :root{
+    --cat-value:#82B971; --cat-macro:#D4A84B; --cat-tiger:#7FB5D1;
+    --cat-activist:#D69D55; --cat-contrarian:#D66955; --cat-ai:#B97FA8;
+    --cat-political:#E2B13C; --cat-founder:#7BC585; --cat-private:#4A463E;
+  }
+
+  /* Empty state */
+  .loading{grid-column:1/-1;padding:48px;text-align:center;color:var(--ink-dim);font-style:italic;}
+
+  /* TradingView ticker links — same pattern */
+  a.tv-link{color:inherit;text-decoration:none;border-bottom:1px dashed transparent;transition:border-color .2s var(--ease),color .2s var(--ease);cursor:pointer;display:inline-block;}
+  a.tv-link:hover{border-bottom-color:var(--accent);color:var(--accent);}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <div class="brand"><span class="brand-dot"></span><a href="../index.html"><span>DAINER <em>Finance</em></span></a></div>
+    <div class="nav-right">
+      <ul class="nav-links">
+        <li><a href="../index.html">Dashboard</a></li>
+        <li><a href="swing-3-5yr.html">US Picks</a></li>
+        <li><a href="swing-msia.html">Malaysia</a></li>
+        <li><a href="dividends.html">Dividends</a></li>
+        <li><a href="famous-traders.html" class="active">Traders</a></li>
+        <li><a href="../calculator.html">Calculator</a></li>
+        <li><a href="../newsletter/index.html">Newsletter</a></li>
+      </ul>
+      <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
+        <svg class="sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.93 4.93l1.41 1.41m11.32 11.32l1.41 1.41M2 12h2m16 0h2M4.93 19.07l1.41-1.41m11.32-11.32l1.41-1.41"/></svg>
+        <svg class="moon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="hero-meta-top">
+    <span>Report 005</span>
+    <span>26 names tracked · 13F + congressional</span>
+    <span>Updated <em id="updated-date">2026-05-20</em></span>
+    <span>Auto-refresh weekly via Codex</span>
+  </div>
+  <h1 class="hero-title">
+    What the<br>
+    <em>smart money</em> actually owns.
+  </h1>
+  <p class="hero-sub">
+    Twenty-six famous investors. Their <em>top positions</em>, what they added, what they sold. Sourced from SEC EDGAR 13F filings + CapitolTrades disclosures. Updated weekly with the newsletter.
+  </p>
+</header>
+
+<section class="pf-strip">
+  <div class="pf-card above-fold">
+    <div class="pf-stats">
+      <div class="pf-stat">
+        <span class="pf-stat-label">Traders tracked</span>
+        <span class="pf-stat-value"><em class="count" data-target="26">26</em></span>
+        <span class="pf-stat-sub">across 8 categories</span>
+      </div>
+      <div class="pf-stat">
+        <span class="pf-stat-label">Value legends</span>
+        <span class="pf-stat-value"><em class="count" data-target="8">8</em></span>
+        <span class="pf-stat-sub">Buffett · Ackman · Klarman · ...</span>
+      </div>
+      <div class="pf-stat">
+        <span class="pf-stat-label">AI / new-gen</span>
+        <span class="pf-stat-value"><em class="count" data-target="3">3</em></span>
+        <span class="pf-stat-sub">Wood · Aschenbrenner · Thiel</span>
+      </div>
+      <div class="pf-stat">
+        <span class="pf-stat-label">Congressional</span>
+        <span class="pf-stat-value"><em>Pelosi</em></span>
+        <span class="pf-stat-sub">via STOCK Act PTR</span>
+      </div>
+      <div class="pf-stat">
+        <span class="pf-stat-label">Last filing deadline</span>
+        <span class="pf-stat-value"><em>May 15</em></span>
+        <span class="pf-stat-sub">Q1 2026 13F-HR deadline</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="traders" class="section">
+  <div class="section-head reveal">
+    <div>
+      <div class="section-label">01 · Click any name to expand</div>
+      <h2 class="section-title">The <em>investor universe</em></h2>
+    </div>
+    <p class="section-sub">Filter by style below. Click any card to see full top 5 positions, recent changes, and the SEC filing link. Tickers go straight to TradingView in a new tab.</p>
+  </div>
+
+  <div class="filter-bar reveal">
+    <button class="filter-btn active" data-cat="all">All · 26</button>
+    <button class="filter-btn" data-cat="value">Value · 8</button>
+    <button class="filter-btn" data-cat="macro">Macro · 5</button>
+    <button class="filter-btn" data-cat="tiger">Tiger Cubs · 5</button>
+    <button class="filter-btn" data-cat="activist">Activist · 2</button>
+    <button class="filter-btn" data-cat="ai">AI / new-gen · 3</button>
+    <button class="filter-btn" data-cat="founder">Founder · 1</button>
+    <button class="filter-btn" data-cat="political">Political · 1</button>
+    <button class="filter-btn" data-cat="private">Private · 1</button>
+  </div>
+
+  <div class="trader-grid reveal-stagger" id="trader-grid" style="margin-top:32px;">
+    <div class="loading">Loading trader data from data/famous-traders.json...</div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section-head reveal">
+    <div>
+      <div class="section-label">02 · How this works</div>
+      <h2 class="section-title">Sources <em>+ cadence</em></h2>
+    </div>
+  </div>
+
+  <div class="exec-grid reveal">
+    <div class="exec-card">
+      <h4>13F filings</h4>
+      <h3>SEC EDGAR · quarterly</h3>
+      <ul>
+        <li><em>Filer:</em> any institution managing >$100M in 13F-eligible US securities must file</li>
+        <li><em>Cadence:</em> 45 days after quarter end (Feb 14, May 15, Aug 14, Nov 14)</li>
+        <li><em>What's in:</em> long equity positions, calls + puts (notional), shares + value</li>
+        <li><em>What's NOT in:</em> shorts, cash, foreign equity, fixed income — only US 13F-eligible</li>
+        <li><em>Source URL:</em> <code>efts.sec.gov/LATEST/search-index?q=&forms=13F-HR</code></li>
+      </ul>
+    </div>
+    <div class="exec-card">
+      <h4>Congressional disclosures</h4>
+      <h3>STOCK Act PTR · 45 days post-trade</h3>
+      <ul>
+        <li><em>Filer:</em> all members of Congress + senior staff, per 2012 STOCK Act</li>
+        <li><em>Cadence:</em> Periodic Transaction Report within 45 days of trade</li>
+        <li><em>What's in:</em> ticker, transaction date, buy/sell, amount range (e.g. "$1K-$15K")</li>
+        <li><em>What's NOT in:</em> exact dollar amounts, holdings totals (only annual disclosure has those)</li>
+        <li><em>Source URL:</em> capitoltrades.com / quiverquant.com (parsed feeds)</li>
+      </ul>
+    </div>
+    <div class="exec-card">
+      <h4>Private investors</h4>
+      <h3>Not always disclosed</h3>
+      <ul>
+        <li><em>Trump Org (Eric Trump):</em> private company — no SEC filing. Listed for honesty, not data.</li>
+        <li><em>Founders Fund (Peter Thiel):</em> partial 13F coverage. Most early-stage holdings are private.</li>
+        <li><em>Gates Foundation Trust:</em> files 13F. Bill Gates personal Cascade Investment is private.</li>
+        <li><em>ARK (Cathie Wood):</em> ETF issuer publishes daily holdings on ark-funds.com.</li>
+      </ul>
+    </div>
+    <div class="exec-card">
+      <h4>Limitations to know</h4>
+      <h3>Read 13F as direction, not action</h3>
+      <ul>
+        <li><em>45 days stale:</em> By the time you see Q1 holdings, the fund may have rotated. Treat as directional signal.</li>
+        <li><em>No price detail:</em> 13F shows shares + value as of period end. Cost basis unknown — you don't know if they bought at $50 or $500.</li>
+        <li><em>Puts notional only:</em> Notional value visible, but not strike/expiration. Don't assume hedged or directional.</li>
+        <li><em>Selection bias:</em> Famous investors get tracked because they're famous, not because their style fits your situation.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer-grid">
+    <div>
+      <h4>Methodology · 13F tracker</h4>
+      <p>Codex pulls latest 13F filings from SEC EDGAR every Sunday + Congressional PTRs from CapitolTrades. Data normalized into <code>data/famous-traders.json</code>. Display only — no transactional advice. Always verify against the actual filing URL provided per card before any allocation decision.</p>
+      <span class="status-tag" id="status-tag">STATUS: see data/famous-traders.json</span>
+    </div>
+    <div>
+      <h4>Companion reports</h4>
+      <ul>
+        <li><a href="leopold-13f.html">Leopold 13F deep-dive</a></li>
+        <li><a href="swing-3-5yr.html">US 3-5yr swing</a></li>
+        <li><a href="swing-msia.html">Malaysia swing</a></li>
+        <li><a href="dividends.html">Dividend income</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>External sources</h4>
+      <ul>
+        <li><a href="https://www.sec.gov/cgi-bin/browse-edgar?action=getcurrent&type=13F" target="_blank" rel="noopener">SEC EDGAR 13F live</a></li>
+        <li><a href="https://www.capitoltrades.com" target="_blank" rel="noopener">CapitolTrades (Congress)</a></li>
+        <li><a href="https://whalewisdom.com" target="_blank" rel="noopener">WhaleWisdom (aggregator)</a></li>
+        <li><a href="https://www.hedgefollow.com" target="_blank" rel="noopener">HedgeFollow</a></li>
+      </ul>
+    </div>
+  </div>
+</footer>
+
+<script src="../assets/main.js"></script>
+<script>
+const CAT_COLORS = {
+  value:'var(--cat-value)',
+  macro:'var(--cat-macro)',
+  tiger:'var(--cat-tiger)',
+  activist:'var(--cat-activist)',
+  contrarian:'var(--cat-contrarian)',
+  ai:'var(--cat-ai)',
+  political:'var(--cat-political)',
+  founder:'var(--cat-founder)',
+  private:'var(--cat-private)',
+};
+
+const CAT_LABELS = {
+  value:'Value',
+  macro:'Macro',
+  tiger:'Tiger Cub',
+  activist:'Activist',
+  contrarian:'Contrarian',
+  ai:'AI / new-gen',
+  political:'Congressional',
+  founder:'Founder',
+  private:'Private — not disclosed',
+};
+
+const TICKER_PREFIX = {
+  // Map any non-US ticker to its exchange prefix if needed
+  // Default: empty (uses tradingview.com/symbols/TKR/)
+};
+
+function tvUrl(tkr){
+  if (!tkr) return '#';
+  const prefix = TICKER_PREFIX[tkr] || '';
+  return `https://www.tradingview.com/symbols/${prefix}${tkr}/`;
+}
+
+function renderTraders(traders){
+  const grid = document.getElementById('trader-grid');
+  if (!traders || traders.length === 0) {
+    grid.innerHTML = '<div class="loading">No trader data available. Run <code>scripts/refresh-13f.py</code> to populate.</div>';
+    return;
+  }
+
+  grid.innerHTML = traders.map(t => {
+    const isPrivate = t.category === 'private' || t.status === 'not-disclosed';
+    const topPositions = (t.top_positions || []).slice(0, 5);
+    const topHtml = topPositions.length > 0
+      ? topPositions.map(p => {
+          const changeClass = (p.change || '').includes('added') || (p.change || '').includes('+') ? 'up'
+            : (p.change || '').includes('trimmed') || (p.change || '').includes('-') ? 'down' : '';
+          return `
+            <div class="trader-top-row">
+              <a class="tv-link pos-tkr" href="${tvUrl(p.tkr)}" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()">${p.tkr}</a>
+              <span class="pos-pct">${p.pct_of_portfolio ? p.pct_of_portfolio + '%' : (p.amount_range || '—')}</span>
+              <span class="pos-change ${changeClass}">${p.change || '—'}</span>
+            </div>
+          `;
+        }).join('')
+      : `<div style="font-family:var(--mono);font-size:11px;color:var(--ink-faint);font-style:italic;">${t.note || 'No holdings disclosed.'}</div>`;
+
+    return `
+      <div class="trader ${isPrivate ? 'unverified' : ''}" style="--cat:${CAT_COLORS[t.category] || 'var(--ink-dim)'}" data-cat="${t.category}">
+        <div class="trader-rank">/ ${String(t.rank).padStart(2,'0')}</div>
+        <div class="trader-name">${t.name}</div>
+        <div class="trader-fund">${t.fund}</div>
+        <div class="trader-cat">${CAT_LABELS[t.category] || t.category}</div>
+        <div class="trader-tagline">"${t.tagline}"</div>
+        <div class="trader-meta">
+          <div><span>AUM</span><span>${t.aum_usd_b ? '$' + t.aum_usd_b + 'B' : '—'}</span></div>
+          <div><span>Latest</span><span>${t.latest_filing_period || '—'}</span></div>
+        </div>
+        <div class="trader-top">
+          ${topHtml}
+        </div>
+        <div class="trader-detail">
+          <div>
+            <h4>Notable recent change</h4>
+            <p class="change">${t.notable_recent_change || 'No notable changes reported.'}</p>
+            <h4>Thesis summary</h4>
+            <p class="thesis">${t.thesis_summary || ''}</p>
+          </div>
+          <div class="trader-side">
+            <h4>Filing details</h4>
+            <div class="trader-side-row"><span>CIK</span><span>${t.cik || 'n/a'}</span></div>
+            <div class="trader-side-row"><span>Filing period</span><span>${t.latest_filing_period || '—'}</span></div>
+            <div class="trader-side-row"><span>Filing date</span><span>${t.latest_filing_date || '—'}</span></div>
+            <div class="trader-side-row"><span>AUM</span><span>${t.aum_usd_b ? '$' + t.aum_usd_b + 'B' : '—'}</span></div>
+            <div class="trader-side-row"><span>Type</span><span>${t.type || '13F-HR'}</span></div>
+            ${t.url_filing ? `<div class="trader-side-row"><span>SEC filing</span><span><a href="${t.url_filing}" target="_blank" rel="noopener">view →</a></span></div>` : ''}
+            ${t.url_tracker ? `<div class="trader-side-row"><span>Tracker</span><span><a href="${t.url_tracker}" target="_blank" rel="noopener">WhaleWisdom →</a></span></div>` : ''}
+          </div>
+        </div>
+        <div class="trader-expand-cue">↳ click for more</div>
+      </div>
+    `;
+  }).join('');
+
+  // Card click → expand
+  grid.querySelectorAll('.trader').forEach(el => {
+    el.addEventListener('click', () => {
+      const wasExpanded = el.classList.contains('expanded');
+      grid.querySelectorAll('.trader.expanded').forEach(x => x.classList.remove('expanded'));
+      if (!wasExpanded) el.classList.add('expanded');
+    });
+  });
+}
+
+function setupFilters(){
+  document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const cat = btn.dataset.cat;
+      document.querySelectorAll('.trader').forEach(card => {
+        if (cat === 'all' || card.dataset.cat === cat) {
+          card.classList.remove('hidden');
+        } else {
+          card.classList.add('hidden');
+        }
+      });
+    });
+  });
+}
+
+(async function load(){
+  try {
+    const r = await fetch('../data/famous-traders.json');
+    if (!r.ok) throw new Error('no data file yet');
+    const j = await r.json();
+    if (j.updated) document.getElementById('updated-date').textContent = j.updated;
+    if (j.status) document.getElementById('status-tag').textContent = 'STATUS: ' + j.status;
+    renderTraders(j.traders || []);
+    setupFilters();
+  } catch (e) {
+    document.getElementById('trader-grid').innerHTML =
+      '<div class="loading">Data file <code>data/famous-traders.json</code> not found yet. The research agent is generating it now — refresh in a few minutes.</div>';
+  }
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Newsletter Archive · DAINER Finance</title>
+<meta name="description" content="Weekly read on markets, picks, and capital. Free, no paywall.">
+<link rel="alternate" type="application/rss+xml" title="DAINER Finance" href="feed.xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Instrument+Sans:ital,wght@0,400..700;1,400..700&family=JetBrains+Mono:wght@300;400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <div class="brand"><span class="brand-dot"></span><a href="../index.html"><span>DAINER <em>Finance</em></span></a></div>
+    <div class="nav-right">
+      <ul class="nav-links">
+        <li><a href="../index.html">Dashboard</a></li>
+        <li><a href="../picks/swing-3-5yr.html">US Picks</a></li>
+        <li><a href="../picks/swing-msia.html">Malaysia</a></li>
+        <li><a href="../picks/dividends.html">Dividends</a></li>
+        <li><a href="../picks/famous-traders.html">Traders</a></li>
+        <li><a href="../calculator.html">Calculator</a></li>
+        <li><a href="index.html" class="active">Newsletter</a></li>
+      </ul>
+      <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
+        <svg class="sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.93 4.93l1.41 1.41m11.32 11.32l1.41 1.41M2 12h2m16 0h2M4.93 19.07l1.41-1.41m11.32-11.32l1.41-1.41"/></svg>
+        <svg class="moon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="hero-meta-top">
+    <span>Newsletter · weekly · free</span>
+    <span>Issued <em>Sunday 8pm AEST</em></span>
+    <span>RSS · <a href="feed.xml" style="color:var(--accent);border-bottom:1px solid var(--line);">/newsletter/feed.xml</a></span>
+  </div>
+  <h1 class="hero-title">
+    The weekly<br>
+    <em>read</em>.
+  </h1>
+  <p class="hero-sub">
+    One issue every Sunday. Picks, what I changed my mind on, the one chart worth the click. <em>No paywall, no upsell.</em> The whole site is free, and so is this.
+  </p>
+</header>
+
+<section class="section">
+  <div class="section-head reveal">
+    <div>
+      <div class="section-label">Subscribe</div>
+      <h2 class="section-title">Hit my <em>inbox</em></h2>
+    </div>
+    <p class="section-sub">Two-click unsubscribe. RSS available for fediverse / reader apps.</p>
+  </div>
+
+  <div class="exec-grid reveal">
+    <div class="exec-card" style="background:var(--bg-elev-2);border-color:var(--accent);">
+      <h4>Free · weekly</h4>
+      <h3>The Sunday read</h3>
+      <p style="font-size:14px;color:var(--ink-dim);margin-bottom:18px;line-height:1.55;">
+        Markets close Friday. I read over the weekend. Sunday 8pm AEST you get the issue — picks recap, news scan, one idea worth the click.
+      </p>
+      <form action="https://buttondown.email/api/emails/embed-subscribe/dainer" method="post" target="popupwindow" style="display:flex;gap:8px;flex-direction:column;">
+        <input type="email" name="email" placeholder="you@example.com" required style="background:var(--bg);border:1px solid var(--line);color:var(--ink);padding:14px;font-family:var(--mono);font-size:13px;outline:none;">
+        <button type="submit" style="background:var(--accent);color:var(--bg);font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;padding:16px;border:none;cursor:pointer;">Subscribe</button>
+      </form>
+    </div>
+
+    <div class="exec-card">
+      <h4>RSS / alt readers</h4>
+      <h3>If you don't email</h3>
+      <ul>
+        <li><em>RSS feed:</em> <a href="feed.xml" style="color:var(--accent);">/newsletter/feed.xml</a> — paste into any reader (Feedly, NetNewsWire, Reeder, Inoreader)</li>
+        <li><em>GitHub:</em> watch the <a href="https://github.com/dainer/dainer-finance-dashboard" style="color:var(--accent);">repo</a> for new issue commits</li>
+        <li><em>What's in each issue:</em> portfolio update · 3-5 news cards · 1 deep idea · what changed my mind</li>
+        <li><em>What's NOT in:</em> tips, alerts, "act now", paywalled premium tier. None of that.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section-head reveal">
+    <div>
+      <div class="section-label">All issues</div>
+      <h2 class="section-title">The <em>archive</em></h2>
+    </div>
+    <p class="section-sub">Every past issue lives here. Click through to read in browser, or use the RSS feed.</p>
+  </div>
+
+  <div class="issue-list reveal">
+    <a class="issue-row" href="2026-05-20.html">
+      <div class="issue-date">2026-05-20</div>
+      <div class="issue-title">Issue #001 · <em>The launch</em> — three reports, one dashboard, and a Leopold curveball</div>
+      <div class="issue-meta">~8 min read</div>
+    </a>
+    <!-- Future issues prepended here by Codex automation -->
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer-grid">
+    <div>
+      <h4>About the newsletter</h4>
+      <p>Free, weekly, no paywall. Each Sunday, one issue covering the picks I'm watching, what I changed my mind on, and the 3-5 news stories that move the thesis. Not financial advice — open notebook. Drafts are auto-generated each Saturday by Codex (price refresh + news scan), reviewed by hand, published Sunday.</p>
+    </div>
+    <div>
+      <h4>Companion pages</h4>
+      <ul>
+        <li><a href="../picks/swing-3-5yr.html">US 3-5yr swing</a></li>
+        <li><a href="../picks/swing-msia.html">Malaysia swing</a></li>
+        <li><a href="../picks/dividends.html">Dividend income</a></li>
+        <li><a href="../calculator.html">Compound calculator</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Source</h4>
+      <ul>
+        <li><a href="feed.xml">RSS feed</a></li>
+        <li><a href="https://github.com/dainer/dainer-finance-dashboard">GitHub source</a></li>
+      </ul>
+      <p style="margin-top:14px;">Hand-written + AI-assisted research · STATUS tags on every claim</p>
+    </div>
+  </div>
+</footer>
+
+<script src="../assets/main.js"></script>
+</body>
+</html>

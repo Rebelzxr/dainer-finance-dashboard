@@ -1,0 +1,23 @@
+{
+  "updated": "2026-05-20",
+  "currency_disclosure": "Public site shows % allocations only. No $ or RM amounts.",
+  "active_book": "swing-3-5yr",
+  "live_positions_pct": {
+    "TSM": 14, "LLY": 12, "MSFT": 11, "V": 10, "CEG": 10,
+    "ITA": 10, "ETN": 9, "ANET": 8, "VRTX": 8, "SMH": 8
+  },
+  "regional_overlay_pct": {
+    "MAYBANK": 0,
+    "IHH": 0,
+    "TENAGA": 0,
+    "GAMUDA": 0,
+    "NATGATE": 0,
+    "_note": "MY overlay is reference allocation — actual sizing TBD by Dainer"
+  },
+  "_meta": {
+    "primary_unit": "percent",
+    "rebalance_cadence": "quarterly",
+    "next_review": "2026-08-14 (post Q2 13F)",
+    "updated_by": "Codex (scripts/refresh-prices.py) refreshes price-only fields; allocation % only changes via manual edit + commit"
+  }
+}

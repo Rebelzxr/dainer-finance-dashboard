@@ -1,0 +1,96 @@
+{
+  "updated": "2026-05-20",
+  "version": "v0.1",
+  "currency_disclosure": "Public site shows % allocations only. No absolute $ or RM amounts.",
+  "reports": {
+    "swing-3-5yr": {
+      "name": "US Swing 3-5yr",
+      "type": "growth",
+      "horizon_years": "3-5",
+      "currency": "USD",
+      "total_positions": 10,
+      "singles": 8,
+      "etfs": 2,
+      "top5_concentration_pct": 57,
+      "picks": [
+        {"tkr":"TSM","alloc":14,"theme":"AI","type":"single"},
+        {"tkr":"LLY","alloc":12,"theme":"HC","type":"single"},
+        {"tkr":"MSFT","alloc":11,"theme":"Q","type":"single"},
+        {"tkr":"V","alloc":10,"theme":"Q","type":"single"},
+        {"tkr":"CEG","alloc":10,"theme":"EN","type":"single"},
+        {"tkr":"ITA","alloc":10,"theme":"DEF","type":"etf"},
+        {"tkr":"ETN","alloc":9,"theme":"EN","type":"single"},
+        {"tkr":"ANET","alloc":8,"theme":"AI","type":"single"},
+        {"tkr":"VRTX","alloc":8,"theme":"HC","type":"single"},
+        {"tkr":"SMH","alloc":8,"theme":"AI","type":"etf"}
+      ],
+      "buckets": {"AI":30,"Q":21,"HC":20,"EN":19,"DEF":10}
+    },
+    "swing-msia": {
+      "name": "Malaysia Swing 3-5yr",
+      "type": "growth + income",
+      "horizon_years": "3-5",
+      "currency": "MYR",
+      "total_positions": 11,
+      "top5_concentrated": {
+        "MAYBANK": 25, "IHH": 20, "TENAGA": 20, "GAMUDA": 20, "NATGATE": 15
+      },
+      "all_picks": ["MAYBANK","PBBANK","CIMB","IHH","TENAGA","YTLPOWR","GAMUDA","NATGATE","VITROX","SIME","PETDAG"],
+      "themes": ["AI/DC","Quality/financials","Healthcare","Energy","Reshoring"]
+    },
+    "dividends": {
+      "name": "Dividend Income",
+      "type": "income",
+      "horizon_years": "3-5+",
+      "currency": "USD + MYR",
+      "total_positions": 21,
+      "blended_yield_pct": 4.5,
+      "sleeves": {
+        "A_us_aristocrats": {
+          "allocation_pct": 50,
+          "yield_range": "2.4-3.7%",
+          "names": ["JNJ","PG","KO","PEP","ABBV","HD","LOW","ED"]
+        },
+        "B_us_high_yield": {
+          "allocation_pct": 30,
+          "yield_range": "5-9%",
+          "names": ["O","ARCC","MAIN","ENB","KMI","VZ"]
+        },
+        "C_my_ringgit": {
+          "allocation_pct": 20,
+          "yield_range": "5-7% net",
+          "names": ["MAYBANK","PBBANK","TENAGA","PETDAG","MAXIS","SUNREIT","PAVREIT"]
+        }
+      },
+      "etf_shortcut": {
+        "50% SCHD": "US dividend quality",
+        "20% O": "monthly REIT",
+        "10% VNQ": "broad US REIT",
+        "20% MAYBANK + PBBANK": "MY banks equal-weight"
+      }
+    },
+    "leopold-13f": {
+      "name": "Leopold 13F Tracker",
+      "type": "tactical",
+      "horizon_years": "0.25-0.5",
+      "currency": "USD",
+      "filer": "Situational Awareness LP",
+      "cik": "0002045724",
+      "latest_quarter": "Q1 2026",
+      "latest_filed": "2026-05-18",
+      "aum_usd_b": 13.68,
+      "long_book_usd_b": 5.22,
+      "put_notional_usd_b": 8.5,
+      "top_longs": ["SNDK","BE","CRWV","MU","IREN","CORZ","TSM","APLD","RIOT","CLSK"],
+      "top_puts": ["SMH","NVDA","ORCL","AVGO","AMD","MU","TSM","ASML","INTC"],
+      "next_filing_due": "2026-08-14"
+    }
+  },
+  "_meta": {
+    "primary_book": "swing-3-5yr",
+    "income_overlay": "dividends",
+    "regional_anchor": "swing-msia",
+    "tactical_signal": "leopold-13f",
+    "updated_by": "Codex (scripts/refresh-picks.py) or manual edit"
+  }
+}
