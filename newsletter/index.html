@@ -8,7 +8,7 @@
 <link rel="alternate" type="application/rss+xml" title="DAINER Finance" href="feed.xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Instrument+Sans:ital,wght@0,400..700;1,400..700&family=JetBrains+Mono:wght@300;400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@200;300;400;500;700&family=Bitter:wght@300;400;500;700&display=swap" rel="stylesheet">
 <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
 <link rel="stylesheet" href="../assets/style.css">
 </head>
@@ -39,11 +39,11 @@
     <span>Issued <em>Sunday 8pm AEST</em></span>
     <span>RSS · <a href="feed.xml" style="color:var(--accent);border-bottom:1px solid var(--line);">/newsletter/feed.xml</a></span>
   </div>
-  <h1 class="hero-title">
+  <h1 class="hero-title" data-i18n="newsletterHeroTitle">
     The weekly<br>
     <em>read</em>.
   </h1>
-  <p class="hero-sub">
+  <p class="hero-sub" data-i18n="newsletterHeroSub">
     One issue every Sunday. Picks, what I changed my mind on, the one chart worth the click. <em>No paywall, no upsell.</em> The whole site is free, and so is this.
   </p>
 </header>
@@ -52,32 +52,32 @@
   <div class="section-head reveal">
     <div>
       <div class="section-label">Subscribe</div>
-      <h2 class="section-title">Hit my <em>inbox</em></h2>
+      <h2 class="section-title" data-i18n="newsletterSubscribeTitle">Hit my <em>inbox</em></h2>
     </div>
-    <p class="section-sub">Two-click unsubscribe. RSS available for fediverse / reader apps.</p>
+    <p class="section-sub" data-i18n="newsletterSubscribeSub">Two-click unsubscribe. RSS available for fediverse / reader apps.</p>
   </div>
 
   <div class="exec-grid reveal">
     <div class="exec-card" style="background:var(--bg-elev-2);border-color:var(--accent);">
       <h4>Free · weekly</h4>
-      <h3>The Sunday read</h3>
-      <p style="font-size:14px;color:var(--ink-dim);margin-bottom:18px;line-height:1.55;">
+      <h3 data-i18n="newsletterSundayTitle">The Sunday read</h3>
+      <p style="font-size:14px;color:var(--ink-dim);margin-bottom:18px;line-height:1.55;" data-i18n="newsletterSundayCopy">
         Markets close Friday. I read over the weekend. Sunday 8pm AEST you get the issue — picks recap, news scan, one idea worth the click.
       </p>
       <form action="https://formspree.io/f/mvgrlojp" method="POST" class="subscribe-form">
         <input type="email" name="email" placeholder="you@example.com" required aria-label="Email address">
-        <button type="submit">Subscribe to weekly</button>
+        <button type="submit" data-i18n="Subscribe to weekly">Subscribe to weekly</button>
       </form>
     </div>
 
     <div class="exec-card">
       <h4>RSS / alt readers</h4>
-      <h3>If you don't email</h3>
+      <h3 data-i18n="newsletterAltTitle">If you don't email</h3>
       <ul>
         <li><em>RSS feed:</em> <a href="feed.xml" style="color:var(--accent);">/newsletter/feed.xml</a> — paste into any reader (Feedly, NetNewsWire, Reeder, Inoreader)</li>
-        <li><em>GitHub:</em> watch the <a href="https://github.com/Rebelzxr/dainer-finance-dashboard" style="color:var(--accent);">repo</a> for new issue commits</li>
-        <li><em>What's in each issue:</em> portfolio update · 3-5 news cards · 1 deep idea · what changed my mind</li>
-        <li><em>What's NOT in:</em> tips, alerts, "act now", paywalled premium tier. None of that.</li>
+        <li data-i18n="newsGithubLi"><em>GitHub:</em> watch the <a href="https://github.com/Rebelzxr/dainer-finance-dashboard" style="color:var(--accent);">repo</a> for new issue commits</li>
+        <li data-i18n="newsInEachIssueLi"><em>What's in each issue:</em> portfolio update · 3-5 news cards · 1 deep idea · what changed my mind</li>
+        <li data-i18n="newsNotInLi"><em>What's NOT in:</em> tips, alerts, "act now", paywalled premium tier. None of that.</li>
       </ul>
     </div>
   </div>
@@ -87,15 +87,15 @@
   <div class="section-head reveal">
     <div>
       <div class="section-label">All issues</div>
-      <h2 class="section-title">The <em>archive</em></h2>
+      <h2 class="section-title" data-i18n="newsletterArchiveTitle">The <em>archive</em></h2>
     </div>
-    <p class="section-sub">Every past issue lives here. Click through to read in browser, or use the RSS feed.</p>
+    <p class="section-sub" data-i18n="newsletterArchiveSub">Every past issue lives here. Click through to read in browser, or use the RSS feed.</p>
   </div>
 
   <div class="issue-list reveal">
     <a class="issue-row" href="2026-05-20.html">
       <div class="issue-date">2026-05-20</div>
-      <div class="issue-title">Issue #001 · <em>The launch</em> — three reports, one dashboard, and a Leopold curveball</div>
+      <div class="issue-title" data-i18n="newsIssueTitleFull">Issue #001 · <em>The launch</em> — three reports, one dashboard, and a Leopold curveball</div>
       <div class="issue-meta">~8 min read</div>
     </a>
     <!-- Future issues prepended here by Codex automation -->
@@ -106,7 +106,7 @@
   <div class="footer-grid">
     <div>
       <h4>About the newsletter</h4>
-      <p>Free, weekly, no paywall. Each Sunday, one issue covering the picks I'm watching, what I changed my mind on, and the 3-5 news stories that move the thesis. Not financial advice — open notebook. Drafts are auto-generated each Saturday by Codex (price refresh + news scan), reviewed by hand, published Sunday.</p>
+      <p data-i18n="newsletterAboutCopy">Free, weekly, no paywall. Each Sunday, one issue covering the picks I'm watching, what I changed my mind on, and the 3-5 news stories that move the thesis. Not financial advice — open notebook. Drafts are auto-generated each Saturday by Codex (price refresh + news scan), reviewed by hand, published Sunday.</p>
     </div>
     <div>
       <h4>Companion pages</h4>

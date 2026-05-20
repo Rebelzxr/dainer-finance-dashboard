@@ -7,7 +7,7 @@
 <meta name="description" content="What 25+ legendary investors actually own. 13F filings + congressional disclosures. Updated weekly.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Instrument+Sans:ital,wght@0,400..700;1,400..700&family=JetBrains+Mono:wght@300;400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@200;300;400;500;700&family=Bitter:wght@300;400;500;700&display=swap" rel="stylesheet">
 <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
 <link rel="stylesheet" href="../assets/style.css">
 <style>
@@ -103,11 +103,11 @@
     <span>Updated <em id="updated-date">2026-05-20</em></span>
     <span>Auto-refresh weekly via Codex</span>
   </div>
-  <h1 class="hero-title">
+  <h1 class="hero-title" data-i18n="tradersHeroTitle">
     What the<br>
     <em>smart money</em> actually owns.
   </h1>
-  <p class="hero-sub">
+  <p class="hero-sub" data-i18n="tradersHeroSub">
     Twenty-six famous investors. Their <em>top positions</em>, what they added, what they sold. Sourced from SEC EDGAR 13F filings + CapitolTrades disclosures. Updated weekly with the newsletter.
   </p>
 </header>
@@ -148,9 +148,9 @@
   <div class="section-head reveal">
     <div>
       <div class="section-label">01 · Click any name to expand</div>
-      <h2 class="section-title">The <em>investor universe</em></h2>
+      <h2 class="section-title" data-i18n="tradersUniverseTitle">The <em>investor universe</em></h2>
     </div>
-    <p class="section-sub">Filter by style below. Click any card to see full top 5 positions, recent changes, and the SEC filing link. Tickers go straight to TradingView in a new tab.</p>
+    <p class="section-sub" data-i18n="tradersUniverseSub">Filter by style below. Click any card to see full top 5 positions, recent changes, and the SEC filing link. Tickers go straight to TradingView in a new tab.</p>
   </div>
 
   <div class="filter-bar reveal">
@@ -174,7 +174,7 @@
   <div class="section-head reveal">
     <div>
       <div class="section-label">02 · How this works</div>
-      <h2 class="section-title">Sources <em>+ cadence</em></h2>
+      <h2 class="section-title" data-i18n="tradersSourcesTitle">Sources <em>+ cadence</em></h2>
     </div>
   </div>
 
@@ -184,41 +184,41 @@
       <h3>SEC EDGAR · quarterly</h3>
       <ul>
         <li><em>Filer:</em> any institution managing >$100M in 13F-eligible US securities must file</li>
-        <li><em>Cadence:</em> 45 days after quarter end (Feb 14, May 15, Aug 14, Nov 14)</li>
-        <li><em>What's in:</em> long equity positions, calls + puts (notional), shares + value</li>
-        <li><em>What's NOT in:</em> shorts, cash, foreign equity, fixed income — only US 13F-eligible</li>
-        <li><em>Source URL:</em> <code>efts.sec.gov/LATEST/search-index?q=&forms=13F-HR</code></li>
+        <li data-i18n="famousStaticAuto1"><em>Cadence:</em> 45 days after quarter end (Feb 14, May 15, Aug 14, Nov 14)</li>
+        <li data-i18n="famousStaticAuto2"><em>What's in:</em> long equity positions, calls + puts (notional), shares + value</li>
+        <li data-i18n="famousStaticAuto3"><em>What's NOT in:</em> shorts, cash, foreign equity, fixed income — only US 13F-eligible</li>
+        <li data-i18n="famousStaticAuto4"><em>Source URL:</em> <code>efts.sec.gov/LATEST/search-index?q=&forms=13F-HR</code></li>
       </ul>
     </div>
     <div class="exec-card">
       <h4>Congressional disclosures</h4>
       <h3>STOCK Act PTR · 45 days post-trade</h3>
       <ul>
-        <li><em>Filer:</em> all members of Congress + senior staff, per 2012 STOCK Act</li>
-        <li><em>Cadence:</em> Periodic Transaction Report within 45 days of trade</li>
-        <li><em>What's in:</em> ticker, transaction date, buy/sell, amount range (e.g. "$1K-$15K")</li>
-        <li><em>What's NOT in:</em> exact dollar amounts, holdings totals (only annual disclosure has those)</li>
-        <li><em>Source URL:</em> capitoltrades.com / quiverquant.com (parsed feeds)</li>
+        <li data-i18n="famousStaticAuto5"><em>Filer:</em> all members of Congress + senior staff, per 2012 STOCK Act</li>
+        <li data-i18n="famousStaticAuto6"><em>Cadence:</em> Periodic Transaction Report within 45 days of trade</li>
+        <li data-i18n="famousStaticAuto7"><em>What's in:</em> ticker, transaction date, buy/sell, amount range (e.g. "$1K-$15K")</li>
+        <li data-i18n="famousStaticAuto8"><em>What's NOT in:</em> exact dollar amounts, holdings totals (only annual disclosure has those)</li>
+        <li data-i18n="famousStaticAuto9"><em>Source URL:</em> capitoltrades.com / quiverquant.com (parsed feeds)</li>
       </ul>
     </div>
     <div class="exec-card">
       <h4>Private investors</h4>
       <h3>Not always disclosed</h3>
       <ul>
-        <li><em>Trump Org (Eric Trump):</em> private company — no SEC filing. Listed for honesty, not data.</li>
-        <li><em>Founders Fund (Peter Thiel):</em> partial 13F coverage. Most early-stage holdings are private.</li>
-        <li><em>Gates Foundation Trust:</em> files 13F. Bill Gates personal Cascade Investment is private.</li>
-        <li><em>ARK (Cathie Wood):</em> ETF issuer publishes daily holdings on ark-funds.com.</li>
+        <li data-i18n="famousStaticAuto10"><em>Trump Org (Eric Trump):</em> private company — no SEC filing. Listed for honesty, not data.</li>
+        <li data-i18n="famousStaticAuto11"><em>Founders Fund (Peter Thiel):</em> partial 13F coverage. Most early-stage holdings are private.</li>
+        <li data-i18n="famousStaticAuto12"><em>Gates Foundation Trust:</em> files 13F. Bill Gates personal Cascade Investment is private.</li>
+        <li data-i18n="famousStaticAuto13"><em>ARK (Cathie Wood):</em> ETF issuer publishes daily holdings on ark-funds.com.</li>
       </ul>
     </div>
     <div class="exec-card">
       <h4>Limitations to know</h4>
       <h3>Read 13F as direction, not action</h3>
       <ul>
-        <li><em>45 days stale:</em> By the time you see Q1 holdings, the fund may have rotated. Treat as directional signal.</li>
-        <li><em>No price detail:</em> 13F shows shares + value as of period end. Cost basis unknown — you don't know if they bought at $50 or $500.</li>
-        <li><em>Puts notional only:</em> Notional value visible, but not strike/expiration. Don't assume hedged or directional.</li>
-        <li><em>Selection bias:</em> Famous investors get tracked because they're famous, not because their style fits your situation.</li>
+        <li data-i18n="famousStaticAuto14"><em>45 days stale:</em> By the time you see Q1 holdings, the fund may have rotated. Treat as directional signal.</li>
+        <li data-i18n="famousStaticAuto15"><em>No price detail:</em> 13F shows shares + value as of period end. Cost basis unknown — you don't know if they bought at $50 or $500.</li>
+        <li data-i18n="famousStaticAuto16"><em>Puts notional only:</em> Notional value visible, but not strike/expiration. Don't assume hedged or directional.</li>
+        <li data-i18n="famousStaticAuto17"><em>Selection bias:</em> Famous investors get tracked because they're famous, not because their style fits your situation.</li>
       </ul>
     </div>
   </div>
@@ -357,6 +357,7 @@ function renderTraders(traders){
       </div>
     `;
   }).join('');
+  if (typeof applyLanguage === 'function') applyLanguage(currentLanguage());
 
   // Card click → expand
   grid.querySelectorAll('.trader').forEach(el => {

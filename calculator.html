@@ -7,7 +7,7 @@
 <meta name="description" content="Interactive compound interest calculator. See how a portfolio compounds over 5, 10, 20 years. Your inputs stay private.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Instrument+Sans:ital,wght@0,400..700;1,400..700&family=JetBrains+Mono:wght@300;400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@200;300;400;500;700&family=Bitter:wght@300;400;500;700&display=swap" rel="stylesheet">
 <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
 <link rel="stylesheet" href="assets/style.css">
 <style>
@@ -83,11 +83,11 @@ canvas{display:block;max-width:100%;}
     <span>All inputs stay <em>client-side</em></span>
     <span>Nothing saved, nothing shared</span>
   </div>
-  <h1 class="hero-title">
+  <h1 class="hero-title" data-i18n="calcHeroTitle">
     Compound,<br>
     <em>over</em> <span class="amp">×</span> Time.
   </h1>
-  <p class="hero-sub">
+  <p class="hero-sub" data-i18n="calcHeroSub">
     The single chart every investor needs to internalize. Punch in your starting amount, monthly add, expected return, and time horizon. <em>The math doesn't lie.</em> Your inputs never leave this page.
   </p>
 </header>
@@ -96,7 +96,7 @@ canvas{display:block;max-width:100%;}
   <div class="section-head reveal">
     <div>
       <div class="section-label">01 · Run the math</div>
-      <h2 class="section-title">Inputs <em>×</em> outputs</h2>
+      <h2 class="section-title" data-i18n="calcInputsTitle">Inputs <em>×</em> outputs</h2>
     </div>
     <div class="preset-buttons">
       <button onclick="loadPreset('conservative')">Conservative · 6%</button>
@@ -137,7 +137,7 @@ canvas{display:block;max-width:100%;}
         <input type="range" id="years" min="1" max="50" step="1" value="25">
       </div>
 
-      <p style="font-size:11px;color:var(--ink-faint);font-family:var(--mono);letter-spacing:.05em;line-height:1.5;border-top:1px solid var(--line);padding-top:14px;">
+      <p style="font-size:11px;color:var(--ink-faint);font-family:var(--mono);letter-spacing:.05em;line-height:1.5;border-top:1px solid var(--line);padding-top:14px;" data-i18n="calcInputsNote">
         Annual compounding · monthly contributions added at end of each year for simplicity. Inputs stored in your browser only — nothing transmitted, nothing logged.
       </p>
     </div>
@@ -297,7 +297,7 @@ canvas{display:block;max-width:100%;}
   <div class="section-head reveal">
     <div>
       <div class="section-label">03 · What the numbers say</div>
-      <h2 class="section-title">The <em>three lessons</em></h2>
+      <h2 class="section-title" data-i18n="calcLessonsTitle">The <em>three lessons</em></h2>
     </div>
   </div>
 
@@ -307,39 +307,39 @@ canvas{display:block;max-width:100%;}
       <h3>Time beats amount</h3>
       <ul>
         <li><em>20 years at 8%:</em> $1,000/mo → ~$590K. You contributed $240K.</li>
-        <li><em>30 years at 8%:</em> $1,000/mo → ~$1.49M. You contributed $360K.</li>
-        <li><em>The extra decade:</em> 50% more cash in for 150% more value. The last 10 years compound the first 20.</li>
-        <li><em>Implication:</em> start now beats start optimal.</li>
+        <li data-i18n="calcLessonAuto1"><em>30 years at 8%:</em> $1,000/mo → ~$1.49M. You contributed $360K.</li>
+        <li data-i18n="calcLessonAuto2"><em>The extra decade:</em> 50% more cash in for 150% more value. The last 10 years compound the first 20.</li>
+        <li data-i18n="calcLessonAuto3"><em>Implication:</em> start now beats start optimal.</li>
       </ul>
     </div>
     <div class="exec-card">
       <h4>Lesson 2</h4>
       <h3>Return rate is non-linear</h3>
       <ul>
-        <li><em>$500/mo for 30 yrs:</em> 6% → $500K · 8% → $750K · 10% → $1.13M · 12% → $1.74M</li>
-        <li><em>4% extra return = 3× the value.</em> Not 4% extra. Three times.</li>
-        <li><em>What costs you 4% return:</em> 1.5% advisor fee + 1% fund expense + tax drag + behavioural mistakes.</li>
-        <li><em>Implication:</em> fees compound against you the same way returns compound for you.</li>
+        <li data-i18n="calcLessonAuto4"><em>$500/mo for 30 yrs:</em> 6% → $500K · 8% → $750K · 10% → $1.13M · 12% → $1.74M</li>
+        <li data-i18n="calcLessonAuto5"><em>4% extra return = 3× the value.</em> Not 4% extra. Three times.</li>
+        <li data-i18n="calcLessonAuto6"><em>What costs you 4% return:</em> 1.5% advisor fee + 1% fund expense + tax drag + behavioural mistakes.</li>
+        <li data-i18n="calcLessonAuto7"><em>Implication:</em> fees compound against you the same way returns compound for you.</li>
       </ul>
     </div>
     <div class="exec-card">
       <h4>Lesson 3</h4>
       <h3>Monthly add matters more than first deposit</h3>
       <ul>
-        <li><em>$50K start + $0/mo:</em> at 8% × 30yr = $503K. Boring.</li>
-        <li><em>$0 start + $500/mo:</em> at 8% × 30yr = $745K. Beats above.</li>
-        <li><em>$50K start + $500/mo:</em> at 8% × 30yr = $1.25M. The combination compounds.</li>
-        <li><em>Implication:</em> the monthly habit is what builds wealth. Lump-sum head-start helps but isn't decisive.</li>
+        <li data-i18n="calcLessonAuto8"><em>$50K start + $0/mo:</em> at 8% × 30yr = $503K. Boring.</li>
+        <li data-i18n="calcLessonAuto9"><em>$0 start + $500/mo:</em> at 8% × 30yr = $745K. Beats above.</li>
+        <li data-i18n="calcLessonAuto10"><em>$50K start + $500/mo:</em> at 8% × 30yr = $1.25M. The combination compounds.</li>
+        <li data-i18n="calcLessonAuto11"><em>Implication:</em> the monthly habit is what builds wealth. Lump-sum head-start helps but isn't decisive.</li>
       </ul>
     </div>
     <div class="exec-card">
       <h4>Realistic assumptions</h4>
       <h3>What return rate to use</h3>
       <ul>
-        <li><em>6%:</em> Treasury-heavy / bond-leaning conservative portfolio. Real after-inflation ~3%.</li>
-        <li><em>8%:</em> US S&P 500 long-run nominal average (1928-2024 = ~10%; recent decade higher; expect mean reversion). Use 8% for forward planning.</li>
-        <li><em>10%:</em> Active-managed equity with some alpha. Optimistic for retail without edge.</li>
-        <li><em>12%+:</em> Concentrated growth / individual-stock portfolio. Achievable for short windows; very hard to sustain 20+ years. Don't plan around this.</li>
+        <li data-i18n="calcLessonAuto12"><em>6%:</em> Treasury-heavy / bond-leaning conservative portfolio. Real after-inflation ~3%.</li>
+        <li data-i18n="calcLessonAuto13"><em>8%:</em> US S&P 500 long-run nominal average (1928-2024 = ~10%; recent decade higher; expect mean reversion). Use 8% for forward planning.</li>
+        <li data-i18n="calcLessonAuto14"><em>10%:</em> Active-managed equity with some alpha. Optimistic for retail without edge.</li>
+        <li data-i18n="calcLessonAuto15"><em>12%+:</em> Concentrated growth / individual-stock portfolio. Achievable for short windows; very hard to sustain 20+ years. Don't plan around this.</li>
       </ul>
     </div>
   </div>
@@ -349,7 +349,7 @@ canvas{display:block;max-width:100%;}
   <div class="footer-grid">
     <div>
       <h4>Privacy</h4>
-      <p>This calculator runs entirely in your browser. Your inputs are not transmitted to any server, not stored in any cookie, not logged anywhere. Refresh the page and all inputs reset to defaults. The site uses no analytics that would capture these values.</p>
+      <p data-i18n="calcPrivacyCopy">This calculator runs entirely in your browser. Your inputs are not transmitted to any server, not stored in any cookie, not logged anywhere. Refresh the page and all inputs reset to defaults. The site uses no analytics that would capture these values.</p>
       <span class="status-tag">Client-side only · no tracking</span>
     </div>
     <div>
