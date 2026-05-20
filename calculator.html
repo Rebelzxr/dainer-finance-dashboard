@@ -8,6 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Instrument+Sans:ital,wght@0,400..700;1,400..700&family=JetBrains+Mono:wght@300;400;500;700&display=swap" rel="stylesheet">
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
 <link rel="stylesheet" href="assets/style.css">
 <style>
 .calc-wrap{display:grid;grid-template-columns:1fr 1.4fr;gap:48px;align-items:start;margin-top:32px;}
@@ -32,7 +33,7 @@ canvas{display:block;max-width:100%;}
 .calc-result-card{border:1px solid var(--accent);background:var(--bg-elev-2);padding:32px;position:relative;overflow:hidden;}
 .calc-result-card::before{content:'';position:absolute;top:0;left:0;width:100%;height:2px;background:var(--accent);}
 .calc-result-label{font-family:var(--mono);font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:var(--ink-dim);margin-bottom:8px;}
-.calc-result-value{font-family:var(--serif);font-size:64px;font-weight:300;letter-spacing:-.02em;color:var(--accent);line-height:1;font-variant-numeric:tabular-nums;}
+.calc-result-value{font-family:var(--serif);font-size:clamp(38px,13vw,64px);font-weight:300;letter-spacing:-.02em;color:var(--accent);line-height:1;font-variant-numeric:tabular-nums;max-width:100%;overflow-wrap:anywhere;}
 .calc-result-sub{font-family:var(--mono);font-size:11px;color:var(--ink-dim);margin-top:8px;letter-spacing:.06em;}
 .calc-result-sub em{color:var(--bull);font-style:normal;}
 
@@ -177,10 +178,125 @@ canvas{display:block;max-width:100%;}
   </div>
 </section>
 
+<section id="tax" class="section">
+  <div class="section-head reveal">
+    <div>
+      <div class="section-label" data-i18n="taxSectionLabel">02 · Dividend tax + live FX</div>
+      <h2 class="section-title" data-i18n="taxSectionTitle">Country tax <em>drag</em></h2>
+    </div>
+    <p class="section-sub" data-i18n="taxSectionSub">For Malaysia-based investors comparing US, MY, SG, HK, UK, AU, Canada, and China dividend income. Uses source-backed defaults, then lets you override the exact broker rate.</p>
+  </div>
+
+  <div id="tax-tool" class="tool-panel reveal">
+    <div class="tool-grid">
+      <div class="tool-form">
+        <div class="tool-field">
+          <label for="tax-market"><span data-i18n="sourceMarket">Source market</span><em data-i18n="officialDefault">official default</em></label>
+          <select id="tax-market" aria-label="Dividend source market"></select>
+        </div>
+
+        <div class="tool-row-2">
+          <div class="tool-field">
+            <label for="tax-portfolio"><span data-i18n="portfolioValue">Portfolio value</span></label>
+            <input id="tax-portfolio" type="number" min="0" step="1000" value="100000" inputmode="decimal">
+          </div>
+          <div class="tool-field">
+            <label for="tax-yield"><span data-i18n="grossDividendYield">Gross dividend yield %</span></label>
+            <input id="tax-yield" type="number" min="0" max="30" step="0.1" value="4" inputmode="decimal">
+          </div>
+        </div>
+
+        <div class="tool-row-2">
+          <div class="tool-field">
+            <label for="tax-years"><span data-i18n="projectionYears">Projection years</span></label>
+            <input id="tax-years" type="number" min="1" max="50" step="1" value="20" inputmode="numeric">
+          </div>
+          <div class="tool-field">
+            <label for="tax-override"><span data-i18n="overrideRate">Override withholding %</span><em data-i18n="optional">optional</em></label>
+            <input id="tax-override" type="number" min="0" max="50" step="0.1" placeholder="blank = default" inputmode="decimal">
+          </div>
+        </div>
+
+        <div class="tool-row-2">
+          <div class="tool-field">
+            <label for="tax-currency"><span data-i18n="outputCurrency">Output currency</span></label>
+            <select id="tax-currency" aria-label="Output currency">
+              <option value="MYR">MYR</option>
+              <option value="USD">USD</option>
+              <option value="SGD">SGD</option>
+              <option value="HKD">HKD</option>
+              <option value="GBP">GBP</option>
+              <option value="AUD">AUD</option>
+              <option value="CAD">CAD</option>
+              <option value="CNY">CNY</option>
+            </select>
+          </div>
+          <div class="tool-field">
+            <label for="tax-fx-rate"><span data-i18n="fxRate">FX rate</span><em id="tax-fx-status">loading</em></label>
+            <input id="tax-fx-rate" type="number" min="0" step="0.0001" value="1.0000" inputmode="decimal">
+          </div>
+        </div>
+
+        <p class="tool-disclaimer" data-i18n="taxDisclaimer">No paid API. FX tries a free no-key endpoint; if blocked, the rate field stays editable. Tax rules are defaults, not personal tax advice. Broker statements win.</p>
+      </div>
+
+      <div>
+        <div class="tax-kpis">
+          <div class="tax-kpi">
+            <div class="tax-kpi-label" data-i18n="netIncome">Net dividend income</div>
+            <div class="tax-kpi-value pos" id="tax-net-income">RM0</div>
+          </div>
+          <div class="tax-kpi">
+            <div class="tax-kpi-label" data-i18n="sourceWithholding">Source withholding</div>
+            <div class="tax-kpi-value warn" id="tax-withholding">RM0</div>
+          </div>
+          <div class="tax-kpi">
+            <div class="tax-kpi-label" data-i18n="malaysiaTax">Malaysia dividend tax</div>
+            <div class="tax-kpi-value warn" id="tax-local-tax">RM0</div>
+          </div>
+          <div class="tax-kpi">
+            <div class="tax-kpi-label" data-i18n="netYield">Net yield</div>
+            <div class="tax-kpi-value" id="tax-net-yield">0%</div>
+          </div>
+          <div class="tax-kpi">
+            <div class="tax-kpi-label" data-i18n="annualDrag">Annual tax drag</div>
+            <div class="tax-kpi-value warn" id="tax-drag">0%</div>
+          </div>
+        </div>
+
+        <div id="tax-rule-notes" class="tax-notes"></div>
+
+        <div class="tax-chart-wrap">
+          <canvas id="tax-chart" aria-label="Tax drag projection chart"></canvas>
+        </div>
+        <div class="tax-chart-legend">
+          <span style="--legend-color:var(--bull);" data-i18n="noTaxReinvested">No tax reinvested</span>
+          <span style="--legend-color:var(--oxide);" data-i18n="afterTaxReinvested">After tax reinvested</span>
+          <span><strong id="tax-compound-drag">RM0</strong> <em data-i18n="compoundDrag">compound drag</em></span>
+        </div>
+
+        <div class="table-scroll">
+          <table class="tax-table">
+            <thead>
+              <tr>
+                <th data-i18n="market">Market</th>
+                <th data-i18n="withholdingRate">WHT rate</th>
+                <th data-i18n="netIncome">Net income</th>
+                <th data-i18n="netYield">Net yield</th>
+              </tr>
+            </thead>
+            <tbody id="tax-compare-body"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section class="section">
   <div class="section-head reveal">
     <div>
-      <div class="section-label">02 · What the numbers say</div>
+      <div class="section-label">03 · What the numbers say</div>
       <h2 class="section-title">The <em>three lessons</em></h2>
     </div>
   </div>
@@ -248,13 +364,14 @@ canvas{display:block;max-width:100%;}
       <h4>Connect</h4>
       <ul>
         <li><a href="newsletter/index.html">Weekly newsletter</a></li>
-        <li><a href="https://github.com/dainer/dainer-finance-dashboard">GitHub source</a></li>
+        <li><a href="https://github.com/Rebelzxr/dainer-finance-dashboard">GitHub source</a></li>
       </ul>
     </div>
   </div>
 </footer>
 
 <script src="assets/main.js"></script>
+<script src="assets/tax-tools.js"></script>
 <script>
 let CURRENCY = 'USD';
 const SYMBOL = {USD:'$', MYR:'RM'};

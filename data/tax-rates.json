@@ -1,0 +1,136 @@
+{
+  "last_verified": "2026-05-20",
+  "resident_profile": "Malaysia resident individual using common treaty/broker defaults where they are clearly source-backed. Actual rate can differ by broker, account type, instrument, treaty form, and tax status.",
+  "markets": [
+    {
+      "id": "US",
+      "label": "United States ordinary dividends",
+      "label_zh": "美国普通股息",
+      "currency": "USD",
+      "withholding_rate": 0.30,
+      "basis": "US-source FDAP dividends paid to a nonresident alien are generally subject to 30% withholding. Malaysia is not on the IRS income tax treaty list, so the conservative Malaysia-resident default is 30%.",
+      "caveat": "W-8BEN confirms foreign status; it does not create a reduced US treaty rate for Malaysia residents.",
+      "sources": [
+        "https://www.irs.gov/individuals/international-taxpayers/nra-withholding",
+        "https://www.irs.gov/businesses/international-businesses/united-states-income-tax-treaties-a-to-z"
+      ]
+    },
+    {
+      "id": "MY",
+      "label": "Malaysia listed dividends",
+      "label_zh": "马来西亚上市股息",
+      "currency": "MYR",
+      "withholding_rate": 0,
+      "basis": "Malaysia single-tier/company dividends have no source withholding to the shareholder.",
+      "caveat": "For Malaysian resident individuals, annual dividend income above RM100,000 is subject to 2% tax from YA2025 under Budget 2025 rules.",
+      "local_dividend_tax": {
+        "threshold": 100000,
+        "rate": 0.02,
+        "currency": "MYR"
+      },
+      "sources": [
+        "https://www.hasil.gov.my/en/individual/other-tax-information/tax-treatment-on-dividend-income/"
+      ]
+    },
+    {
+      "id": "SG",
+      "label": "Singapore ordinary dividends",
+      "label_zh": "新加坡普通股息",
+      "currency": "SGD",
+      "withholding_rate": 0,
+      "basis": "Singapore does not normally withhold tax on ordinary company dividends paid to non-resident shareholders.",
+      "caveat": "S-REIT and other trust distributions can have separate rules. Use override when the broker statement shows a different rate.",
+      "sources": [
+        "https://www.iras.gov.sg/taxes/withholding-tax/withholding-tax-payments-to-non-resident-companies"
+      ]
+    },
+    {
+      "id": "HK",
+      "label": "Hong Kong dividends",
+      "label_zh": "香港股息",
+      "currency": "HKD",
+      "withholding_rate": 0,
+      "basis": "Hong Kong has no withholding tax on dividends.",
+      "caveat": "Mainland China source income received through Hong Kong listings can carry PRC withholding at the issuer level.",
+      "sources": [
+        "https://www.ird.gov.hk/eng/tax/bus_pft.htm"
+      ]
+    },
+    {
+      "id": "UK",
+      "label": "UK ordinary dividends",
+      "label_zh": "英国普通股息",
+      "currency": "GBP",
+      "withholding_rate": 0,
+      "basis": "UK ordinary dividends are generally paid without UK withholding tax.",
+      "caveat": "UK REIT property income distributions are different; use the UK REIT PID row for that case.",
+      "sources": [
+        "https://www.gov.uk/hmrc-internal-manuals/international-manual/intm343500"
+      ]
+    },
+    {
+      "id": "UK_REIT",
+      "label": "UK REIT property income distribution",
+      "label_zh": "英国 REIT 房产收入分派",
+      "currency": "GBP",
+      "withholding_rate": 0.20,
+      "basis": "UK REIT property income distributions are commonly paid after 20% withholding.",
+      "caveat": "Treaty relief, ISA/SIPP treatment, and broker setup can change the actual rate.",
+      "sources": [
+        "https://www.gov.uk/hmrc-internal-manuals/company-taxation-manual/ctm40525"
+      ]
+    },
+    {
+      "id": "AU_FRANKED",
+      "label": "Australia franked dividends",
+      "label_zh": "澳洲已抵免股息",
+      "currency": "AUD",
+      "withholding_rate": 0,
+      "basis": "Fully franked Australian dividends are not subject to Australian dividend withholding tax for non-residents.",
+      "caveat": "Only the franked component gets this treatment. Use the unfranked row for unfranked dividends.",
+      "sources": [
+        "https://www.ato.gov.au/businesses-and-organisations/corporate-tax-measures-and-assurance/taxation-of-financial-arrangements/in-detail/dividend-withholding-tax"
+      ]
+    },
+    {
+      "id": "AU_UNFRANKED",
+      "label": "Australia unfranked dividends",
+      "label_zh": "澳洲未抵免股息",
+      "currency": "AUD",
+      "withholding_rate": 0.15,
+      "basis": "Unfranked Australian dividends can be subject to dividend withholding tax. The Malaysia-Australia tax treaty commonly caps ordinary portfolio dividend withholding at 15%.",
+      "caveat": "If treaty paperwork is not applied, broker withholding can differ. Use override from the broker statement.",
+      "sources": [
+        "https://www.ato.gov.au/businesses-and-organisations/corporate-tax-measures-and-assurance/taxation-of-financial-arrangements/in-detail/dividend-withholding-tax"
+      ]
+    },
+    {
+      "id": "CA",
+      "label": "Canada dividends",
+      "label_zh": "加拿大股息",
+      "currency": "CAD",
+      "withholding_rate": 0.15,
+      "basis": "Canada statutory Part XIII withholding on dividends is 25%, but tax treaties commonly reduce it. The Malaysia-Canada treaty commonly caps dividends at 15%.",
+      "caveat": "If treaty status is not applied by the broker, the default statutory 25% may appear. Use override when needed.",
+      "sources": [
+        "https://www.canada.ca/en/revenue-agency/services/forms-publications/publications/t4061/nr4-non-resident-tax-withholding-remitting-reporting.html"
+      ]
+    },
+    {
+      "id": "CN",
+      "label": "China PRC-source dividends",
+      "label_zh": "中国内地来源股息",
+      "currency": "CNY",
+      "withholding_rate": 0.10,
+      "basis": "PRC-source dividends paid to non-resident investors are commonly subject to 10% withholding.",
+      "caveat": "A-shares, H-shares, Stock Connect, ETFs, funds, and broker nominee chains can create different practical treatment. Use override for the actual statement rate.",
+      "sources": [
+        "https://www.chinatax.gov.cn/eng/c101270/c101274/c5157949/content.html"
+      ]
+    }
+  ],
+  "fx": {
+    "live_endpoint": "https://api.frankfurter.app/latest?from=USD&to=MYR,SGD,HKD,GBP,AUD,CAD,CNY",
+    "cost": "Free public no-key endpoint. No OpenAI, Anthropic, Perplexity, or paid market-data API token is used."
+  }
+}

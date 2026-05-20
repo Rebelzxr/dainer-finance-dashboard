@@ -82,7 +82,7 @@ git commit -m "Initial commit: DAINER Finance dashboard v0.1"
 gh repo create dainer-finance-dashboard --public --description "A builder's weekly read on markets, picks, and capital."
 
 # Push
-git remote add origin https://github.com/dainer/dainer-finance-dashboard.git
+git remote add origin https://github.com/Rebelzxr/dainer-finance-dashboard.git
 git branch -M main
 git push -u origin main
 
