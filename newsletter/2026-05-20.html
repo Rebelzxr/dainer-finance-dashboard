@@ -12,26 +12,24 @@
 </head>
 <body>
 
-<nav class="nav">
-  <div class="nav-inner">
-    <div class="brand"><span class="brand-dot"></span><a href="../index.html"><span>DAINER <em>Finance</em></span></a></div>
-    <div class="nav-right">
-      <ul class="nav-links">
-        <li><a href="../index.html">Dashboard</a></li>
-        <li><a href="../picks/swing-3-5yr.html">US Picks</a></li>
-        <li><a href="../picks/swing-msia.html">Malaysia</a></li>
-        <li><a href="../picks/dividends.html">Dividends</a></li>
-        <li><a href="../picks/famous-traders.html">Traders</a></li>
-        <li><a href="../calculator.html">Calculator</a></li>
-        <li><a href="index.html" class="active">Newsletter</a></li>
-      </ul>
-      <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
-        <svg class="sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.93 4.93l1.41 1.41m11.32 11.32l1.41 1.41M2 12h2m16 0h2M4.93 19.07l1.41-1.41m11.32-11.32l1.41-1.41"/></svg>
-        <svg class="moon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
-      </button>
-    </div>
+<header class="mission">
+  <div class="mission-cells">
+    <span class="mission-brand">DAINER·<em>FIN</em></span>
+    <a href="../index.html">Dashboard</a>
+    <a href="../picks/swing-3-5yr.html">US Picks</a>
+    <a href="../picks/swing-msia.html">Malaysia</a>
+    <a href="../picks/dividends.html">Dividends</a>
+    <a href="../picks/famous-traders.html">Traders</a>
+    <a href="../calculator.html">Calculator</a>
+    <a href="index.html" class="active">Newsletter</a>
   </div>
-</nav>
+  <div class="mission-cells">
+    <span class="nav-cell-hide">SOL <em data-sol>1247</em></span>
+    <span class="live nav-cell-hide">UPLINK</span>
+    <span class="nav-cell-hide">RUN <em data-runtime>02:47:11</em></span>
+    <button class="theme-btn" onclick="toggleTheme()">DRK / <span style="color:var(--oxide)">LGT</span></button>
+  </div>
+</header>
 
 <article class="section" style="padding-top:80px;">
   <div style="max-width:680px;margin:0 auto;">
@@ -123,9 +121,9 @@
         <span>Liked this?</span>
       </div>
       <h3 style="font-family:var(--serif);font-size:28px;font-weight:400;font-style:italic;margin-bottom:14px;line-height:1.2;">Get the next one in your inbox.</h3>
-      <form action="https://buttondown.email/api/emails/embed-subscribe/dainer" method="post" target="popupwindow" style="display:flex;gap:8px;max-width:480px;">
-        <input type="email" name="email" placeholder="you@example.com" required style="flex:1;background:var(--bg);border:1px solid var(--line);color:var(--ink);padding:12px 14px;font-family:var(--mono);font-size:13px;outline:none;">
-        <button type="submit" style="background:var(--accent);color:var(--bg);font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;padding:12px 24px;border:none;cursor:pointer;white-space:nowrap;">Subscribe</button>
+      <form action="https://formspree.io/f/mvgrlojp" method="POST" class="subscribe-form">
+        <input type="email" name="email" placeholder="you@example.com" required aria-label="Email address">
+        <button type="submit">Subscribe to weekly</button>
       </form>
     </div>
   </div>

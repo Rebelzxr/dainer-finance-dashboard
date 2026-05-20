@@ -1,5 +1,5 @@
-/* DAINER FINANCE — shared JS
-   Theme toggle · scroll reveals · counters · nav active link
+/* DAINER FINANCE — Mars Rover Log shared JS
+   Theme toggle · scroll reveals · counters · SOL counter · runtime · cursor coord
 */
 
 // Theme toggle
@@ -45,9 +45,6 @@ function setupReveal(){
             animateCount(c);
           }
         });
-        e.target.querySelectorAll('.bar-fill').forEach(b => b.classList.add('animate'));
-        const donut = e.target.querySelector('.donut');
-        if (donut) donut.classList.add('animate');
         io.unobserve(e.target);
       }
     });
@@ -55,27 +52,92 @@ function setupReveal(){
   document.querySelectorAll('.reveal, .reveal-stagger').forEach(el => io.observe(el));
 }
 
+// Mission strip — SOL counter (ticks every minute, gives "mission day passing" feel)
+let sol = 1247;
+function tickSol(){
+  sol++;
+  document.querySelectorAll('[data-sol]').forEach(el => el.textContent = sol);
+}
+setInterval(tickSol, 60000);
+
+// Runtime — counts up from page load with base offset
+const startTime = Date.now() - (2*3600 + 47*60 + 11)*1000;
+function tickRuntime(){
+  const ms = Date.now() - startTime;
+  const h = Math.floor(ms/3600000);
+  const m = Math.floor((ms%3600000)/60000);
+  const s = Math.floor((ms%60000)/1000);
+  const str = `${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+  document.querySelectorAll('[data-runtime]').forEach(el => el.textContent = str);
+}
+setInterval(tickRuntime, 1000);
+
+// Cursor coordinate marker — auto-injects if not present (dark mode only via CSS)
+function setupCursorMark(){
+  if (document.getElementById('cursor-mark')) return;
+  const mark = document.createElement('div');
+  mark.id = 'cursor-mark';
+  mark.className = 'cursor-mark';
+  const coord = document.createElement('div');
+  coord.id = 'cursor-coord';
+  coord.className = 'cursor-coord';
+  coord.textContent = '47.123°N · 03.218°W';
+  document.body.appendChild(mark);
+  document.body.appendChild(coord);
+  document.addEventListener('mousemove', (e) => {
+    mark.style.left = e.clientX + 'px';
+    mark.style.top = e.clientY + 'px';
+    coord.style.left = e.clientX + 'px';
+    coord.style.top = e.clientY + 'px';
+    const lat = (47.123 + (e.clientY / window.innerHeight - 0.5) * 0.02).toFixed(3);
+    const lng = (3.218 + (e.clientX / window.innerWidth - 0.5) * 0.04).toFixed(3);
+    coord.textContent = `${lat}°N · ${lng}°W`;
+  });
+}
+
+// Inject Mars-horizon backdrop layers if missing (so every page has them)
+function injectBackdrop(){
+  if (document.querySelector('.horizon')) return;
+  const layers = ['horizon','ridge far','ridge','haze','grain','bg-grid'];
+  layers.forEach(cls => {
+    const el = document.createElement('div');
+    el.className = cls;
+    document.body.insertBefore(el, document.body.firstChild);
+  });
+  // Mars hero photo only if body has class
+  if (document.body.classList.contains('has-mars-hero')){
+    const m = document.createElement('div');
+    m.className = 'mars-hero-bg';
+    document.body.insertBefore(m, document.body.firstChild);
+  }
+}
+
 // Mark active nav link based on current path
 function setupActiveNav(){
   const path = window.location.pathname;
-  document.querySelectorAll('.nav-links a').forEach(a => {
+  document.querySelectorAll('.mission-cells a, .nav-links a').forEach(a => {
     const href = a.getAttribute('href') || '';
-    if (href === path || (href !== '/' && path.endsWith(href.replace(/^\.\//, '/')))) {
+    if (!href || href === '#') return;
+    if (path.endsWith(href.replace(/^\.+\//, '/')) || path.endsWith(href)) {
       a.classList.add('active');
     }
   });
 }
 
-// Common init — pages can override or extend
+// Init
 document.addEventListener('DOMContentLoaded', () => {
+  injectBackdrop();
+  setupCursorMark();
   setupReveal();
   setupActiveNav();
+  tickRuntime();
+  // Immediate counters for above-fold cards
   setTimeout(() => {
-    document.querySelectorAll('.pf-card, .above-fold').forEach(el => {
+    document.querySelectorAll('.above-fold').forEach(el => {
       el.classList.add('visible');
       el.querySelectorAll('.count').forEach(c => {
         if (!c.dataset.counted){ c.dataset.counted='1'; animateCount(c); }
       });
     });
-  }, 400);
+  }, 300);
 });

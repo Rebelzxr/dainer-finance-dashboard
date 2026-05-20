@@ -3,98 +3,114 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>DAINER Finance — Dashboard</title>
-<meta name="description" content="A builder's weekly read on markets, picks, and capital. Research, picks, and a weekly newsletter — all in one place.">
+<title>DAINER Finance — Mars Rover Log</title>
+<meta name="description" content="A builder's weekly log on markets, picks, and capital. Research, picks, and a weekly newsletter — broadcast every Sunday.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Instrument+Sans:ital,wght@0,400..700;1,400..700&family=JetBrains+Mono:wght@300;400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@200;300;400;500;700&family=Bitter:wght@300;400;500;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/style.css">
 </head>
-<body>
+<body class="has-mars-hero">
 
-<!-- NAV -->
-<nav class="nav">
-  <div class="nav-inner">
-    <div class="brand">
-      <span class="brand-dot"></span>
-      <a href="index.html"><span>DAINER <em>Finance</em></span></a>
-    </div>
-    <div class="nav-right">
-      <ul class="nav-links">
-        <li><a href="index.html" class="active">Dashboard</a></li>
-        <li><a href="picks/swing-3-5yr.html">US Picks</a></li>
-        <li><a href="picks/swing-msia.html">Malaysia</a></li>
-        <li><a href="picks/dividends.html">Dividends</a></li>
-        <li><a href="picks/famous-traders.html">Traders</a></li>
-        <li><a href="calculator.html">Calculator</a></li>
-        <li><a href="newsletter/index.html">Newsletter</a></li>
-      </ul>
-      <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
-        <svg class="sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.93 4.93l1.41 1.41m11.32 11.32l1.41 1.41M2 12h2m16 0h2M4.93 19.07l1.41-1.41m11.32-11.32l1.41-1.41"/></svg>
-        <svg class="moon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
-      </button>
-    </div>
+<header class="mission">
+  <div class="mission-cells">
+    <span class="mission-brand">DAINER·<em>FIN</em></span>
+    <a href="index.html" class="active">Dashboard</a>
+    <a href="picks/swing-3-5yr.html" class="nav-cell-hide">US Picks</a>
+    <a href="picks/swing-msia.html" class="nav-cell-hide">Malaysia</a>
+    <a href="picks/dividends.html" class="nav-cell-hide">Dividends</a>
+    <a href="picks/famous-traders.html">Traders</a>
+    <a href="calculator.html" class="nav-cell-hide">Calculator</a>
+    <a href="newsletter/index.html">Newsletter</a>
   </div>
-</nav>
-
-<!-- HERO -->
-<header class="hero">
-  <div class="hero-meta-top">
-    <span>Issue · weekly</span>
-    <span>Research · 3 active reports</span>
-    <span>Updated <em>May 20, 2026</em></span>
-    <span>Built &amp; written in public</span>
+  <div class="mission-cells">
+    <span class="nav-cell-hide">SOL <em data-sol>1247</em></span>
+    <span class="live nav-cell-hide">UPLINK</span>
+    <span class="nav-cell-hide">RUN <em data-runtime>02:47:11</em></span>
+    <button class="theme-btn" onclick="toggleTheme()">DRK / <span style="color:var(--oxide)">LGT</span></button>
   </div>
-  <h1 class="hero-title">
-    A builder's<br>
-    <em>finance</em> <span class="amp">&amp;</span> capital lens.
-  </h1>
-  <p class="hero-sub">
-    Where I keep the picks, the weekly read, and the math — for the next <em>five years</em> of compounding. Not financial advice. Not paywalled. Just one operator's open notebook.
-  </p>
 </header>
 
-<!-- KEY STATS STRIP (% only — never $) -->
-<section class="pf-strip">
-  <div class="pf-card above-fold">
-    <div class="pf-stats">
-      <div class="pf-stat">
-        <span class="pf-stat-label">Active reports</span>
-        <span class="pf-stat-value"><em class="count" data-target="3">3</em></span>
-        <span class="pf-stat-sub">US swing · MY swing · Dividends</span>
+<header class="hero">
+  <div class="hero-stack">
+    <div>
+      <div class="hero-tag">⊕ DAINER FINANCE · MISSION LOG · v0.2</div>
+      <h1 class="hero-title">
+        <span class="lbl">// DEPLOY LOG · DASHBOARD</span>
+        A builder's<br>
+        <em>finance</em> &amp;<br>
+        capital <em>lens</em>.
+      </h1>
+      <p class="hero-sub">
+        Where I keep the <em>picks</em>, the <em>weekly read</em>, and the math — for the next five years of compounding. Five research reports, twenty-six investors tracked, one open notebook. <em>Free, no paywall, no advice.</em>
+      </p>
+    </div>
+
+    <aside class="hero-panel">
+      <div class="hero-panel-head">
+        <span>// CORE READOUT</span>
+        <span class="live" style="color:var(--oxide)">LIVE</span>
       </div>
-      <div class="pf-stat">
-        <span class="pf-stat-label">Total positions tracked</span>
-        <span class="pf-stat-value"><em class="count" data-target="30">30</em></span>
-        <span class="pf-stat-sub">across all three sleeves</span>
+      <div class="hero-panel-body">
+        <div class="hero-panel-label">SINGLE LARGEST CONVICTION</div>
+        <div class="hero-panel-val">TSM</div>
+        <div class="hero-panel-sub">14% allocation · 5y ROIC 35.1%<br>Foundry monopoly · no second source</div>
+        <hr class="hero-panel-rule">
+        <div class="hero-panel-grid">
+          <div><span>REPORTS</span><span>5 active</span></div>
+          <div><span>POSITIONS</span><span>30+ tracked</span></div>
+          <div><span>TRADERS</span><span>26 watched</span></div>
+          <div><span>CADENCE</span><span>Sunday weekly</span></div>
+          <div><span>HORIZON</span><span>3-5 yrs</span></div>
+          <div><span>NEXT SYNC</span><span>+7 days</span></div>
+        </div>
       </div>
-      <div class="pf-stat">
-        <span class="pf-stat-label">Top single conviction</span>
-        <span class="pf-stat-value"><em><a class="tv-link" href="https://www.tradingview.com/symbols/TSM/" target="_blank" rel="noopener noreferrer" style="color:var(--accent);">TSM</a></em></span>
-        <span class="pf-stat-sub">14% · foundry monopoly</span>
-      </div>
-      <div class="pf-stat">
-        <span class="pf-stat-label">Newsletter cadence</span>
-        <span class="pf-stat-value"><em>Sun</em></span>
-        <span class="pf-stat-sub">weekly · auto-drafted</span>
-      </div>
-      <div class="pf-stat">
-        <span class="pf-stat-label">AI agents per report</span>
-        <span class="pf-stat-value"><em class="count" data-target="5">5</em></span>
-        <span class="pf-stat-sub">parallel research per theme</span>
-      </div>
+    </aside>
+  </div>
+</header>
+
+<section class="waypoint-strip reveal">
+  <div class="waypoint-grid">
+    <div class="waypoint">
+      <div class="waypoint-id">WPT-01</div>
+      <div class="waypoint-label">Active reports</div>
+      <div class="waypoint-val count" data-target="5">5</div>
+      <div class="waypoint-sub">// US · MY · Dividends · Traders · Leopold</div>
+    </div>
+    <div class="waypoint">
+      <div class="waypoint-id">WPT-02</div>
+      <div class="waypoint-label">Positions tracked</div>
+      <div class="waypoint-val count" data-target="30">30</div>
+      <div class="waypoint-sub">// across all sleeves</div>
+    </div>
+    <div class="waypoint">
+      <div class="waypoint-id">WPT-03</div>
+      <div class="waypoint-label">Top single conviction</div>
+      <div class="waypoint-val"><em>TSM</em></div>
+      <div class="waypoint-sub">// 14% · foundry monopoly</div>
+    </div>
+    <div class="waypoint">
+      <div class="waypoint-id">WPT-04</div>
+      <div class="waypoint-label">Newsletter cadence</div>
+      <div class="waypoint-val">SUN</div>
+      <div class="waypoint-sub">// weekly · auto-drafted</div>
+    </div>
+    <div class="waypoint">
+      <div class="waypoint-id">WPT-05</div>
+      <div class="waypoint-label">AI agents per report</div>
+      <div class="waypoint-val count" data-target="5">5</div>
+      <div class="waypoint-sub">// parallel research per theme</div>
     </div>
   </div>
 </section>
 
-<!-- THE REPORTS -->
 <section id="reports" class="section">
-  <div class="section-head reveal">
+  <div class="sec-head reveal">
     <div>
-      <div class="section-label">01 · The reports</div>
-      <h2 class="section-title">Three lenses, <em>one book</em></h2>
+      <div class="sec-tag">// PROBE 01 · THE REPORTS</div>
+      <div class="sec-tag-tail">5 ACTIVE · STATUS GREEN</div>
     </div>
-    <p class="section-sub">Each report is a separate research artifact with its own conviction list. Click through for the full thesis, allocation, and risks.</p>
+    <h2 class="sec-title">Three lenses,<br><em>one book</em>.</h2>
   </div>
 
   <div class="nav-card-grid reveal-stagger">
@@ -109,14 +125,21 @@
       <div class="nav-card-num">REPORT 003</div>
       <div class="nav-card-title">Malaysia <em>Swing 3-5yr</em></div>
       <p class="nav-card-sub">Ringgit-denominated 5-theme shortlist — Johor data centers, MY banks, healthcare, electrification (TNB), and reshoring construction. Dividend-friendly.</p>
-      <div class="nav-card-meta">12 picks · 5 themes · Bursa Malaysia</div>
+      <div class="nav-card-meta">11 picks · 5 themes · Bursa Malaysia</div>
     </a>
 
     <a class="nav-card" href="picks/dividends.html">
       <div class="nav-card-num">REPORT 004</div>
       <div class="nav-card-title">Dividend <em>Income</em></div>
       <p class="nav-card-sub">3-sleeve income strategy — US aristocrats, US high-yield specialty, MY ringgit income. Tax mechanics for a Malaysian holder included.</p>
-      <div class="nav-card-meta">15+ picks · 3 sleeves · 3.5% min yield</div>
+      <div class="nav-card-meta">21 picks · 3 sleeves · 4.5% blended yield</div>
+    </a>
+
+    <a class="nav-card" href="picks/famous-traders.html">
+      <div class="nav-card-num">REPORT 005</div>
+      <div class="nav-card-title">Famous <em>Traders</em></div>
+      <p class="nav-card-sub">Twenty-six legendary investors. Buffett · Burry · Wood · Druckenmiller · Icahn · Pelosi · Thiel + more. 13F filings + Congressional PTRs. Updated weekly.</p>
+      <div class="nav-card-meta">26 tracked · 22 verified · STATUS green</div>
     </a>
 
     <a class="nav-card" href="picks/leopold-13f.html">
@@ -125,72 +148,74 @@
       <p class="nav-card-sub">Quarterly read on Situational Awareness LP. Tactical 1-2 quarter horizon — different beast from the 3-5yr sleeves. Updated each 13F deadline.</p>
       <div class="nav-card-meta">Tactical · 1-2Q horizon · long/short</div>
     </a>
+
+    <a class="nav-card" href="calculator.html">
+      <div class="nav-card-num">TOOL</div>
+      <div class="nav-card-title">Compound <em>Calculator</em></div>
+      <p class="nav-card-sub">Punch in starting amount + monthly add + expected return + time horizon. See what compounding actually does to your principal. Your inputs stay client-side.</p>
+      <div class="nav-card-meta">Interactive · client-side · USD + MYR</div>
+    </a>
   </div>
 </section>
 
-<!-- LATEST NEWSLETTER ISSUE -->
 <section id="latest" class="section">
-  <div class="section-head reveal">
+  <div class="sec-head reveal">
     <div>
-      <div class="section-label">02 · This week's read</div>
-      <h2 class="section-title">Latest <em>issue</em></h2>
+      <div class="sec-tag">// PROBE 02 · THIS WEEK'S READ</div>
+      <div class="sec-tag-tail">ISSUE 001 · 2026.05.20</div>
     </div>
-    <a href="newsletter/index.html" class="section-sub" style="color:var(--accent);border-bottom:1px solid var(--line);padding-bottom:4px;">View full archive →</a>
+    <h2 class="sec-title">Latest <em>issue</em>.</h2>
   </div>
 
   <div class="exec-grid reveal">
-    <div class="exec-card" style="background:var(--bg-elev-2);border-color:var(--accent);">
+    <div class="exec-card">
       <h4>Issue #001 · May 20, 2026</h4>
       <h3>The launch — three reports, one dashboard, and a Leopold curveball</h3>
       <ul>
-        <li><em>What's new:</em> Combined the dainer-fund swing dashboard with the new 3-5yr research into one site. Threw away the old. This is the new home.</li>
+        <li><em>What's new:</em> Combined the dainer-fund swing dashboard with the new 3-5yr research into one Mars-rover-themed site. Threw away the old.</li>
         <li><em>What I changed my mind on:</em> 18 picks (v1) was closet-indexing. Cut to 10 in v2, added 2 ETFs (ITA defense, SMH semis) for breadth without the picking tax.</li>
-        <li><em>The Leopold curveball:</em> His Q1 13F flipped to a long/short barbell. $8.5B in puts against megacap compute. The thesis he authored in 2024 is now in consensus. The alpha left is in second-derivatives.</li>
+        <li><em>The Leopold curveball:</em> His Q1 13F flipped to a long/short barbell. $8.5B in puts against megacap compute. The thesis he authored in 2024 is now in consensus.</li>
         <li><em>Anthropic IPO:</em> Not July. July is the rumored S-1 filing window. Actual listing targeted Q4 2026.</li>
-        <li><em>Next week:</em> Codex automation — weekly price refresh + draft issue auto-generated and committed.</li>
       </ul>
-      <a href="newsletter/2026-05-20.html" style="color:var(--accent);font-family:var(--mono);font-size:11px;letter-spacing:.14em;margin-top:18px;display:inline-block;">READ FULL ISSUE →</a>
+      <p style="margin-top:18px;"><a href="newsletter/2026-05-20.html" style="font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;">READ FULL ISSUE →</a></p>
     </div>
 
     <div class="exec-card">
       <h4>Subscribe — free, weekly</h4>
       <h3>Sunday 8pm AEST, every week</h3>
-      <p style="font-size:14px;color:var(--ink-dim);margin-bottom:18px;line-height:1.55;">
-        One issue per week. Picks, what I changed my mind on, the one chart worth the click. No spam, no upsell.
-        Unsubscribe in two clicks.
-      </p>
-      <!-- Buttondown embed — Codex will swap the form action URL post-account-setup -->
-      <form action="https://buttondown.email/api/emails/embed-subscribe/dainer" method="post" target="popupwindow" style="display:flex;gap:8px;flex-direction:column;">
-        <input type="email" name="email" placeholder="you@example.com" required style="background:var(--bg);border:1px solid var(--line);color:var(--ink);padding:12px 14px;font-family:var(--mono);font-size:13px;outline:none;transition:border-color .2s var(--ease);">
-        <button type="submit" style="background:var(--accent);color:var(--bg);font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;padding:14px;border:none;cursor:pointer;transition:background .2s var(--ease);">Subscribe</button>
+      <p>One issue per week. Picks, what I changed my mind on, the one chart worth the click. No spam, no upsell. Unsubscribe in two clicks.</p>
+      <!-- Formspree form — replace 'mvgrlojp' below with your Formspree form ID after sign-up at formspree.io (free tier 50/mo) -->
+      <form action="https://formspree.io/f/mvgrlojp" method="POST" class="subscribe-form" id="subscribe-form">
+        <input type="email" name="email" placeholder="you@example.com" required aria-label="Email address">
+        <button type="submit">Subscribe to weekly</button>
       </form>
-      <p style="font-size:11px;color:var(--ink-faint);margin-top:14px;font-family:var(--mono);">RSS: <a href="newsletter/feed.xml" style="color:var(--accent);border-bottom:1px solid var(--line);">/newsletter/feed.xml</a></p>
+      <p style="margin-top:14px;font-family:var(--mono);font-size:10px;color:var(--ink-faint);letter-spacing:.06em;">
+        RSS: <a href="newsletter/feed.xml" style="color:var(--oxide);">/newsletter/feed.xml</a> · GitHub: <a href="https://github.com/Rebelzxr/dainer-finance-dashboard" style="color:var(--oxide);">repo</a>
+      </p>
     </div>
   </div>
 </section>
 
-<!-- THIS WEEK — MAJOR NEWS -->
 <section id="news" class="section">
-  <div class="section-head reveal">
+  <div class="sec-head reveal">
     <div>
-      <div class="section-label">03 · This week in markets</div>
-      <h2 class="section-title">News that <em>moves the thesis</em></h2>
+      <div class="sec-tag">// PROBE 03 · SIGNAL FEED</div>
+      <div class="sec-tag-tail">WIRE · WEEKLY</div>
     </div>
-    <p class="section-sub">Five stories I'm watching this week. Click any card → source. Updated each Sunday with the newsletter.</p>
+    <h2 class="sec-title">News that <em>moves the thesis</em>.</h2>
   </div>
 
-  <div class="card-grid-3 reveal-stagger" id="news-grid">
-    <!-- News cards injected by JS from data/news.json -->
+  <div class="news-grid reveal-stagger" id="news-grid">
+    <!-- Loaded from data/news.json -->
   </div>
 </section>
 
-<!-- FOOTER -->
 <footer class="footer">
   <div class="footer-grid">
     <div>
       <h4>About</h4>
-      <p>DAINER Finance is one operator's open notebook on markets, picks, and capital. Built in public. Not financial advice — research artifacts only. Every pick is independently verifiable from cited sources. The site is generated by AI research agents + reviewed by hand; the methodology lives in each report's footer.</p>
-      <span class="status-tag">v0.1 · launched 2026-05-20</span>
+      <p>DAINER Finance is one operator's open notebook on markets, picks, and capital. Built in public. Not financial advice — research artifacts only. Every pick is independently verifiable from cited sources.</p>
+      <span class="status-tag">v0.2 · launched 2026-05-20</span>
     </div>
     <div>
       <h4>Site map</h4>
@@ -199,6 +224,7 @@
         <li><a href="picks/swing-3-5yr.html">US 3-5yr swing</a></li>
         <li><a href="picks/swing-msia.html">Malaysia swing</a></li>
         <li><a href="picks/dividends.html">Dividend income</a></li>
+        <li><a href="picks/famous-traders.html">Famous traders</a></li>
         <li><a href="picks/leopold-13f.html">Leopold 13F tracker</a></li>
         <li><a href="calculator.html">Compound calculator</a></li>
         <li><a href="newsletter/index.html">Newsletter archive</a></li>
@@ -208,35 +234,32 @@
       <h4>Connect</h4>
       <ul>
         <li><a href="newsletter/feed.xml">RSS feed</a></li>
-        <li><a href="https://github.com/dainer/dainer-finance-dashboard">GitHub source</a></li>
-        <li><a href="https://twitter.com/">X — @dainerbuilds</a></li>
+        <li><a href="https://github.com/Rebelzxr/dainer-finance-dashboard">GitHub source</a></li>
       </ul>
-      <p style="margin-top:14px;">Built on macOS · open-sourced · last published 2026-05-20</p>
+      <p style="margin-top:14px;">// CLOSING UPLINK · SOL <em data-sol>1247</em><br>Selangor, Malaysia · open notebook</p>
     </div>
   </div>
 </footer>
 
 <script src="assets/main.js"></script>
 <script>
-// Load and render news from data/news.json
+// Load news from data/news.json
 (async function loadNews(){
   try {
     const r = await fetch('data/news.json');
-    if (!r.ok) throw new Error('no news.json');
-    const news = await r.json();
+    if (!r.ok) throw new Error();
+    const d = await r.json();
     const grid = document.getElementById('news-grid');
-    grid.innerHTML = news.items.slice(0, 6).map(n => `
-      <a class="theme-card" style="--th:var(--accent);" href="${n.url}" target="_blank" rel="noopener">
-        <div class="theme-num">${n.source} · ${n.date}</div>
-        <h3 class="theme-name">${n.title}</h3>
-        <p class="theme-meta">${n.preview}</p>
-        <div style="font-family:var(--mono);font-size:10px;letter-spacing:.14em;color:var(--accent);margin-top:14px;">READ AT SOURCE →</div>
+    grid.innerHTML = d.items.slice(0, 4).map(n => `
+      <a class="news-log" href="${n.url}" target="_blank" rel="noopener">
+        <div class="news-meta"><span>${n.source.toUpperCase()} // ${n.date}</span><em>● TRACKED</em></div>
+        <h3 class="news-head">${n.title}</h3>
+        <p class="news-text">${n.preview}</p>
+        <span class="news-link">VIEW SOURCE</span>
       </a>
     `).join('');
   } catch(e) {
-    // Fallback if news.json missing — show placeholder
-    const grid = document.getElementById('news-grid');
-    grid.innerHTML = '<p style="grid-column:span 3;color:var(--ink-dim);font-style:italic;text-align:center;padding:32px;">News feed loading. Updated each Sunday with the newsletter.</p>';
+    document.getElementById('news-grid').innerHTML = '<p style="grid-column:span 2;color:var(--ink-dim);font-style:italic;text-align:center;padding:32px;font-family:var(--body);">News feed loading. Updated each Sunday with the newsletter.</p>';
   }
 })();
 </script>

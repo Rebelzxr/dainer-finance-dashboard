@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>A · Orbital Deck · DAINER Finance Mockup</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;700&family=IBM+Plex+Mono:wght@100;200;300;400;500&family=Manrope:wght@200;300;400;500&display=swap" rel="stylesheet">
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased}
+  body{overflow-x:hidden}
+  ul,ol{list-style:none}
+  a{color:inherit;text-decoration:none}
+  button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
+
+  :root, [data-theme="dark"]{
+    --bg:#000000;
+    --bg-elev:#070A0D;
+    --bg-deep:#03060A;
+    --ink:#E5F4FA;
+    --ink-dim:#6B7E8E;
+    --ink-faint:#2C3A47;
+    --accent:#B8F0FF;
+    --accent-deep:#5BD3F5;
+    --rule:#1A2530;
+    --rule-bright:#2C3D4D;
+  }
+  [data-theme="light"]{
+    --bg:#FBFCFD;
+    --bg-elev:#F3F6F9;
+    --bg-deep:#E8EDF2;
+    --ink:#0D1419;
+    --ink-dim:#4B5C6B;
+    --ink-faint:#9AAABA;
+    --accent:#006B7A;
+    --accent-deep:#003F4A;
+    --rule:#D9E2E9;
+    --rule-bright:#B3C2CE;
+  }
+  :root{
+    --display:'Inter',system-ui,sans-serif;
+    --body:'Manrope',system-ui,sans-serif;
+    --mono:'IBM Plex Mono',monospace;
+    --max:1480px;
+    --ease:cubic-bezier(.2,.8,.2,1);
+  }
+
+  body{
+    font-family:var(--body);
+    background:var(--bg);
+    color:var(--ink);
+    font-size:15px;
+    line-height:1.6;
+    font-weight:300;
+    transition:background .5s var(--ease),color .5s var(--ease);
+    position:relative;
+  }
+
+  /* Star-field / coordinate marks faint backdrop */
+  body::before{
+    content:'';position:fixed;inset:0;pointer-events:none;z-index:1;
+    background-image:
+      radial-gradient(circle at 12% 18%, color-mix(in srgb,var(--accent) 18%,transparent) 0.5px, transparent 1px),
+      radial-gradient(circle at 78% 38%, color-mix(in srgb,var(--accent) 12%,transparent) 0.5px, transparent 1px),
+      radial-gradient(circle at 38% 78%, color-mix(in srgb,var(--accent) 14%,transparent) 0.5px, transparent 1px),
+      radial-gradient(circle at 88% 88%, color-mix(in srgb,var(--accent) 10%,transparent) 0.5px, transparent 1px),
+      radial-gradient(circle at 22% 62%, color-mix(in srgb,var(--accent) 8%,transparent) 0.5px, transparent 1px);
+    background-size:100% 100%;
+    opacity:.7;
+  }
+
+  /* ============== TOP NAV — minimal, edge-pinned ============== */
+  .nav{position:fixed;top:0;left:0;right:0;z-index:50;padding:24px 32px;display:flex;justify-content:space-between;align-items:center;}
+  .brand{font-family:var(--mono);font-size:11px;letter-spacing:.32em;text-transform:uppercase;color:var(--ink);font-weight:300;}
+  .brand em{color:var(--accent);font-style:normal;}
+  .nav-stats{display:flex;gap:32px;font-family:var(--mono);font-size:10px;letter-spacing:.18em;color:var(--ink-dim);text-transform:uppercase;font-weight:300;}
+  .nav-stats em{color:var(--accent);font-style:normal;}
+
+  /* Theme toggle — minimal pill */
+  .theme-btn{font-family:var(--mono);font-size:10px;letter-spacing:.2em;color:var(--ink-dim);text-transform:uppercase;border:1px solid var(--rule-bright);padding:8px 16px;border-radius:99px;transition:all .25s var(--ease);}
+  .theme-btn:hover{color:var(--accent);border-color:var(--accent);}
+  .theme-btn .on{color:var(--accent);}
+
+  /* ============== HERO — massive thin numeral ============== */
+  .hero{padding:140px 32px 100px;max-width:var(--max);margin:0 auto;position:relative;z-index:3;display:grid;grid-template-columns:1fr;gap:60px;}
+
+  .hero-meta{font-family:var(--mono);font-size:10px;letter-spacing:.32em;color:var(--ink-dim);text-transform:uppercase;display:flex;flex-wrap:wrap;gap:48px;border-bottom:1px solid var(--rule);padding-bottom:24px;}
+  .hero-meta em{color:var(--accent);font-style:normal;}
+
+  .hero-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:end;}
+  @media(max-width:900px){.hero-grid{grid-template-columns:1fr;gap:48px;}}
+
+  .hero-title{font-family:var(--display);font-weight:100;font-size:clamp(72px,11vw,180px);line-height:.88;letter-spacing:-.045em;color:var(--ink);}
+  .hero-title em{font-style:normal;font-weight:200;color:var(--accent);}
+  .hero-title .small{display:block;font-size:.34em;letter-spacing:-.02em;color:var(--ink-dim);font-weight:200;margin-top:24px;line-height:1;}
+
+  .hero-stat-block{display:flex;flex-direction:column;gap:14px;padding-left:32px;border-left:1px solid var(--rule);}
+  .hero-stat-block .label{font-family:var(--mono);font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--ink-dim);}
+  .hero-stat-block .val{font-family:var(--display);font-weight:100;font-size:64px;line-height:.95;letter-spacing:-.04em;color:var(--accent);font-variant-numeric:tabular-nums;}
+  .hero-stat-block .sub{font-family:var(--mono);font-size:11px;letter-spacing:.12em;color:var(--ink-dim);}
+
+  /* ============== STAT STRIP — wide breathy ============== */
+  .strip{max-width:var(--max);margin:0 auto;padding:0 32px;position:relative;z-index:3;}
+  .strip-inner{border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);padding:48px 0;display:grid;grid-template-columns:repeat(5,1fr);gap:0;}
+  @media(max-width:1000px){.strip-inner{grid-template-columns:repeat(2,1fr);gap:48px 0;}}
+  .strip-item{padding:0 32px;border-right:1px solid var(--rule);}
+  .strip-item:last-child{border-right:none;}
+  .strip-item .label{font-family:var(--mono);font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--ink-dim);margin-bottom:14px;}
+  .strip-item .val{font-family:var(--display);font-weight:100;font-size:54px;letter-spacing:-.04em;line-height:1;color:var(--ink);font-variant-numeric:tabular-nums;}
+  .strip-item .val em{color:var(--accent);font-style:normal;}
+  .strip-item .sub{font-family:var(--mono);font-size:10px;letter-spacing:.12em;color:var(--ink-faint);margin-top:10px;}
+
+  /* ============== SECTION HEADS ============== */
+  .section{max-width:var(--max);margin:0 auto;padding:120px 32px;position:relative;z-index:3;}
+  .sec-head{display:grid;grid-template-columns:1fr 2fr;gap:64px;margin-bottom:80px;padding-bottom:24px;border-bottom:1px solid var(--rule);}
+  @media(max-width:900px){.sec-head{grid-template-columns:1fr;}}
+  .sec-num{font-family:var(--mono);font-size:10px;letter-spacing:.32em;text-transform:uppercase;color:var(--accent);}
+  .sec-title{font-family:var(--display);font-weight:200;font-size:clamp(36px,4.8vw,64px);line-height:.95;letter-spacing:-.035em;color:var(--ink);}
+  .sec-title em{font-style:normal;font-weight:200;color:var(--accent);}
+
+  /* ============== PICK CARDS — orbital plates ============== */
+  .picks{display:grid;grid-template-columns:repeat(2,1fr);gap:48px;}
+  @media(max-width:900px){.picks{grid-template-columns:1fr;}}
+
+  .pick{position:relative;padding:48px 40px;border:1px solid var(--rule);background:var(--bg);transition:border-color .35s var(--ease);}
+  .pick:hover{border-color:var(--rule-bright);}
+  /* Corner brackets */
+  .pick::before, .pick::after{content:'';position:absolute;width:16px;height:16px;border:1px solid var(--accent);}
+  .pick::before{top:-1px;left:-1px;border-right:none;border-bottom:none;}
+  .pick::after{bottom:-1px;right:-1px;border-left:none;border-top:none;}
+
+  .pick-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:32px;}
+  .pick-meta{font-family:var(--mono);font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--ink-dim);}
+  .pick-meta em{color:var(--accent);font-style:normal;}
+  .pick-alloc{font-family:var(--display);font-weight:100;font-size:48px;letter-spacing:-.03em;color:var(--accent);line-height:1;font-variant-numeric:tabular-nums;}
+
+  .pick-tkr{font-family:var(--display);font-weight:100;font-size:96px;line-height:.9;letter-spacing:-.05em;color:var(--ink);margin-bottom:18px;}
+  .pick-name{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-dim);margin-bottom:32px;}
+
+  .pick-hook{font-family:var(--body);font-size:17px;font-weight:300;line-height:1.5;color:var(--ink);max-width:46ch;margin-bottom:32px;}
+
+  .pick-metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;border-top:1px solid var(--rule);padding-top:24px;}
+  .pick-metric{padding-right:12px;}
+  .pick-metric .k{font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:6px;}
+  .pick-metric .v{font-family:var(--display);font-weight:300;font-size:18px;letter-spacing:-.01em;color:var(--ink);font-variant-numeric:tabular-nums;}
+
+  /* ============== TRADER CARDS ============== */
+  .traders{display:grid;grid-template-columns:repeat(3,1fr);gap:40px;}
+  @media(max-width:1000px){.traders{grid-template-columns:1fr;}}
+
+  .trader{padding:36px 32px;border:1px solid var(--rule);background:var(--bg);transition:border-color .35s var(--ease);position:relative;}
+  .trader:hover{border-color:var(--accent);}
+  .trader-rank{position:absolute;top:24px;right:32px;font-family:var(--mono);font-size:10px;letter-spacing:.2em;color:var(--ink-faint);}
+  .trader-name{font-family:var(--display);font-weight:200;font-size:36px;letter-spacing:-.02em;line-height:1;color:var(--ink);margin-bottom:8px;}
+  .trader-fund{font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-dim);margin-bottom:24px;}
+  .trader-cat{display:inline-block;font-family:var(--mono);font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent);padding:5px 12px;border:1px solid var(--accent);border-radius:99px;margin-bottom:28px;}
+  .trader-tag{font-family:var(--body);font-style:italic;font-size:14px;font-weight:300;color:var(--ink);line-height:1.5;margin-bottom:28px;}
+
+  .trader-pos{border-top:1px solid var(--rule);padding-top:20px;display:flex;flex-direction:column;gap:10px;}
+  .trader-row{display:grid;grid-template-columns:1fr auto auto;gap:14px;align-items:baseline;font-family:var(--mono);font-size:11px;}
+  .trader-row .pos-tkr{font-family:var(--display);font-weight:400;font-size:14px;letter-spacing:-.005em;color:var(--ink);}
+  .trader-row .pos-pct{color:var(--accent);font-weight:400;}
+  .trader-row .pos-chg{font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-faint);}
+
+  /* ============== NEWS — full bleed editorial ============== */
+  .news{display:grid;grid-template-columns:1fr 1fr;gap:80px;}
+  @media(max-width:900px){.news{grid-template-columns:1fr;}}
+
+  .news-card{padding:48px 0;border-top:2px solid var(--accent);transition:border-color .3s var(--ease);}
+  .news-card:hover{border-color:var(--ink);}
+  .news-mark{font-family:var(--mono);font-size:10px;letter-spacing:.32em;text-transform:uppercase;color:var(--accent);margin-bottom:20px;}
+  .news-headline{font-family:var(--display);font-weight:200;font-size:36px;line-height:1.05;letter-spacing:-.025em;color:var(--ink);margin-bottom:24px;}
+  .news-headline em{font-style:normal;font-weight:300;color:var(--accent);}
+  .news-text{font-family:var(--body);font-size:15px;font-weight:300;line-height:1.6;color:var(--ink-dim);margin-bottom:24px;}
+  .news-link{font-family:var(--mono);font-size:10px;letter-spacing:.32em;text-transform:uppercase;color:var(--accent);}
+
+  /* ============== FOOTER ============== */
+  .foot{max-width:var(--max);margin:0 auto;padding:80px 32px 48px;border-top:1px solid var(--rule);font-family:var(--mono);font-size:10px;letter-spacing:.18em;color:var(--ink-faint);text-transform:uppercase;display:flex;justify-content:space-between;flex-wrap:wrap;gap:16px;position:relative;z-index:3;}
+  .foot em{color:var(--accent);font-style:normal;}
+
+  /* ============== MOCKUP BANNER ============== */
+  .banner{position:fixed;top:0;left:0;width:100%;background:var(--accent);color:var(--bg);padding:6px 32px;font-family:var(--mono);font-size:10px;letter-spacing:.24em;text-transform:uppercase;text-align:center;z-index:100;font-weight:400;}
+
+  .nav{margin-top:24px;}
+
+  /* Notes about the design */
+  .note-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:48px;}
+  @media(max-width:900px){.note-grid{grid-template-columns:1fr;}}
+  .note{padding:32px 0;border-top:1px solid var(--rule);}
+  .note-tag{font-family:var(--mono);font-size:10px;letter-spacing:.32em;text-transform:uppercase;color:var(--accent);margin-bottom:14px;}
+  .note-head{font-family:var(--display);font-weight:200;font-size:24px;letter-spacing:-.02em;line-height:1.15;color:var(--ink);margin-bottom:14px;}
+  .note-body{font-family:var(--body);font-size:14px;font-weight:300;line-height:1.65;color:var(--ink-dim);}
+  .note-body code{font-family:var(--mono);font-size:.85em;color:var(--accent);}
+</style>
+</head>
+<body>
+
+<div class="banner">A · ORBITAL DECK · MOCKUP · 1 OF 3 · TOGGLE THEME ↗</div>
+
+<nav class="nav">
+  <div class="brand">DAINER·<em>FIN</em>·OBS</div>
+  <div class="nav-stats">
+    <span>POS <em>+47°N 03°W</em></span>
+    <span>SYNC 2026.05.20</span>
+    <span><em>LIVE</em></span>
+  </div>
+  <button class="theme-btn" onclick="toggleTheme()">DRK<span> / </span><span class="on">LGT</span></button>
+</nav>
+
+<header class="hero">
+  <div class="hero-meta">
+    <span>REPORT <em>005</em></span>
+    <span>TRADER UNIVERSE</span>
+    <span>13F SYNC · Q1.2026</span>
+    <span>26 NAMES · 22 VERIFIED</span>
+    <span><em>LIVE</em></span>
+  </div>
+
+  <div class="hero-grid">
+    <h1 class="hero-title">
+      Watching<br>
+      the <em>smart<br>money</em>.
+      <span class="small">Every Sunday, twenty-six investors. From orbit.</span>
+    </h1>
+
+    <div class="hero-stat-block">
+      <span class="label">PRIMARY · SINGLE LARGEST CONVICTION</span>
+      <span class="val">TSM<span style="color:var(--ink-dim);font-size:.6em;"> / 14%</span></span>
+      <span class="sub">FOUNDRY MONOPOLY · 5Y ROIC 35.1% · NO REPLACEMENT IN SIGHT</span>
+    </div>
+  </div>
+</header>
+
+<section class="strip">
+  <div class="strip-inner">
+    <div class="strip-item">
+      <div class="label">TRADERS TRACKED</div>
+      <div class="val">26</div>
+      <div class="sub">8 CATEGORIES · 13F + PTR</div>
+    </div>
+    <div class="strip-item">
+      <div class="label">UNIVERSE SCREENED</div>
+      <div class="val">120</div>
+      <div class="sub">QUALITY × MOAT × FCF</div>
+    </div>
+    <div class="strip-item">
+      <div class="label">FINAL CONVICTION</div>
+      <div class="val">10</div>
+      <div class="sub">8 SINGLES · 2 ETFS</div>
+    </div>
+    <div class="strip-item">
+      <div class="label">TOP 5 CONCENTRATION</div>
+      <div class="val"><em>57%</em></div>
+      <div class="sub">NOT EQUAL-WEIGHT</div>
+    </div>
+    <div class="strip-item">
+      <div class="label">NEXT SYNC</div>
+      <div class="val">+7d</div>
+      <div class="sub">SUNDAY 2026.05.27 · 20:00 AEST</div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="sec-head">
+    <div>
+      <div class="sec-num">01 / PRIMARY HOLDINGS</div>
+    </div>
+    <h2 class="sec-title">Where the <em>physics</em><br>actually binds.</h2>
+  </div>
+
+  <div class="picks">
+    <div class="pick">
+      <div class="pick-top">
+        <div class="pick-meta">PICK <em>001</em> · AI INFRA · FOUNDRY</div>
+        <div class="pick-alloc">14%</div>
+      </div>
+      <div class="pick-tkr">TSM</div>
+      <div class="pick-name">Taiwan Semiconductor Manufacturing</div>
+      <div class="pick-hook">The single physical bottleneck of the AI compute stack. Every credible 5-year scenario requires more TSM wafers — there is no second source at the leading edge.</div>
+      <div class="pick-metrics">
+        <div class="pick-metric"><div class="k">5Y ROIC</div><div class="v">35.1%</div></div>
+        <div class="pick-metric"><div class="k">FCF TTM</div><div class="v">$33B</div></div>
+        <div class="pick-metric"><div class="k">NET DEBT</div><div class="v">−$71B</div></div>
+        <div class="pick-metric"><div class="k">FWD P/E</div><div class="v">21.2×</div></div>
+      </div>
+    </div>
+
+    <div class="pick">
+      <div class="pick-top">
+        <div class="pick-meta">PICK <em>002</em> · HEALTHCARE · GLP-1</div>
+        <div class="pick-alloc">12%</div>
+      </div>
+      <div class="pick-tkr">LLY</div>
+      <div class="pick-name">Eli Lilly &amp; Company</div>
+      <div class="pick-hook">Owns the structural winner in the largest pharma category in history. Only commercial oral GLP-1. Cardiovascular outcomes data drops October 2026.</div>
+      <div class="pick-metrics">
+        <div class="pick-metric"><div class="k">ROIC TTM</div><div class="v">~40%</div></div>
+        <div class="pick-metric"><div class="k">FCF MARGIN</div><div class="v">25%+</div></div>
+        <div class="pick-metric"><div class="k">ND / EBITDA</div><div class="v">0.8×</div></div>
+        <div class="pick-metric"><div class="k">FWD P/E</div><div class="v">26.7×</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="sec-head">
+    <div>
+      <div class="sec-num">02 / TRADER UNIVERSE · SAMPLE</div>
+    </div>
+    <h2 class="sec-title">Three of <em>twenty-six</em>,<br>filed this quarter.</h2>
+  </div>
+
+  <div class="traders">
+    <div class="trader">
+      <div class="trader-rank">/ 01</div>
+      <div class="trader-name">Warren Buffett</div>
+      <div class="trader-fund">BERKSHIRE HATHAWAY · CIK 0001067983</div>
+      <div class="trader-cat">VALUE</div>
+      <div class="trader-tag">"Trimmed AAPL further. Built sizable cash pile ~$300B. Quiet on adds."</div>
+      <div class="trader-pos">
+        <div class="trader-row"><span class="pos-tkr">AAPL</span><span class="pos-pct">25.4%</span><span class="pos-chg">−5%</span></div>
+        <div class="trader-row"><span class="pos-tkr">BAC</span><span class="pos-pct">12.1%</span><span class="pos-chg">held</span></div>
+        <div class="trader-row"><span class="pos-tkr">AXP</span><span class="pos-pct">11.8%</span><span class="pos-chg">held</span></div>
+        <div class="trader-row"><span class="pos-tkr">KO</span><span class="pos-pct">9.2%</span><span class="pos-chg">held</span></div>
+        <div class="trader-row"><span class="pos-tkr">CVX</span><span class="pos-pct">6.4%</span><span class="pos-chg">+2%</span></div>
+      </div>
+    </div>
+
+    <div class="trader">
+      <div class="trader-rank">/ 08</div>
+      <div class="trader-name">Michael Burry</div>
+      <div class="trader-fund">SCION ASSET MANAGEMENT · 0001649339</div>
+      <div class="trader-cat">CONTRARIAN</div>
+      <div class="trader-tag">"Concentrated China bet. 3 names, equal weight. Q3 2025 only — Scion skipped filings."</div>
+      <div class="trader-pos">
+        <div class="trader-row"><span class="pos-tkr">JD</span><span class="pos-pct">18.5%</span><span class="pos-chg">new</span></div>
+        <div class="trader-row"><span class="pos-tkr">BABA</span><span class="pos-pct">16.2%</span><span class="pos-chg">added</span></div>
+        <div class="trader-row"><span class="pos-tkr">BIDU</span><span class="pos-pct">14.7%</span><span class="pos-chg">held</span></div>
+      </div>
+    </div>
+
+    <div class="trader">
+      <div class="trader-rank">/ 25</div>
+      <div class="trader-name">Nancy Pelosi</div>
+      <div class="trader-fund">HOUSE PTR · STOCK ACT · 2026.01.16</div>
+      <div class="trader-cat">CONGRESSIONAL</div>
+      <div class="trader-tag">"Last five trades. Three GOOGL buys in 72 hours. AB call option opened Jan 14."</div>
+      <div class="trader-pos">
+        <div class="trader-row"><span class="pos-tkr">GOOGL</span><span class="pos-pct">1M–5M</span><span class="pos-chg">×3 buys</span></div>
+        <div class="trader-row"><span class="pos-tkr">AMZN</span><span class="pos-pct">500K–1M</span><span class="pos-chg">buy</span></div>
+        <div class="trader-row"><span class="pos-tkr">AB</span><span class="pos-pct">15K–50K</span><span class="pos-chg">call</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="sec-head">
+    <div>
+      <div class="sec-num">03 / NEWS LAYER</div>
+    </div>
+    <h2 class="sec-title">Signals from <em>this week</em>.</h2>
+  </div>
+
+  <div class="news">
+    <a class="news-card">
+      <div class="news-mark">SEC EDGAR · 2026.05.18</div>
+      <h3 class="news-headline">Aschenbrenner files Q1 — <em>$8.5B</em> in new puts.</h3>
+      <p class="news-text">Situational Awareness LP flips to long/short barbell. SMH ETF put $2B notional, NVDA put $1.57B. Top long remains SanDisk at $1.11B. Read the divergence as the loudest signal of the quarter.</p>
+      <span class="news-link">VIEW SOURCE →</span>
+    </a>
+
+    <a class="news-card">
+      <div class="news-mark">THE INFORMATION · 2026.05.15</div>
+      <h3 class="news-headline">Anthropic eyes <em>Q4 2026</em> IPO — Wilson Sonsini hired.</h3>
+      <p class="news-text">Internal target Q4 2026, October at earliest. S-1 confidential filing rumored for July window. Metaculus prediction market: 66% odds before July 1. Last official valuation $380B post-money.</p>
+      <span class="news-link">VIEW SOURCE →</span>
+    </a>
+  </div>
+</section>
+
+<section class="section">
+  <div class="sec-head">
+    <div>
+      <div class="sec-num">// DESIGN NOTES</div>
+    </div>
+    <h2 class="sec-title">The <em>orbital</em><br>vocabulary.</h2>
+  </div>
+
+  <div class="note-grid">
+    <div class="note">
+      <div class="note-tag">TYPE</div>
+      <div class="note-head">Inter Thin + IBM Plex Mono.</div>
+      <div class="note-body">Display = <code>Inter 100/200</code> at massive scale. Mono = <code>IBM Plex Mono</code>. No serif. The "editorial" instinct is replaced with NASA-mission-control restraint. Numbers are oversized + tabular.</div>
+    </div>
+    <div class="note">
+      <div class="note-tag">COLOR</div>
+      <div class="note-head">Void + ice-cyan only.</div>
+      <div class="note-body">Pure <code>#000000</code>. One signature: ice-cyan <code>#B8F0FF</code> — Hubble-image blue. Light mode flips to <code>#FBFCFD</code> + deep-teal <code>#006B7A</code>. No second accent. No gradient anywhere.</div>
+    </div>
+    <div class="note">
+      <div class="note-tag">SPACE</div>
+      <div class="note-head">Negative space is the design.</div>
+      <div class="note-body">120px section padding, 80px gaps. Picks are far apart, not crammed. The void between cards is doing the work. Star-field backdrop only at extreme low opacity. Corner brackets mark every pick — like coordinate ticks.</div>
+    </div>
+  </div>
+</section>
+
+<footer class="foot">
+  <div>MOCKUP · A · ORBITAL DECK · <em>v1</em></div>
+  <div>UNCOMMITTED · LOCAL ONLY</div>
+  <div>TOGGLE THEME ↑</div>
+  <div>SEE ALSO · <a href="B-brutalist-gazette.html" style="color:var(--accent);">B GAZETTE</a> · <a href="C-mars-rover.html" style="color:var(--accent);">C ROVER</a></div>
+</footer>
+
+<script>
+function toggleTheme(){
+  const cur = document.documentElement.getAttribute('data-theme');
+  document.documentElement.setAttribute('data-theme', cur === 'dark' ? 'light' : 'dark');
+}
+</script>
+</body>
+</html>

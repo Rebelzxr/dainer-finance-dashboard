@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>C · Mars Rover Log v2 · Mars Exploration Mode</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@200;300;400;500;700&family=Bitter:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased}
+  body{overflow-x:hidden;margin:0;padding:0;}
+  ul,ol{list-style:none}
+  a{color:inherit;text-decoration:none}
+  button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
+
+  :root, [data-theme="dark"]{
+    --bg:#0E0A07;
+    --bg-elev:#1A130D;
+    --bg-deep:#08050355;
+    --ink:#F2EDE2;
+    --ink-dim:#9E9686;
+    --ink-faint:#5C5853;
+    --oxide:#E8732B;
+    --oxide-deep:#C25623;
+    --oxide-soft:#F7A06B;
+    --oxide-glow:#FF8E3F;
+    --bone:#D7CFBE;
+    --line:#2B2C30;
+    --line-bright:#3F3F44;
+    --sky-top:#1A0D08;
+    --sky-mid:#3A1D0F;
+    --sky-bot:#7A3818;
+    --dust:#A85628;
+    --surface:#5A2E14;
+    --shadow-deep:#0A0604;
+  }
+  [data-theme="light"]{
+    --bg:#E8E4D8;
+    --bg-elev:#DDD8C8;
+    --bg-deep:#CFC9B5;
+    --ink:#1A1814;
+    --ink-dim:#5C5853;
+    --ink-faint:#9A9486;
+    --oxide:#C25623;
+    --oxide-deep:#8C3A14;
+    --oxide-soft:#E8732B;
+    --oxide-glow:#E8732B;
+    --bone:#3A332B;
+    --line:#B5AE9D;
+    --line-bright:#8E8775;
+    --sky-top:#E4B98C;
+    --sky-mid:#E0A66B;
+    --sky-bot:#C97A3D;
+    --dust:#BA6638;
+    --surface:#8A4920;
+    --shadow-deep:#6B4022;
+  }
+
+  :root{
+    --display:'Space Grotesk',system-ui,sans-serif;
+    --body:'Bitter',Georgia,serif;
+    --mono:'JetBrains Mono',monospace;
+    --max:1420px;
+    --ease:cubic-bezier(.2,.8,.2,1);
+    --ease-snap:cubic-bezier(.6,0,.2,1);
+  }
+
+  body{
+    font-family:var(--body);
+    background:var(--bg);
+    color:var(--ink);
+    font-size:15px;
+    line-height:1.6;
+    font-weight:400;
+    transition:background .6s var(--ease),color .6s var(--ease);
+    position:relative;
+  }
+
+  /* ==================== MARS HORIZON BACKDROP ==================== */
+  /* Layer 1 — atmospheric sky gradient (dusty oxide horizon → deep void up top) */
+  .horizon{
+    position:fixed;inset:0;z-index:0;pointer-events:none;
+    background:
+      radial-gradient(ellipse 140% 80% at 50% 110%, var(--sky-bot) 0%, var(--sky-mid) 25%, var(--sky-top) 55%, var(--bg) 80%);
+  }
+  /* Layer 2 — sun glow on horizon */
+  .horizon::before{
+    content:'';position:absolute;left:50%;bottom:30%;width:280px;height:280px;
+    transform:translateX(-50%);border-radius:50%;
+    background:radial-gradient(circle, color-mix(in srgb,var(--oxide-glow) 60%,transparent) 0%, transparent 70%);
+    opacity:.5;filter:blur(20px);
+    animation:sunDrift 32s ease-in-out infinite alternate;
+  }
+  @keyframes sunDrift{
+    0%{transform:translateX(-50%) translateY(0);opacity:.45;}
+    100%{transform:translateX(-50%) translateY(-30px);opacity:.6;}
+  }
+  /* Layer 3 — distant Mars ridgeline silhouette (SVG inline as background) */
+  .ridge{
+    position:fixed;left:0;right:0;bottom:0;height:38vh;z-index:1;pointer-events:none;
+    background-image:
+      url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 400' preserveAspectRatio='none'><path d='M0,250 L60,238 L120,242 L180,228 L240,232 L300,210 L360,218 L420,200 L500,215 L580,195 L640,205 L720,180 L800,200 L860,185 L920,205 L1000,190 L1080,215 L1140,200 L1220,225 L1280,210 L1360,230 L1440,220 L1440,400 L0,400 Z' fill='%23000' opacity='1'/></svg>");
+    background-repeat:no-repeat;background-size:cover;background-position:bottom center;
+    opacity:.85;
+    filter:brightness(.4);
+  }
+  .ridge.far{height:48vh;opacity:.4;filter:brightness(.6) hue-rotate(-5deg);transform:scale(1.05);}
+  /* Animate ridges with extremely slow parallax drift */
+  .ridge{animation:ridgeDrift 60s linear infinite;}
+  .ridge.far{animation:ridgeDrift 90s linear infinite reverse;}
+  @keyframes ridgeDrift{
+    0%{background-position-x:0%;}
+    100%{background-position-x:6%;}
+  }
+
+  /* Layer 4 — dust haze film */
+  .haze{position:fixed;inset:0;z-index:2;pointer-events:none;
+    background:radial-gradient(ellipse 80% 60% at 50% 70%, color-mix(in srgb,var(--dust) 14%,transparent) 0%, transparent 100%);
+    mix-blend-mode:screen;}
+  [data-theme="light"] .haze{mix-blend-mode:multiply;background:radial-gradient(ellipse 80% 60% at 50% 70%, color-mix(in srgb,var(--dust) 22%,transparent) 0%, transparent 100%);}
+
+  /* Layer 5 — fine grain texture (procedural noise) */
+  .grain{position:fixed;inset:0;z-index:3;pointer-events:none;opacity:.06;
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence baseFrequency='2.5' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");}
+
+  /* Layer 6 — schematic crosshair grid (sparse, overlay) */
+  .grid{position:fixed;inset:0;z-index:4;pointer-events:none;opacity:.08;
+    background-image:
+      linear-gradient(var(--ink) 1px, transparent 1px),
+      linear-gradient(90deg, var(--ink) 1px, transparent 1px);
+    background-size:96px 96px;
+    mask-image:radial-gradient(ellipse 90% 70% at center, rgba(0,0,0,.8), transparent 100%);
+    -webkit-mask-image:radial-gradient(ellipse 90% 70% at center, rgba(0,0,0,.8), transparent 100%);}
+
+  /* Layer 7 — Real Mars horizon photo, hero only */
+  .mars-image-slot{position:fixed;top:0;left:0;width:100%;height:100vh;z-index:0;
+    background-image:url("../assets/mars-horizon.jpg");
+    background-size:cover;background-position:center 65%;
+    opacity:.78;
+    pointer-events:none;
+    mask-image:linear-gradient(180deg, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 55%, rgba(0,0,0,.4) 80%, transparent 100%);
+    -webkit-mask-image:linear-gradient(180deg, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 55%, rgba(0,0,0,.4) 80%, transparent 100%);}
+  [data-theme="light"] .mars-image-slot{opacity:.55;}
+
+  /* Content layer above background */
+  body > nav, body > header, body > section, body > footer{position:relative;z-index:10;}
+
+  /* ==================== MISSION STRIP ==================== */
+  .mission{position:fixed;top:0;left:0;right:0;z-index:50;background:color-mix(in srgb,var(--bg-elev) 92%,transparent);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--line-bright);padding:10px 24px;display:flex;justify-content:space-between;align-items:center;font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-dim);margin-top:24px;}
+  .mission em{color:var(--oxide);font-style:normal;}
+  .mission-cells{display:flex;gap:32px;align-items:center;}
+  .mission-cells .live::before{content:'● ';color:var(--oxide);animation:livePulse 1.6s var(--ease) infinite;}
+  @keyframes livePulse{0%,100%{opacity:1;}50%{opacity:.35;}}
+
+  .theme-btn{font-family:var(--mono);font-size:10px;letter-spacing:.2em;color:var(--ink-dim);text-transform:uppercase;border:1px solid var(--line-bright);padding:6px 14px;transition:all .25s var(--ease);cursor:pointer;}
+  .theme-btn:hover{border-color:var(--oxide);color:var(--oxide);}
+
+  /* SOL counter — counts seconds since page load just for the live feel */
+  .sol-cell{font-variant-numeric:tabular-nums;}
+
+  /* ==================== HERO ==================== */
+  .hero{padding:160px 32px 100px;max-width:var(--max);margin:0 auto;position:relative;}
+
+  /* Corner brackets on hero */
+  .hero::before, .hero::after{content:'';position:absolute;width:32px;height:32px;pointer-events:none;}
+  .hero::before{top:120px;left:32px;border-top:2px solid var(--oxide);border-left:2px solid var(--oxide);}
+  .hero::after{top:120px;right:32px;border-top:2px solid var(--oxide);border-right:2px solid var(--oxide);}
+
+  .hero-stack{display:grid;grid-template-columns:2.3fr 1fr;gap:64px;align-items:start;}
+  @media(max-width:1000px){.hero-stack{grid-template-columns:1fr;gap:48px;}}
+
+  .hero-tag{
+    font-family:var(--mono);font-size:11px;letter-spacing:.28em;text-transform:uppercase;
+    color:var(--oxide);margin-bottom:36px;display:inline-block;padding:8px 16px;
+    border:1px solid var(--oxide);
+    animation:fadeIn 1.2s var(--ease) both;
+  }
+  @keyframes fadeIn{from{opacity:0;transform:translateY(12px);}to{opacity:1;transform:translateY(0);}}
+
+  .hero-title{font-family:var(--display);font-weight:500;font-size:clamp(56px,7.8vw,140px);line-height:.9;letter-spacing:-.035em;color:var(--ink);margin-bottom:36px;animation:fadeIn 1.4s var(--ease) .15s both;}
+  .hero-title em{font-style:normal;color:var(--oxide);font-weight:600;text-shadow:0 0 32px color-mix(in srgb,var(--oxide-glow) 30%,transparent);}
+  .hero-title .lbl{display:block;font-family:var(--mono);font-size:.14em;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-dim);font-weight:400;margin-bottom:18px;}
+
+  .hero-sub{font-family:var(--body);font-size:18px;line-height:1.55;color:var(--ink-dim);max-width:60ch;animation:fadeIn 1.6s var(--ease) .35s both;}
+  .hero-sub em{color:var(--ink);font-style:normal;font-weight:500;}
+
+  /* Hero side panel — instrument readout */
+  .hero-panel{
+    border:1px solid var(--line-bright);background:color-mix(in srgb,var(--bg-elev) 88%,transparent);
+    backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+    position:relative;animation:fadeIn 1.8s var(--ease) .55s both;
+  }
+  .hero-panel::before, .hero-panel::after{content:'';position:absolute;width:18px;height:18px;}
+  .hero-panel::before{top:-1px;left:-1px;border-top:2px solid var(--oxide);border-left:2px solid var(--oxide);}
+  .hero-panel::after{bottom:-1px;right:-1px;border-bottom:2px solid var(--oxide);border-right:2px solid var(--oxide);}
+
+  .hero-panel-head{padding:12px 18px;border-bottom:1px solid var(--line);font-family:var(--mono);font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--oxide);display:flex;justify-content:space-between;align-items:center;}
+  .hero-panel-head .live::before{content:'● ';animation:livePulse 1.6s var(--ease) infinite;}
+  .hero-panel-body{padding:28px 18px;}
+  .hero-panel-label{font-family:var(--mono);font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--ink-dim);margin-bottom:10px;}
+  .hero-panel-val{font-family:var(--display);font-weight:600;font-size:64px;letter-spacing:-.03em;color:var(--oxide);line-height:1;font-variant-numeric:tabular-nums;text-shadow:0 0 24px color-mix(in srgb,var(--oxide-glow) 35%,transparent);}
+  .hero-panel-sub{font-family:var(--mono);font-size:11px;letter-spacing:.12em;color:var(--ink-dim);margin-top:14px;line-height:1.5;}
+  .hero-panel-rule{margin:24px 0;border:none;border-top:1px dashed var(--line-bright);}
+  .hero-panel-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px 18px;font-family:var(--mono);font-size:10px;}
+  .hero-panel-grid div span:first-child{display:block;color:var(--ink-faint);letter-spacing:.16em;text-transform:uppercase;margin-bottom:4px;font-size:9px;}
+  .hero-panel-grid div span:last-child{color:var(--ink);letter-spacing:.06em;font-size:11px;}
+
+  /* ==================== WAYPOINT STRIP ==================== */
+  .waypoint-strip{max-width:var(--max);margin:0 auto;padding:0 32px;}
+  .waypoint-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:var(--line-bright);border:1px solid var(--line-bright);}
+  @media(max-width:1000px){.waypoint-grid{grid-template-columns:repeat(2,1fr);}}
+
+  .waypoint{background:color-mix(in srgb,var(--bg-elev) 94%,transparent);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);padding:32px 24px;position:relative;}
+  .waypoint::before{content:'';position:absolute;top:8px;left:8px;width:6px;height:6px;background:var(--oxide);}
+  .waypoint-id{font-family:var(--mono);font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:var(--oxide);margin-bottom:14px;}
+  .waypoint-label{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-dim);margin-bottom:10px;}
+  .waypoint-val{font-family:var(--display);font-weight:500;font-size:42px;letter-spacing:-.03em;color:var(--ink);line-height:1;font-variant-numeric:tabular-nums;}
+  .waypoint-val em{color:var(--oxide);font-style:normal;}
+  .waypoint-sub{font-family:var(--mono);font-size:10px;letter-spacing:.06em;color:var(--ink-faint);margin-top:10px;}
+
+  /* ==================== SECTIONS ==================== */
+  .section{max-width:var(--max);margin:0 auto;padding:120px 32px;}
+  .sec-head{display:grid;grid-template-columns:1fr 2fr;gap:64px;margin-bottom:64px;align-items:end;}
+  @media(max-width:900px){.sec-head{grid-template-columns:1fr;}}
+  .sec-tag{font-family:var(--mono);font-size:10px;letter-spacing:.32em;text-transform:uppercase;color:var(--oxide);margin-bottom:14px;padding-bottom:14px;border-bottom:1px solid var(--oxide);}
+  .sec-tag-tail{font-family:var(--mono);font-size:10px;letter-spacing:.16em;color:var(--ink-faint);}
+  .sec-title{font-family:var(--display);font-weight:500;font-size:clamp(40px,5.4vw,76px);line-height:.95;letter-spacing:-.03em;color:var(--ink);}
+  .sec-title em{font-style:normal;color:var(--oxide);font-weight:600;}
+
+  /* ==================== PICKS ==================== */
+  .picks{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;}
+  @media(max-width:900px){.picks{grid-template-columns:1fr;}}
+
+  .pick{position:relative;background:color-mix(in srgb,var(--bg-elev) 92%,transparent);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border:1px solid var(--line-bright);padding:36px 32px 32px;transition:background .35s var(--ease);overflow:hidden;}
+  .pick:hover{background:color-mix(in srgb,var(--bg-elev) 100%,transparent);}
+
+  /* 4 corner brackets — animated scan-in on hover */
+  .pick::before, .pick::after, .pick > .br-bl, .pick > .br-br{
+    content:'';position:absolute;width:18px;height:18px;
+    transition:width .35s var(--ease-snap),height .35s var(--ease-snap),border-color .35s var(--ease);
+  }
+  .pick::before{top:-1px;left:-1px;border-top:2px solid var(--oxide);border-left:2px solid var(--oxide);}
+  .pick::after{top:-1px;right:-1px;border-top:2px solid var(--oxide);border-right:2px solid var(--oxide);}
+  .pick > .br-bl{position:absolute;bottom:-1px;left:-1px;width:18px;height:18px;border-bottom:2px solid var(--oxide);border-left:2px solid var(--oxide);transition:width .35s var(--ease-snap),height .35s var(--ease-snap);}
+  .pick > .br-br{position:absolute;bottom:-1px;right:-1px;width:18px;height:18px;border-bottom:2px solid var(--oxide);border-right:2px solid var(--oxide);transition:width .35s var(--ease-snap),height .35s var(--ease-snap);}
+  .pick:hover::before, .pick:hover::after, .pick:hover > .br-bl, .pick:hover > .br-br{width:32px;height:32px;}
+
+  .pick-id{font-family:var(--mono);font-size:9px;letter-spacing:.28em;text-transform:uppercase;color:var(--oxide);margin-bottom:18px;display:flex;justify-content:space-between;padding-bottom:14px;border-bottom:1px solid var(--line);}
+  .pick-id em{color:var(--ink-dim);font-style:normal;}
+
+  .pick-head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:8px;gap:14px;}
+  .pick-tkr{font-family:var(--display);font-weight:600;font-size:84px;letter-spacing:-.04em;line-height:.9;color:var(--ink);font-variant-numeric:tabular-nums;}
+  .pick-alloc{font-family:var(--display);font-weight:500;font-size:48px;letter-spacing:-.02em;color:var(--oxide);font-variant-numeric:tabular-nums;text-shadow:0 0 18px color-mix(in srgb,var(--oxide-glow) 30%,transparent);}
+
+  .pick-name{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-dim);margin-bottom:24px;padding-bottom:18px;border-bottom:1px dashed var(--line-bright);}
+
+  .pick-hook{font-family:var(--body);font-size:16px;line-height:1.55;color:var(--ink);margin-bottom:28px;font-weight:400;}
+
+  .pick-metrics{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;padding:18px;border:1px dashed var(--line-bright);background:color-mix(in srgb,var(--shadow-deep) 50%,transparent);font-family:var(--mono);}
+  .pick-metric{display:flex;justify-content:space-between;font-size:11px;letter-spacing:.06em;}
+  .pick-metric .k{color:var(--ink-dim);text-transform:uppercase;letter-spacing:.14em;font-size:10px;}
+  .pick-metric .v{color:var(--ink);font-weight:500;font-variant-numeric:tabular-nums;}
+  .pick-metric .v.bull{color:var(--oxide);}
+
+  /* ==================== TRADERS ==================== */
+  .traders{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+  @media(max-width:1000px){.traders{grid-template-columns:1fr;}}
+
+  .trader{position:relative;background:color-mix(in srgb,var(--bg-elev) 90%,transparent);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);border:1px solid var(--line-bright);padding:28px 24px;transition:all .3s var(--ease);}
+  .trader:hover{border-color:var(--oxide);}
+  .trader::before{content:'';position:absolute;top:0;left:0;width:36px;height:2px;background:var(--oxide);transition:width .35s var(--ease-snap);}
+  .trader:hover::before{width:80px;}
+
+  .trader-id{font-family:var(--mono);font-size:9px;letter-spacing:.28em;text-transform:uppercase;color:var(--oxide);margin-bottom:18px;display:flex;justify-content:space-between;}
+  .trader-name{font-family:var(--display);font-weight:500;font-size:30px;letter-spacing:-.02em;line-height:1.05;color:var(--ink);margin-bottom:8px;}
+  .trader-fund{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-dim);margin-bottom:18px;}
+
+  .trader-cat-pill{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--oxide);padding:5px 12px;border:1px solid var(--oxide);margin-bottom:22px;}
+  .trader-cat-pill::before{content:'';width:5px;height:5px;background:var(--oxide);animation:livePulse 2s var(--ease) infinite;}
+
+  .trader-tag{font-family:var(--body);font-size:13px;line-height:1.55;color:var(--ink-dim);font-style:italic;margin-bottom:24px;}
+
+  .trader-table{width:100%;border-collapse:collapse;border-top:1px dashed var(--line-bright);}
+  .trader-table tr{border-bottom:1px dashed var(--line);}
+  .trader-table tr:last-child{border-bottom:none;}
+  .trader-table td{padding:9px 0;font-family:var(--mono);font-size:11px;letter-spacing:.04em;}
+  .trader-table td:nth-child(1){font-family:var(--display);font-weight:500;font-size:14px;color:var(--ink);letter-spacing:-.005em;}
+  .trader-table td:nth-child(2){color:var(--oxide);font-weight:500;text-align:right;padding-right:14px;font-variant-numeric:tabular-nums;}
+  .trader-table td:nth-child(3){color:var(--ink-faint);font-size:9px;letter-spacing:.16em;text-transform:uppercase;text-align:right;}
+
+  /* ==================== NEWS ==================== */
+  .news{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;}
+  @media(max-width:900px){.news{grid-template-columns:1fr;}}
+
+  .news-log{background:color-mix(in srgb,var(--bg-elev) 92%,transparent);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border:1px solid var(--line-bright);padding:32px;transition:all .25s var(--ease);position:relative;display:block;overflow:hidden;}
+  .news-log:hover{border-color:var(--oxide);}
+  .news-log::before{content:'';position:absolute;top:0;left:0;height:100%;width:3px;background:var(--oxide);transition:width .25s var(--ease);}
+  .news-log:hover::before{width:6px;}
+  .news-meta{font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-dim);margin-bottom:14px;display:flex;justify-content:space-between;}
+  .news-meta em{color:var(--oxide);font-style:normal;}
+  .news-head{font-family:var(--display);font-weight:500;font-size:30px;line-height:1.1;letter-spacing:-.02em;color:var(--ink);margin-bottom:18px;}
+  .news-head em{font-style:normal;color:var(--oxide);font-weight:600;}
+  .news-text{font-family:var(--body);font-size:14px;line-height:1.6;color:var(--ink-dim);margin-bottom:20px;}
+  .news-link{font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--oxide);}
+  .news-link::after{content:' ↗';}
+
+  /* ==================== REVEAL ON SCROLL ==================== */
+  .reveal{opacity:0;transform:translateY(24px);transition:opacity .8s var(--ease),transform .8s var(--ease);}
+  .reveal.visible{opacity:1;transform:translateY(0);}
+  .reveal-stagger > *{opacity:0;transform:translateY(16px);transition:opacity .6s var(--ease),transform .6s var(--ease);}
+  .reveal-stagger.visible > *{opacity:1;transform:translateY(0);}
+  .reveal-stagger.visible > *:nth-child(1){transition-delay:.05s;}
+  .reveal-stagger.visible > *:nth-child(2){transition-delay:.15s;}
+  .reveal-stagger.visible > *:nth-child(3){transition-delay:.25s;}
+  .reveal-stagger.visible > *:nth-child(4){transition-delay:.35s;}
+  .reveal-stagger.visible > *:nth-child(5){transition-delay:.45s;}
+
+  /* ==================== CURSOR COORDINATE MARKER (dark mode only) ==================== */
+  .cursor-mark{position:fixed;pointer-events:none;z-index:60;width:24px;height:24px;margin:-12px 0 0 -12px;opacity:0;transition:opacity .25s var(--ease);mix-blend-mode:difference;}
+  .cursor-mark::before, .cursor-mark::after{content:'';position:absolute;background:var(--oxide);}
+  .cursor-mark::before{top:50%;left:0;width:100%;height:1px;}
+  .cursor-mark::after{left:50%;top:0;width:1px;height:100%;}
+  body:hover .cursor-mark{opacity:.5;}
+  .cursor-coord{position:fixed;pointer-events:none;z-index:60;font-family:var(--mono);font-size:9px;letter-spacing:.16em;color:var(--oxide);opacity:0;transition:opacity .25s var(--ease);margin:14px 0 0 14px;text-shadow:0 0 8px color-mix(in srgb,var(--shadow-deep) 60%,transparent);}
+  body:hover .cursor-coord{opacity:.7;}
+  [data-theme="light"] .cursor-mark, [data-theme="light"] .cursor-coord{display:none;}
+
+  /* ==================== NOTES ==================== */
+  .notes{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+  @media(max-width:900px){.notes{grid-template-columns:1fr;}}
+  .note{padding:28px;border:1px solid var(--line-bright);background:color-mix(in srgb,var(--bg-elev) 92%,transparent);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);}
+  .note-tag{font-family:var(--mono);font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--oxide);margin-bottom:14px;}
+  .note-head{font-family:var(--display);font-weight:500;font-size:22px;letter-spacing:-.015em;color:var(--ink);line-height:1.15;margin-bottom:12px;}
+  .note-body{font-family:var(--body);font-size:14px;line-height:1.65;color:var(--ink-dim);}
+  .note-body code{font-family:var(--mono);font-size:.85em;color:var(--oxide);}
+
+  .foot{max-width:var(--max);margin:0 auto;padding:48px 32px;border-top:1px solid var(--line-bright);font-family:var(--mono);font-size:10px;letter-spacing:.18em;color:var(--ink-faint);text-transform:uppercase;display:flex;justify-content:space-between;flex-wrap:wrap;gap:16px;}
+  .foot em{color:var(--oxide);font-style:normal;}
+
+  .banner{position:fixed;top:0;left:0;width:100%;background:var(--oxide);color:#0E0A07;padding:6px 32px;font-family:var(--mono);font-size:10px;letter-spacing:.24em;text-transform:uppercase;text-align:center;z-index:200;font-weight:600;}
+
+  /* Reduced motion */
+  @media (prefers-reduced-motion: reduce){
+    *,*::before,*::after{animation:none !important;transition:none !important;}
+  }
+</style>
+</head>
+<body>
+
+<div class="banner">C v2 · MARS EXPLORATION MODE · WITH ANIMATIONS · TOGGLE THEME ↗</div>
+
+<!-- Layered Mars backdrop -->
+<div class="horizon"></div>
+<div class="ridge far"></div>
+<div class="ridge"></div>
+<div class="haze"></div>
+<div class="grain"></div>
+<div class="grid"></div>
+<div class="mars-image-slot" id="mars-slot"></div>
+
+<!-- Cursor coordinate marker (dark mode only) -->
+<div class="cursor-mark" id="cursor-mark"></div>
+<div class="cursor-coord" id="cursor-coord">47.123°N · 03.218°W</div>
+
+<header class="mission">
+  <div class="mission-cells">
+    <span>SOL <em id="sol-counter">1247</em></span>
+    <span>POS · <em id="pos-display">47.123°N / 03.218°W</em></span>
+    <span class="live">UPLINK</span>
+    <span>SYS <em>v0.2</em></span>
+  </div>
+  <div class="mission-cells">
+    <span>RUN <em id="runtime">02:47:11</em></span>
+    <button class="theme-btn" onclick="toggleTheme()">DRK / <span style="color:var(--oxide)">LGT</span></button>
+  </div>
+</header>
+
+<header class="hero">
+  <div class="hero-stack">
+    <div>
+      <div class="hero-tag">⊕ REPORT 005 / TRADER UNIVERSE / Q1.2026 SYNC</div>
+      <h1 class="hero-title">
+        <span class="lbl">// DEPLOY LOG · OBSERVATION 005</span>
+        Twenty-six<br>
+        <em>signals</em>, one<br>
+        weekly <em>sync</em>.
+      </h1>
+      <p class="hero-sub">
+        Mission objective: track <em>what the smart money</em> actually owns. Twenty-six investors, twenty-two verified holdings, two private books flagged honest. <em>SEC EDGAR</em> + <em>CapitolTrades</em> feed. Sunday weekly. Free, no paywall, no advice.
+      </p>
+    </div>
+
+    <aside class="hero-panel">
+      <div class="hero-panel-head">
+        <span>// CORE READOUT</span>
+        <span class="live" style="color:var(--oxide)">LIVE</span>
+      </div>
+      <div class="hero-panel-body">
+        <div class="hero-panel-label">SINGLE LARGEST CONVICTION</div>
+        <div class="hero-panel-val">TSM</div>
+        <div class="hero-panel-sub">14% allocation · 5y ROIC 35.1%<br>Foundry monopoly · no second source</div>
+        <hr class="hero-panel-rule">
+        <div class="hero-panel-grid">
+          <div><span>UNIVERSE</span><span>120 names</span></div>
+          <div><span>FINAL</span><span>10 positions</span></div>
+          <div><span>TOP 5</span><span>57% book</span></div>
+          <div><span>ETFs</span><span>2 (ITA + SMH)</span></div>
+          <div><span>HORIZON</span><span>3-5 yrs</span></div>
+          <div><span>NEXT SYNC</span><span>+7 days</span></div>
+        </div>
+      </div>
+    </aside>
+  </div>
+</header>
+
+<section class="waypoint-strip reveal">
+  <div class="waypoint-grid">
+    <div class="waypoint">
+      <div class="waypoint-id">WPT-01</div>
+      <div class="waypoint-label">Traders tracked</div>
+      <div class="waypoint-val count" data-target="26">26</div>
+      <div class="waypoint-sub">// across 8 categories</div>
+    </div>
+    <div class="waypoint">
+      <div class="waypoint-id">WPT-02</div>
+      <div class="waypoint-label">Universe screen</div>
+      <div class="waypoint-val count" data-target="120">120</div>
+      <div class="waypoint-sub">// quality × moat × FCF</div>
+    </div>
+    <div class="waypoint">
+      <div class="waypoint-id">WPT-03</div>
+      <div class="waypoint-label">Final picks</div>
+      <div class="waypoint-val count" data-target="10">10</div>
+      <div class="waypoint-sub">// 8 singles + 2 ETFs</div>
+    </div>
+    <div class="waypoint">
+      <div class="waypoint-id">WPT-04</div>
+      <div class="waypoint-label">Top 5 concentration</div>
+      <div class="waypoint-val"><em class="count" data-target="57" data-suffix="%">57%</em></div>
+      <div class="waypoint-sub">// conviction-weighted</div>
+    </div>
+    <div class="waypoint">
+      <div class="waypoint-id">WPT-05</div>
+      <div class="waypoint-label">Next uplink</div>
+      <div class="waypoint-val">+7d</div>
+      <div class="waypoint-sub">// 2026.05.27 / Sunday</div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="sec-head reveal">
+    <div>
+      <div class="sec-tag">// PROBE 01 · PRIMARY HOLDINGS</div>
+      <div class="sec-tag-tail">RUNTIME · 00:47:13 · STATUS GREEN</div>
+    </div>
+    <h2 class="sec-title">Two primary <em>anchors</em>.<br>Both verified, both shipping.</h2>
+  </div>
+
+  <div class="picks reveal-stagger">
+    <article class="pick">
+      <span class="br-bl"></span><span class="br-br"></span>
+      <div class="pick-id"><span>PRIMARY · ANCHOR_01</span><em>// AI INFRA · FOUNDRY</em></div>
+      <div class="pick-head">
+        <span class="pick-tkr">TSM</span>
+        <span class="pick-alloc">14%</span>
+      </div>
+      <div class="pick-name">Taiwan Semiconductor Manufacturing · NYSE</div>
+      <p class="pick-hook">The single physical bottleneck of the AI compute stack. Every credible five-year scenario requires more TSM wafers — no second source at the leading edge through 2028.</p>
+      <div class="pick-metrics">
+        <div class="pick-metric"><span class="k">5Y ROIC</span><span class="v bull">35.1%</span></div>
+        <div class="pick-metric"><span class="k">FCF TTM</span><span class="v">$33B</span></div>
+        <div class="pick-metric"><span class="k">NET DEBT</span><span class="v bull">−$71B</span></div>
+        <div class="pick-metric"><span class="k">FWD P/E</span><span class="v">21.2×</span></div>
+        <div class="pick-metric"><span class="k">REV CAGR</span><span class="v">+21%</span></div>
+        <div class="pick-metric"><span class="k">RATING</span><span class="v bull">BUY · HOLD</span></div>
+      </div>
+    </article>
+
+    <article class="pick">
+      <span class="br-bl"></span><span class="br-br"></span>
+      <div class="pick-id"><span>PRIMARY · ANCHOR_02</span><em>// HEALTHCARE · GLP-1</em></div>
+      <div class="pick-head">
+        <span class="pick-tkr">LLY</span>
+        <span class="pick-alloc">12%</span>
+      </div>
+      <div class="pick-name">Eli Lilly &amp; Company · NYSE</div>
+      <p class="pick-hook">Owns the structural winner in the largest pharma category in history. Only commercial oral GLP-1. CV outcomes trial reads out October 2026 — the swing factor for primary-care.</p>
+      <div class="pick-metrics">
+        <div class="pick-metric"><span class="k">ROIC TTM</span><span class="v bull">~40%</span></div>
+        <div class="pick-metric"><span class="k">FCF MARGIN</span><span class="v">25%+</span></div>
+        <div class="pick-metric"><span class="k">ND/EBITDA</span><span class="v">0.8×</span></div>
+        <div class="pick-metric"><span class="k">FWD P/E</span><span class="v">26.7×</span></div>
+        <div class="pick-metric"><span class="k">REV CAGR</span><span class="v">+18-22%</span></div>
+        <div class="pick-metric"><span class="k">RATING</span><span class="v bull">BUY · HOLD</span></div>
+      </div>
+    </article>
+  </div>
+</section>
+
+<section class="section">
+  <div class="sec-head reveal">
+    <div>
+      <div class="sec-tag">// PROBE 02 · TRADER UNIVERSE</div>
+      <div class="sec-tag-tail">SAMPLE · 03 / 26 · VERIFIED</div>
+    </div>
+    <h2 class="sec-title">Reading the <em>signals</em><br>off three filers.</h2>
+  </div>
+
+  <div class="traders reveal-stagger">
+    <article class="trader">
+      <div class="trader-id"><span>SIG_01 // BUFFETT.WARREN</span><span>VRFD</span></div>
+      <div class="trader-name">Warren Buffett</div>
+      <div class="trader-fund">Berkshire Hathaway · CIK 0001067983</div>
+      <div class="trader-cat-pill">VALUE</div>
+      <p class="trader-tag">Trimmed AAPL further. Built sizable cash pile ~$300B. Quiet on adds — reads as bearish on multiples.</p>
+      <table class="trader-table">
+        <tr><td>AAPL</td><td>25.4%</td><td>−5%</td></tr>
+        <tr><td>BAC</td><td>12.1%</td><td>held</td></tr>
+        <tr><td>AXP</td><td>11.8%</td><td>held</td></tr>
+        <tr><td>KO</td><td>9.2%</td><td>held</td></tr>
+        <tr><td>CVX</td><td>6.4%</td><td>+2%</td></tr>
+      </table>
+    </article>
+
+    <article class="trader">
+      <div class="trader-id"><span>SIG_08 // BURRY.MICHAEL</span><span>STALE Q3</span></div>
+      <div class="trader-name">Michael Burry</div>
+      <div class="trader-fund">Scion Asset Mgmt · CIK 0001649339</div>
+      <div class="trader-cat-pill">CONTRARIAN</div>
+      <p class="trader-tag">Concentrated China bet. Three names, equal weight. Q1 2026 not filed — Scion is exempt from filing some quarters.</p>
+      <table class="trader-table">
+        <tr><td>JD</td><td>18.5%</td><td>new</td></tr>
+        <tr><td>BABA</td><td>16.2%</td><td>added</td></tr>
+        <tr><td>BIDU</td><td>14.7%</td><td>held</td></tr>
+      </table>
+    </article>
+
+    <article class="trader">
+      <div class="trader-id"><span>SIG_25 // PELOSI.NANCY</span><span>PTR · LIVE</span></div>
+      <div class="trader-name">Nancy Pelosi</div>
+      <div class="trader-fund">House PTR · STOCK Act · 2026.01.16</div>
+      <div class="trader-cat-pill">CONGRESSIONAL</div>
+      <p class="trader-tag">Last five trades. Three GOOGL buys in 72 hours. AB call option opened Jan 14 — small bet, big tell.</p>
+      <table class="trader-table">
+        <tr><td>GOOGL</td><td>$1-5M</td><td>×3 buys</td></tr>
+        <tr><td>AMZN</td><td>$500K-1M</td><td>buy</td></tr>
+        <tr><td>AB</td><td>$15-50K</td><td>call</td></tr>
+      </table>
+    </article>
+  </div>
+</section>
+
+<section class="section">
+  <div class="sec-head reveal">
+    <div>
+      <div class="sec-tag">// PROBE 03 · SIGNAL FEED</div>
+      <div class="sec-tag-tail">WIRE · WEEKLY</div>
+    </div>
+    <h2 class="sec-title">Dispatches from <em>this week</em><br>worth the click.</h2>
+  </div>
+
+  <div class="news reveal-stagger">
+    <a class="news-log">
+      <div class="news-meta"><span>SEC.EDGAR // 2026.05.18</span><em>● TRACKED</em></div>
+      <h3 class="news-head">Aschenbrenner flips — <em>$8.5B</em> in fresh puts this quarter.</h3>
+      <p class="news-text">Situational Awareness LP files Q1 2026 with a long-short barbell. SMH ETF put $2B notional, NVDA put $1.57B. Top long remains SanDisk. The author of the bullish 2024 compute thesis is now hedging the consensus version of his own bet.</p>
+      <span class="news-link">VIEW SOURCE</span>
+    </a>
+
+    <a class="news-log">
+      <div class="news-meta"><span>THE INFORMATION // 2026.05.15</span><em>● TRACKED</em></div>
+      <h3 class="news-head">Anthropic targets <em>Q4 2026</em> IPO — Wilson Sonsini hired.</h3>
+      <p class="news-text">Internal target Q4 2026, October at earliest. S-1 confidential filing window rumored for July. Metaculus prediction: 66% odds before July 1. Revenue $19B annualized, up from $9B in January. Last official valuation $380B post-money.</p>
+      <span class="news-link">VIEW SOURCE</span>
+    </a>
+  </div>
+</section>
+
+<section class="section">
+  <div class="sec-head reveal">
+    <div>
+      <div class="sec-tag">// LOG_CLOSE · ANIMATIONS</div>
+      <div class="sec-tag-tail">RUNTIME · 02:47:11 · CLOSING UPLINK</div>
+    </div>
+    <h2 class="sec-title">What <em>moves</em>,<br>and what stays still.</h2>
+  </div>
+
+  <div class="notes reveal-stagger">
+    <div class="note">
+      <div class="note-tag">BACKGROUND</div>
+      <div class="note-head">Layered Mars horizon.</div>
+      <div class="note-body">Six fixed layers behind content: <code>radial sky gradient</code> (deep void → oxide haze → horizon glow) + <code>distant ridgeline</code> + <code>foreground silhouette</code> + <code>dust haze</code> blend layer + <code>fine grain</code> texture + <code>schematic grid</code>. Sun spot drifts every 32s. Ridges parallax at 60s and 90s reverse. <strong style="color:var(--ink);">Slot reserved</strong> for real Mars photo — see prompt at bottom.</div>
+    </div>
+    <div class="note">
+      <div class="note-tag">MOTION</div>
+      <div class="note-head">Five animations, all restrained.</div>
+      <div class="note-body">
+        <code>SOL counter</code> · ticks live in mission strip<br>
+        <code>Runtime</code> · counts up live<br>
+        <code>Sun glow</code> · drifts on horizon, 32s loop<br>
+        <code>Ridge parallax</code> · ultra-slow background pan<br>
+        <code>Live pulse</code> · the LIVE indicator dots, 1.6s<br>
+        <code>Reveal on scroll</code> · cards fade up as they enter viewport<br>
+        <code>Hover scan</code> · corner brackets extend 18→32px on pick cards<br>
+        No glow halos. No scale transforms. No glitch.
+      </div>
+    </div>
+    <div class="note">
+      <div class="note-tag">CURSOR</div>
+      <div class="note-head">Coordinate marker follows.</div>
+      <div class="note-body">A tiny oxide-orange crosshair tracks your mouse with a coordinate readout (<code>47.123°N · 03.218°W</code>). Mix-blend-mode <code>difference</code> so it stays legible over any backdrop. Dark mode only. Respects <code>prefers-reduced-motion</code>. <strong style="color:var(--ink);">Move your mouse to see it.</strong></div>
+    </div>
+  </div>
+</section>
+
+<footer class="foot">
+  <div>MOCKUP · C v2 · MARS EXPLORATION · <em>2026.05.20</em></div>
+  <div>UNCOMMITTED · LOCAL ONLY</div>
+  <div>// CLOSING UPLINK · SOL <em id="sol-foot">1247</em></div>
+  <div>BACK · <a href="index.html" style="color:var(--oxide);">CHOOSER</a> · <a href="C-mars-rover.html" style="color:var(--oxide);">v1</a></div>
+</footer>
+
+<script>
+  // Theme toggle
+  function toggleTheme(){
+    const cur = document.documentElement.getAttribute('data-theme');
+    document.documentElement.setAttribute('data-theme', cur === 'dark' ? 'light' : 'dark');
+  }
+
+  // SOL counter — increments every 6 seconds for the "mission day passing" feel
+  let sol = 1247;
+  const solEl = document.getElementById('sol-counter');
+  const solFootEl = document.getElementById('sol-foot');
+  setInterval(() => {
+    sol++;
+    if (solEl) solEl.textContent = sol;
+    if (solFootEl) solFootEl.textContent = sol;
+  }, 60000); // increment once a minute — subtle
+
+  // Runtime — counts up from page load
+  const start = Date.now() - (2*3600 + 47*60 + 11)*1000;
+  const rtEl = document.getElementById('runtime');
+  setInterval(() => {
+    const ms = Date.now() - start;
+    const h = Math.floor(ms/3600000);
+    const m = Math.floor((ms%3600000)/60000);
+    const s = Math.floor((ms%60000)/1000);
+    if (rtEl) rtEl.textContent = `${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+  }, 1000);
+
+  // Cursor coordinate marker
+  const mark = document.getElementById('cursor-mark');
+  const coord = document.getElementById('cursor-coord');
+  document.addEventListener('mousemove', (e) => {
+    if (mark){ mark.style.left = e.clientX + 'px'; mark.style.top = e.clientY + 'px'; }
+    if (coord){ coord.style.left = e.clientX + 'px'; coord.style.top = e.clientY + 'px';
+      // Fake mars-coord style readout based on cursor pos
+      const lat = (47.123 + (e.clientY / window.innerHeight - 0.5) * 0.02).toFixed(3);
+      const lng = (3.218 + (e.clientX / window.innerWidth - 0.5) * 0.04).toFixed(3);
+      coord.textContent = `${lat}°N · ${lng}°W`;
+    }
+  });
+
+  // Reveal on scroll
+  function animateCount(el){
+    const target = parseFloat(el.dataset.target);
+    const suffix = el.dataset.suffix || '';
+    const dur = 1200;
+    const start = performance.now();
+    const tick = t => {
+      const p = Math.min(1, (t - start) / dur);
+      const eased = 1 - Math.pow(1 - p, 3);
+      const v = Math.round(target * eased);
+      el.textContent = v + suffix;
+      if (p < 1) requestAnimationFrame(tick);
+    };
+    requestAnimationFrame(tick);
+  }
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting){
+        e.target.classList.add('visible');
+        e.target.querySelectorAll('.count').forEach(c => {
+          if (!c.dataset.counted){ c.dataset.counted='1'; animateCount(c); }
+        });
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.18 });
+  document.querySelectorAll('.reveal, .reveal-stagger').forEach(el => io.observe(el));
+
+  // To use a real Mars photo, set:
+  // document.getElementById('mars-slot').style.backgroundImage = 'url("path/to/mars-panorama.jpg")';
+  // See GPT-image prompt in the README below.
+</script>
+</body>
+</html>

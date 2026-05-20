@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Design Direction · DAINER Finance · Pick One</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;700&family=JetBrains+Mono:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased}
+  body{
+    font-family:'Inter',system-ui,sans-serif;
+    background:#0A0A0E;
+    color:#E8E6E1;
+    font-size:15px;
+    line-height:1.6;
+    font-weight:300;
+    min-height:100vh;
+  }
+
+  .wrap{max-width:1340px;margin:0 auto;padding:80px 32px;}
+
+  .kicker{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:#FFB000;margin-bottom:24px;}
+
+  h1{
+    font-weight:200;
+    font-size:clamp(48px,7vw,108px);
+    line-height:.95;
+    letter-spacing:-.035em;
+    margin-bottom:24px;
+  }
+  h1 em{font-style:italic;font-weight:300;color:#FFB000;}
+
+  .sub{
+    font-size:18px;
+    line-height:1.55;
+    color:#9A9686;
+    max-width:64ch;
+    margin-bottom:64px;
+  }
+  .sub em{color:#E8E6E1;font-style:normal;font-weight:400;}
+
+  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
+  @media(max-width:900px){.grid{grid-template-columns:1fr;}}
+
+  .card{
+    display:block;
+    padding:48px 36px;
+    border:1px solid #2B2C30;
+    background:#15161A;
+    text-decoration:none;
+    color:inherit;
+    position:relative;
+    transition:all .35s cubic-bezier(.2,.8,.2,1);
+    overflow:hidden;
+  }
+  .card:hover{border-color:var(--card-accent);transform:translateY(-3px);}
+  .card::before{content:'';position:absolute;top:0;left:0;width:100%;height:3px;background:var(--card-accent);}
+
+  .card-id{
+    font-family:'JetBrains Mono',monospace;
+    font-size:11px;
+    letter-spacing:.32em;
+    text-transform:uppercase;
+    color:var(--card-accent);
+    margin-bottom:18px;
+  }
+  .card-name{
+    font-family:'Inter',sans-serif;
+    font-weight:200;
+    font-size:48px;
+    letter-spacing:-.025em;
+    line-height:1;
+    margin-bottom:8px;
+    color:#E8E6E1;
+  }
+  .card-tag{
+    font-family:'JetBrains Mono',monospace;
+    font-size:11px;
+    letter-spacing:.16em;
+    text-transform:uppercase;
+    color:#9A9686;
+    margin-bottom:32px;
+  }
+  .card-desc{
+    font-size:14px;
+    line-height:1.65;
+    color:#9A9686;
+    margin-bottom:32px;
+  }
+  .card-meta{
+    border-top:1px dashed #3F3F44;
+    padding-top:20px;
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+    font-family:'JetBrains Mono',monospace;
+    font-size:11px;
+  }
+  .card-meta div{display:flex;justify-content:space-between;}
+  .card-meta div span:first-child{color:#5C5853;letter-spacing:.14em;text-transform:uppercase;font-size:10px;}
+  .card-meta div span:last-child{color:#E8E6E1;}
+  .card-open{
+    margin-top:32px;
+    display:inline-block;
+    font-family:'JetBrains Mono',monospace;
+    font-size:11px;
+    letter-spacing:.24em;
+    text-transform:uppercase;
+    color:var(--card-accent);
+    padding:14px 24px;
+    border:1px solid var(--card-accent);
+    transition:all .25s ease;
+  }
+  .card:hover .card-open{background:var(--card-accent);color:#0A0A0E;}
+
+  /* Per-card accent */
+  .a-orbital{--card-accent:#B8F0FF;}
+  .b-gazette{--card-accent:#FF5D4D;}
+  .c-rover{--card-accent:#E8732B;}
+
+  /* Color swatches */
+  .swatch-row{display:flex;gap:6px;margin-top:24px;}
+  .swatch{width:24px;height:24px;border:1px solid rgba(232,230,225,.1);}
+
+  .note{
+    margin-top:80px;
+    padding-top:32px;
+    border-top:1px solid #2B2C30;
+    font-family:'JetBrains Mono',monospace;
+    font-size:11px;
+    letter-spacing:.06em;
+    color:#5C5853;
+    line-height:1.7;
+  }
+  .note em{color:#FFB000;font-style:normal;}
+  .note strong{color:#E8E6E1;font-weight:500;}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <div class="kicker">DESIGN DIRECTION · MOCKUPS · 3 OF 3 READY</div>
+  <h1>Pick a <em>direction</em>.</h1>
+  <p class="sub">
+    Three radically different design languages for DAINER Finance. Each is a <em>full mockup</em> with hero, stat strip, two pick cards, three trader cards, two news cards, and notes — both light and dark mode. <em>None of them share a vocabulary.</em> Pick one, or mix-and-match elements from two.
+  </p>
+
+  <div class="grid">
+
+    <a class="card a-orbital" href="A-orbital-deck.html">
+      <div class="card-id">A / ORBITAL DECK</div>
+      <div class="card-name">Orbital<br>Deck</div>
+      <div class="card-tag">Space observatory · ice cyan</div>
+      <p class="card-desc">Pure void black + ice-cyan single accent. Hairline Inter Thin at massive scale paired with IBM Plex Mono. Generous negative space. Star-field backdrop. Corner brackets like coordinate ticks. <em style="color:#E8E6E1;font-style:normal;">Feels like NASA mission control evolved — instrument readouts on a deep-space probe.</em></p>
+      <div class="card-meta">
+        <div><span>Display</span><span>Inter Thin 100/200</span></div>
+        <div><span>Mono</span><span>IBM Plex Mono</span></div>
+        <div><span>Accent</span><span>#B8F0FF / #006B7A</span></div>
+        <div><span>Vibe</span><span>void · breath · physics</span></div>
+      </div>
+      <div class="swatch-row">
+        <div class="swatch" style="background:#000000;"></div>
+        <div class="swatch" style="background:#B8F0FF;"></div>
+        <div class="swatch" style="background:#FBFCFD;"></div>
+        <div class="swatch" style="background:#006B7A;"></div>
+      </div>
+      <span class="card-open">OPEN A →</span>
+    </a>
+
+    <a class="card b-gazette" href="B-brutalist-gazette.html">
+      <div class="card-id">B / BRUTALIST GAZETTE</div>
+      <div class="card-name">Brutalist<br>Gazette</div>
+      <div class="card-tag">Editorial broadsheet · vermillion</div>
+      <p class="card-desc">Cream newsprint + ink black + single vermillion accent. Playfair Display 900 masthead + Cormorant Garamond italic body. Hard 12-col grid. Drop caps. Asterism dingbats <code style="color:#FF5D4D;">⁂</code>. Dark mode flips to noir gazette. <em style="color:#E8E6E1;font-style:normal;">Feels like an architecture quarterly or a Sunday op-ed page.</em></p>
+      <div class="card-meta">
+        <div><span>Display</span><span>Playfair 900 + Cormorant</span></div>
+        <div><span>Mono</span><span>IBM Plex Mono</span></div>
+        <div><span>Accent</span><span>#D9382B vermillion</span></div>
+        <div><span>Vibe</span><span>editorial · paper · ink</span></div>
+      </div>
+      <div class="swatch-row">
+        <div class="swatch" style="background:#FFFDF6;"></div>
+        <div class="swatch" style="background:#0A0A0A;"></div>
+        <div class="swatch" style="background:#D9382B;"></div>
+        <div class="swatch" style="background:#FF5D4D;"></div>
+      </div>
+      <span class="card-open">OPEN B →</span>
+    </a>
+
+    <a class="card c-rover" href="C-mars-rover.html">
+      <div class="card-id">C / MARS ROVER LOG</div>
+      <div class="card-name">Mars Rover<br>Log</div>
+      <div class="card-tag">Engineering schematic · oxide</div>
+      <p class="card-desc">Matte gunmetal + oxide orange + warm bone. Space Grotesk display + Bitter serif body + JetBrains Mono. Corner brackets on every card like engineering drawings. Waypoint IDs (<code style="color:#E8732B;">WPT-01</code>). Crosshair grid backdrop. Sol-day counter. <em style="color:#E8E6E1;font-style:normal;">Feels like NASA engineering notes from a Mars rover, plate-metal aesthetic without the cheese.</em></p>
+      <div class="card-meta">
+        <div><span>Display</span><span>Space Grotesk 500/600</span></div>
+        <div><span>Body</span><span>Bitter slab serif</span></div>
+        <div><span>Accent</span><span>#E8732B oxide orange</span></div>
+        <div><span>Vibe</span><span>technical · warm · NASA</span></div>
+      </div>
+      <div class="swatch-row">
+        <div class="swatch" style="background:#15161A;"></div>
+        <div class="swatch" style="background:#E8732B;"></div>
+        <div class="swatch" style="background:#E8E4D8;"></div>
+        <div class="swatch" style="background:#F2EDE2;"></div>
+      </div>
+      <span class="card-open">OPEN C →</span>
+    </a>
+
+  </div>
+
+  <p class="note">
+    <strong>// HOW TO READ THESE</strong><br>
+    Each mockup shows the <strong>same content</strong> — hero, stat strip, two pick cards, three trader cards (Buffett / Burry / Pelosi), two news cards, notes. The shape of the information is identical. <strong>The vocabulary is what changes</strong>. Click any card to open. Toggle dark/light inside each mockup.<br><br>
+    <strong>// WHAT TO LOOK FOR</strong><br>
+    Pay attention to: typography choices, whitespace rhythm, where the eye lands first, how dense vs breathy it feels, whether you want to read further or close the tab. <strong>Trust the gut reaction</strong> — that's the brand.<br><br>
+    <strong>// WHAT'S NOT IN ANY OF THEM</strong><br>
+    No purple. No gradient. No glow/halo. No neon explosions. No emoji. No rounded corners. No matrix green. No anonymous-hoodie hacker aesthetic. No generic SaaS template feel.<br><br>
+    <strong>// REPLY WITH</strong><br>
+    <em>"A"</em>, <em>"B"</em>, <em>"C"</em>, or <em>"none, try X"</em>. Or mix-and-match — e.g. "B's type with C's corner brackets" — and I'll spin a v2.<br><br>
+    NO GIT PUSH. NOTHING COMMITTED. LOCAL ONLY UNTIL YOU APPROVE.
+  </p>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Mockup · Cyberpunk Editorial · DAINER Finance</title>
+<meta name="description" content="Design mockup — cyberpunk editorial direction. Not production.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500;700;800&family=Newsreader:ital,opsz,wght@0,6..72,300..700;1,6..72,300..700&display=swap" rel="stylesheet">
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;}
+  body{overflow-x:hidden;}
+  ul,ol{list-style:none}
+  a{color:inherit;text-decoration:none}
+  button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
+
+  /* ============== DESIGN TOKENS ============== */
+  :root, [data-theme="dark"]{
+    /* Matte deep black + slate */
+    --bg:#070709;
+    --bg-elev:#0E0E13;
+    --bg-elev-2:#16161D;
+    --bg-grid:#1F1F28;
+
+    /* Cool ink — warm cream tinted */
+    --ink:#E8E6E1;
+    --ink-dim:#7A7884;
+    --ink-faint:#3D3D48;
+
+    /* Cyberpunk accents — restrained two-color system */
+    --accent:#FFB000;          /* sodium-vapor amber — primary */
+    --accent-soft:#FFD27A;     /* warmer for backgrounds */
+    --pulse:#00E5FF;           /* electric cyan — RARE, only for "live" data */
+    --pulse-glow:#5BF0FF;
+
+    /* Sentiment */
+    --bull:#7AD66A;
+    --bear:#FF5A5A;
+    --warn:#FFB000;
+
+    /* Lines + dividers */
+    --line:rgba(232,230,225,.08);
+    --line-bright:rgba(232,230,225,.16);
+    --grid:rgba(232,230,225,.025);
+
+    /* Scan-line texture intensity */
+    --scan-opacity:.04;
+  }
+  [data-theme="light"]{
+    --bg:#F5F1E6;              /* warm newsprint cream */
+    --bg-elev:#EDE7D8;
+    --bg-elev-2:#E2DBCB;
+    --bg-grid:#D8D2C2;
+
+    --ink:#0A0A0F;
+    --ink-dim:#5A5A66;
+    --ink-faint:#A8A7B0;
+
+    --accent:#C25E00;          /* bronze-amber — light-mode primary */
+    --accent-soft:#FFB57A;
+    --pulse:#00798F;           /* deep teal — light-mode pulse */
+    --pulse-glow:#00B5D1;
+
+    --bull:#3C8B2F;
+    --bear:#C8362E;
+    --warn:#B27500;
+
+    --line:rgba(10,10,15,.1);
+    --line-bright:rgba(10,10,15,.18);
+    --grid:rgba(10,10,15,.045);
+
+    --scan-opacity:0;          /* no scan lines in light mode */
+  }
+
+  :root{
+    --serif:'Newsreader','Times New Roman',serif;
+    --sans:'Space Grotesk',system-ui,sans-serif;
+    --mono:'JetBrains Mono','Courier New',monospace;
+    --max:1380px;
+    --ease:cubic-bezier(.2,.8,.2,1);
+    --ease-snap:cubic-bezier(.6,.0,.4,1);
+  }
+
+  body{
+    font-family:var(--sans);
+    background:var(--bg);
+    color:var(--ink);
+    font-size:15px;
+    line-height:1.55;
+    font-weight:400;
+    position:relative;
+    transition:background .4s var(--ease),color .4s var(--ease);
+  }
+
+  /* Faint grid backdrop */
+  body::before{
+    content:'';position:fixed;inset:0;pointer-events:none;z-index:1;
+    background-image:
+      linear-gradient(var(--grid) 1px,transparent 1px),
+      linear-gradient(90deg,var(--grid) 1px,transparent 1px);
+    background-size:48px 48px;
+    mask-image:radial-gradient(ellipse 90% 70% at center,rgba(0,0,0,.85),transparent 100%);
+    -webkit-mask-image:radial-gradient(ellipse 90% 70% at center,rgba(0,0,0,.85),transparent 100%);
+  }
+  /* Scan lines (dark mode only — opacity is 0 in light) */
+  body::after{
+    content:'';position:fixed;inset:0;pointer-events:none;z-index:2;
+    opacity:var(--scan-opacity);
+    background:repeating-linear-gradient(
+      to bottom,
+      transparent 0,
+      transparent 2px,
+      rgba(255,176,0,.3) 2px,
+      rgba(255,176,0,.3) 3px
+    );
+  }
+
+  /* ============== NAV ============== */
+  .nav{position:sticky;top:0;z-index:50;backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);background:color-mix(in srgb,var(--bg) 78%,transparent);border-bottom:1px solid var(--line);}
+  .nav-inner{max-width:var(--max);margin:0 auto;padding:20px 32px;display:flex;align-items:center;gap:32px;justify-content:space-between;}
+  .brand{font-family:var(--mono);font-weight:700;font-size:14px;letter-spacing:.14em;text-transform:uppercase;display:flex;align-items:center;gap:14px;}
+  .brand::before{content:'';width:6px;height:6px;background:var(--pulse);border-radius:50%;box-shadow:0 0 12px var(--pulse-glow),0 0 0 4px color-mix(in srgb,var(--pulse) 18%,transparent);animation:pulse 2.4s var(--ease) infinite;}
+  @keyframes pulse{0%,100%{opacity:1;}50%{opacity:.5;}}
+  .brand em{color:var(--accent);font-style:normal;}
+  .nav-meta{font-family:var(--mono);font-size:10px;color:var(--ink-dim);letter-spacing:.16em;text-transform:uppercase;display:flex;gap:24px;}
+  .nav-meta em{color:var(--accent);font-style:normal;}
+  .nav-meta .pulse-cell{color:var(--pulse);}
+
+  /* THEME TOGGLE — terminal-style switch */
+  .theme-row{display:flex;align-items:center;gap:14px;}
+  .theme-toggle{position:relative;width:50px;height:24px;border:1px solid var(--line-bright);background:var(--bg-elev);cursor:pointer;transition:border-color .2s var(--ease),background .2s var(--ease);}
+  .theme-toggle::after{content:'';position:absolute;top:2px;left:2px;width:18px;height:18px;background:var(--accent);transition:transform .25s var(--ease-snap);}
+  [data-theme="light"] .theme-toggle::after{transform:translateX(26px);}
+  .theme-label{font-family:var(--mono);font-size:9px;color:var(--ink-dim);letter-spacing:.18em;text-transform:uppercase;}
+  .theme-label em{color:var(--accent);font-style:normal;}
+
+  /* ============== HERO ============== */
+  .hero{max-width:var(--max);margin:0 auto;padding:80px 32px 60px;position:relative;z-index:3;}
+  .hero-tag{font-family:var(--mono);font-size:10px;color:var(--pulse);letter-spacing:.24em;text-transform:uppercase;margin-bottom:32px;display:flex;align-items:center;gap:18px;}
+  .hero-tag::before{content:'';width:24px;height:1px;background:var(--pulse);}
+  .hero-tag::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,var(--line-bright),transparent);}
+
+  .hero-title{font-family:var(--serif);font-weight:300;font-size:clamp(56px,9vw,156px);line-height:.88;letter-spacing:-.04em;margin-bottom:32px;}
+  .hero-title em{font-style:italic;color:var(--accent);font-weight:300;}
+  .hero-title .num{font-family:var(--mono);font-weight:300;font-style:normal;color:var(--ink-dim);font-size:.5em;letter-spacing:-.02em;vertical-align:0.4em;}
+
+  .hero-sub{font-family:var(--serif);font-size:clamp(18px,1.8vw,22px);font-weight:300;font-style:italic;color:var(--ink-dim);line-height:1.5;max-width:50ch;margin-bottom:32px;}
+  .hero-sub em{color:var(--ink);font-style:italic;}
+
+  .hero-meta-row{display:flex;flex-wrap:wrap;gap:32px;padding-top:32px;border-top:1px solid var(--line);font-family:var(--mono);font-size:11px;color:var(--ink-dim);letter-spacing:.1em;text-transform:uppercase;}
+  .hero-meta-row span em{color:var(--accent);font-style:normal;}
+  .hero-meta-row .live{color:var(--pulse);}
+  .hero-meta-row .live::before{content:'● ';animation:pulse 1.8s var(--ease) infinite;}
+
+  /* ============== TERMINAL STAT STRIP ============== */
+  .term-strip{max-width:var(--max);margin:24px auto 0;padding:0 32px;position:relative;z-index:3;}
+  .term-card{border:1px solid var(--line-bright);background:var(--bg-elev);position:relative;overflow:hidden;}
+  .term-card::before{content:'';position:absolute;top:0;left:0;width:100%;height:1px;background:linear-gradient(90deg,var(--accent) 0%,var(--accent) 30%,transparent 30%);}
+  .term-head{display:flex;justify-content:space-between;align-items:center;padding:14px 24px;border-bottom:1px solid var(--line);font-family:var(--mono);font-size:10px;color:var(--ink-dim);letter-spacing:.16em;text-transform:uppercase;}
+  .term-head em{color:var(--accent);font-style:normal;}
+  .term-head .live-dot{color:var(--pulse);font-family:var(--mono);font-size:9px;}
+  .term-head .live-dot::before{content:'● ';animation:pulse 1.8s var(--ease) infinite;}
+  .term-stats{display:grid;grid-template-columns:repeat(5,1fr);gap:0;}
+  .term-stat{padding:24px;border-right:1px solid var(--line);}
+  .term-stat:last-child{border-right:none;}
+  .term-stat-label{font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-dim);margin-bottom:12px;}
+  .term-stat-val{font-family:var(--serif);font-size:42px;font-weight:400;letter-spacing:-.02em;line-height:1;color:var(--ink);font-variant-numeric:tabular-nums;}
+  .term-stat-val em{color:var(--accent);font-style:normal;}
+  .term-stat-val.pulse{color:var(--pulse);}
+  .term-stat-sub{font-family:var(--mono);font-size:10px;color:var(--ink-faint);margin-top:8px;letter-spacing:.06em;}
+  .term-stat-sub.bull{color:var(--bull);}
+  @media(max-width:1100px){.term-stats{grid-template-columns:repeat(3,1fr);}.term-stat{border-bottom:1px solid var(--line);}}
+  @media(max-width:640px){.term-stats{grid-template-columns:repeat(2,1fr);}}
+
+  /* ============== SECTION HEADS ============== */
+  .section{max-width:var(--max);margin:0 auto;padding:100px 32px;position:relative;z-index:3;}
+  .section-head{margin-bottom:48px;padding-bottom:24px;border-bottom:1px solid var(--line-bright);}
+  .section-num{font-family:var(--mono);font-size:11px;color:var(--accent);letter-spacing:.2em;text-transform:uppercase;margin-bottom:8px;display:flex;align-items:center;gap:14px;}
+  .section-num::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,var(--accent),transparent);}
+  .section-title{font-family:var(--serif);font-weight:300;font-size:clamp(36px,4.5vw,58px);line-height:1;letter-spacing:-.025em;}
+  .section-title em{font-style:italic;color:var(--accent);font-weight:300;}
+  .section-sub{font-family:var(--mono);font-size:11px;color:var(--ink-dim);letter-spacing:.06em;margin-top:14px;max-width:60ch;}
+
+  /* ============== PICK CARDS ============== */
+  .picks-row{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line-bright);}
+  @media(max-width:900px){.picks-row{grid-template-columns:1fr;}}
+  .pick{background:var(--bg-elev);padding:28px 28px 24px;position:relative;cursor:pointer;transition:background .25s var(--ease);overflow:hidden;}
+  .pick:hover{background:var(--bg-elev-2);}
+  .pick::after{content:'';position:absolute;bottom:0;left:0;width:0;height:1px;background:var(--accent);transition:width .35s var(--ease);}
+  .pick:hover::after{width:100%;}
+  .pick-rank{font-family:var(--mono);font-size:10px;color:var(--ink-faint);letter-spacing:.18em;margin-bottom:14px;}
+  .pick-rank em{color:var(--accent);font-style:normal;}
+  .pick-head{display:flex;align-items:baseline;justify-content:space-between;gap:14px;margin-bottom:8px;}
+  .pick-tkr{font-family:var(--serif);font-size:42px;font-weight:400;letter-spacing:-.02em;line-height:1;font-variant-numeric:tabular-nums;}
+  .pick-tkr em{font-style:italic;color:var(--accent);}
+  .pick-alloc{font-family:var(--mono);font-size:18px;color:var(--accent);font-weight:600;letter-spacing:-.01em;}
+  .pick-name{font-size:13px;color:var(--ink-dim);margin-bottom:18px;}
+  .pick-hook{font-family:var(--serif);font-size:16px;font-style:italic;color:var(--ink);line-height:1.45;margin-bottom:22px;border-left:2px solid var(--accent);padding-left:14px;}
+
+  .pick-meta{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);}
+  .pick-meta div{background:var(--bg-elev);padding:10px 12px;font-family:var(--mono);font-size:10px;display:flex;justify-content:space-between;}
+  .pick-meta div span:first-child{color:var(--ink-dim);letter-spacing:.06em;}
+  .pick-meta div span:last-child{color:var(--ink);font-weight:500;}
+
+  /* ============== TRADER CARDS ============== */
+  .traders-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;}
+  @media(max-width:900px){.traders-grid{grid-template-columns:1fr;}}
+  .trader{border:1px solid var(--line);background:var(--bg-elev);padding:24px;position:relative;cursor:pointer;transition:all .3s var(--ease);overflow:hidden;}
+  .trader:hover{border-color:var(--accent);background:var(--bg-elev-2);}
+  .trader::before{content:'';position:absolute;top:0;left:0;width:32px;height:2px;background:var(--accent);}
+  .trader-rank{position:absolute;top:14px;right:18px;font-family:var(--mono);font-size:10px;color:var(--ink-faint);letter-spacing:.14em;}
+  .trader-name{font-family:var(--serif);font-size:26px;font-weight:400;letter-spacing:-.015em;line-height:1.1;margin-bottom:4px;}
+  .trader-fund{font-family:var(--mono);font-size:10px;color:var(--ink-dim);letter-spacing:.06em;margin-bottom:14px;text-transform:uppercase;}
+  .trader-cat{display:inline-flex;align-items:center;gap:6px;font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);padding:4px 10px;border:1px solid var(--accent);margin-bottom:16px;}
+  .trader-cat::before{content:'';width:5px;height:5px;background:var(--accent);}
+  .trader-tagline{font-family:var(--serif);font-size:13px;font-style:italic;color:var(--ink);line-height:1.5;margin-bottom:18px;}
+  .trader-top{display:flex;flex-direction:column;gap:6px;font-family:var(--mono);font-size:11px;border-top:1px solid var(--line);padding-top:14px;}
+  .trader-top-row{display:grid;grid-template-columns:1fr auto auto;gap:14px;align-items:baseline;}
+  .pos-tkr{font-family:var(--serif);font-size:14px;font-weight:500;letter-spacing:-.005em;color:var(--ink);}
+  .pos-pct{color:var(--accent);font-weight:500;font-variant-numeric:tabular-nums;}
+  .pos-change{font-size:9px;color:var(--ink-faint);letter-spacing:.08em;text-transform:uppercase;}
+  .pos-change.up{color:var(--bull);}
+  .pos-change.down{color:var(--bear);}
+
+  /* ============== NEWS CARDS ============== */
+  .news-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--line);border:1px solid var(--line-bright);}
+  @media(max-width:900px){.news-grid{grid-template-columns:1fr;}}
+  .news-card{background:var(--bg-elev);padding:28px;display:flex;flex-direction:column;gap:14px;position:relative;transition:background .25s var(--ease);}
+  .news-card:hover{background:var(--bg-elev-2);}
+  .news-meta-row{display:flex;justify-content:space-between;font-family:var(--mono);font-size:10px;color:var(--ink-dim);letter-spacing:.14em;text-transform:uppercase;}
+  .news-meta-row em{color:var(--pulse);font-style:normal;}
+  .news-title{font-family:var(--serif);font-size:24px;font-weight:400;line-height:1.2;letter-spacing:-.015em;color:var(--ink);}
+  .news-title em{font-style:italic;color:var(--accent);}
+  .news-preview{font-family:var(--sans);font-size:13px;color:var(--ink-dim);line-height:1.55;flex:1;}
+  .news-link{font-family:var(--mono);font-size:10px;color:var(--accent);letter-spacing:.18em;text-transform:uppercase;padding-top:10px;border-top:1px solid var(--line);}
+  .news-link::after{content:' ↗';}
+
+  /* ============== TABLE / SCORECARD ============== */
+  .scoretable{overflow-x:auto;border:1px solid var(--line-bright);background:var(--bg-elev);}
+  table.sc{width:100%;border-collapse:collapse;font-family:var(--mono);font-size:11px;}
+  table.sc th,table.sc td{padding:14px 18px;text-align:left;border-bottom:1px solid var(--line);}
+  table.sc th{font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);font-weight:600;background:var(--bg-elev-2);position:sticky;top:0;}
+  table.sc tr:last-child td{border-bottom:none;}
+  table.sc tr{transition:background .2s var(--ease);}
+  table.sc tr:hover td{background:color-mix(in srgb,var(--accent) 6%,transparent);}
+  table.sc td.tkr{font-family:var(--serif);font-size:16px;font-weight:500;color:var(--ink);letter-spacing:-.005em;}
+  table.sc td.alloc{color:var(--accent);font-weight:600;font-variant-numeric:tabular-nums;}
+  table.sc td.bull{color:var(--bull);font-variant-numeric:tabular-nums;}
+  table.sc td.bear{color:var(--bear);font-variant-numeric:tabular-nums;}
+
+  /* ============== MOCKUP CALLOUT BANNER ============== */
+  .mockup-banner{position:fixed;top:0;left:0;width:100%;background:var(--accent);color:var(--bg);padding:6px 32px;font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;text-align:center;z-index:100;font-weight:600;}
+  .mockup-banner em{font-style:normal;}
+
+  /* ============== DESIGN NOTES ============== */
+  .notes{display:grid;grid-template-columns:repeat(2,1fr);gap:32px;}
+  @media(max-width:900px){.notes{grid-template-columns:1fr;}}
+  .note{border:1px solid var(--line);background:var(--bg-elev);padding:32px;}
+  .note-num{font-family:var(--mono);font-size:9px;color:var(--accent);letter-spacing:.2em;text-transform:uppercase;margin-bottom:10px;}
+  .note-head{font-family:var(--serif);font-size:22px;font-weight:400;font-style:italic;color:var(--ink);margin-bottom:14px;line-height:1.2;}
+  .note-body{font-size:14px;color:var(--ink-dim);line-height:1.65;}
+  .note-body code{font-family:var(--mono);font-size:.85em;background:var(--bg-elev-2);padding:2px 6px;color:var(--accent);}
+  .note-body strong{color:var(--ink);font-weight:600;}
+
+  /* hover tags */
+  .tag{display:inline-block;font-family:var(--mono);font-size:9px;letter-spacing:.16em;text-transform:uppercase;padding:3px 8px;border:1px solid var(--line-bright);color:var(--ink-dim);margin-right:6px;}
+  .tag.accent{color:var(--accent);border-color:var(--accent);}
+  .tag.pulse{color:var(--pulse);border-color:var(--pulse);}
+
+  /* footer */
+  .foot{max-width:var(--max);margin:0 auto;padding:48px 32px 32px;border-top:1px solid var(--line);position:relative;z-index:3;font-family:var(--mono);font-size:10px;color:var(--ink-dim);letter-spacing:.1em;text-transform:uppercase;display:flex;justify-content:space-between;flex-wrap:wrap;gap:16px;}
+  .foot em{color:var(--accent);font-style:normal;}
+</style>
+</head>
+<body>
+
+<div class="mockup-banner">
+  ⌬ MOCKUP · CYBERPUNK EDITORIAL · NOT PRODUCTION · <em>v1</em>
+</div>
+
+<!-- ============== NAV ============== -->
+<nav class="nav" style="margin-top:24px;">
+  <div class="nav-inner">
+    <div class="brand">DAINER<em>.fin</em></div>
+    <div class="nav-meta">
+      <span>SYS: <em>v0.2</em></span>
+      <span class="pulse-cell">● LIVE</span>
+      <span>2026.05.20</span>
+    </div>
+    <div class="theme-row">
+      <span class="theme-label"><em>DRK</em> / LGT</span>
+      <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme"></button>
+    </div>
+  </div>
+</nav>
+
+<!-- ============== HERO ============== -->
+<header class="hero">
+  <div class="hero-tag">REPORT_005 · TRADER UNIVERSE · 13F SYNC · Q1.2026</div>
+  <h1 class="hero-title">
+    What the<br>
+    <em>smart money</em><br>
+    actually <em>owns</em><span class="num">/ 26 names</span>.
+  </h1>
+  <p class="hero-sub">
+    Twenty-six famous investors. Top positions, what they added, what they sold. Sourced from <em>SEC EDGAR 13F</em> filings + <em>CapitolTrades</em> disclosures. Updated every Sunday, in your reader, on RSS, in your inbox.
+  </p>
+  <div class="hero-meta-row">
+    <span>RUN_TIME: <em>02:47:11</em></span>
+    <span>COVERAGE: <em>22/26 verified</em></span>
+    <span class="live">SOURCE: SEC EDGAR live</span>
+    <span>NEXT_SYNC: 2026.05.27</span>
+  </div>
+</header>
+
+<!-- ============== TERMINAL STAT STRIP ============== -->
+<section class="term-strip">
+  <div class="term-card">
+    <div class="term-head">
+      <span>TRADER_UNIVERSE.SCAN <em>·</em> Q1_2026</span>
+      <span class="live-dot">LIVE</span>
+    </div>
+    <div class="term-stats">
+      <div class="term-stat">
+        <div class="term-stat-label">Traders tracked</div>
+        <div class="term-stat-val">26</div>
+        <div class="term-stat-sub">across 8 categories</div>
+      </div>
+      <div class="term-stat">
+        <div class="term-stat-label">Value legends</div>
+        <div class="term-stat-val">8</div>
+        <div class="term-stat-sub">Buffett · Ackman · Burry · ...</div>
+      </div>
+      <div class="term-stat">
+        <div class="term-stat-label">AI / new-gen</div>
+        <div class="term-stat-val">3</div>
+        <div class="term-stat-sub">Wood · Leopold · Thiel</div>
+      </div>
+      <div class="term-stat">
+        <div class="term-stat-label">Top single conviction</div>
+        <div class="term-stat-val"><em>TSM</em></div>
+        <div class="term-stat-sub bull">14% · foundry monopoly</div>
+      </div>
+      <div class="term-stat">
+        <div class="term-stat-label">Last filing deadline</div>
+        <div class="term-stat-val pulse">May 15</div>
+        <div class="term-stat-sub">Q1.2026 13F-HR cutoff</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== SAMPLE PICK CARDS ============== -->
+<section class="section">
+  <div class="section-head">
+    <div class="section-num">01 · PICK CARD TREATMENT</div>
+    <h2 class="section-title">Where alpha hides <em>over a decade</em></h2>
+    <p class="section-sub">Hover any tile. Border bleeds amber across the bottom edge — subtle, terminal-inspired. Big serif ticker, monospace metric grid below.</p>
+  </div>
+
+  <div class="picks-row">
+    <div class="pick">
+      <div class="pick-rank">/ <em>01</em> · AI INFRA</div>
+      <div class="pick-head">
+        <span class="pick-tkr">TSM</span>
+        <span class="pick-alloc">14%</span>
+      </div>
+      <div class="pick-name">Taiwan Semiconductor Manufacturing</div>
+      <div class="pick-hook">The single physical bottleneck of the AI compute stack. Every credible 5yr scenario requires more TSM wafers.</div>
+      <div class="pick-meta">
+        <div><span>5y ROIC</span><span>35.1%</span></div>
+        <div><span>FCF TTM</span><span>$33B</span></div>
+        <div><span>Net debt</span><span>+$71B cash</span></div>
+        <div><span>Fwd P/E</span><span>21.2×</span></div>
+      </div>
+    </div>
+
+    <div class="pick">
+      <div class="pick-rank">/ <em>02</em> · HEALTHCARE</div>
+      <div class="pick-head">
+        <span class="pick-tkr">LLY</span>
+        <span class="pick-alloc">12%</span>
+      </div>
+      <div class="pick-name">Eli Lilly &amp; Company</div>
+      <div class="pick-hook">Owns the structural winner in the largest pharma category in history. Only commercial oral GLP-1.</div>
+      <div class="pick-meta">
+        <div><span>ROIC TTM</span><span>~40%</span></div>
+        <div><span>FCF margin</span><span>25%+ exp.</span></div>
+        <div><span>Net debt</span><span>0.8× EBITDA</span></div>
+        <div><span>Fwd P/E</span><span>26.7×</span></div>
+      </div>
+    </div>
+
+    <div class="pick">
+      <div class="pick-rank">/ <em>03</em> · QUALITY / AI</div>
+      <div class="pick-head">
+        <span class="pick-tkr">MSFT</span>
+        <span class="pick-alloc">11%</span>
+      </div>
+      <div class="pick-name">Microsoft Corporation</div>
+      <div class="pick-hook">Only Magnificent-7 with both AI revenue ramp AND durable enterprise lock-in. Azure AI = the real moat.</div>
+      <div class="pick-meta">
+        <div><span>5y ROIC</span><span>27%</span></div>
+        <div><span>FCF TTM</span><span>$74B</span></div>
+        <div><span>Net debt</span><span>net cash</span></div>
+        <div><span>Fwd P/E</span><span>31×</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== SAMPLE TRADER CARDS ============== -->
+<section class="section">
+  <div class="section-head">
+    <div class="section-num">02 · TRADER CARD TREATMENT</div>
+    <h2 class="section-title">What they <em>actually own</em></h2>
+    <p class="section-sub">Category badge with built-in indicator dot. Tagline in serif italic, holdings in mono grid. Hover lifts border to amber.</p>
+  </div>
+
+  <div class="traders-grid">
+    <div class="trader">
+      <div class="trader-rank">/ 01</div>
+      <div class="trader-name">Warren Buffett</div>
+      <div class="trader-fund">Berkshire Hathaway · CIK 0001067983</div>
+      <div class="trader-cat">VALUE</div>
+      <div class="trader-tagline">"Oracle of Omaha · long-horizon compounder · $300B+ cash pile"</div>
+      <div class="trader-top">
+        <div class="trader-top-row"><span class="pos-tkr">AAPL</span><span class="pos-pct">25.4%</span><span class="pos-change down">trimmed −5%</span></div>
+        <div class="trader-top-row"><span class="pos-tkr">BAC</span><span class="pos-pct">12.1%</span><span class="pos-change">held</span></div>
+        <div class="trader-top-row"><span class="pos-tkr">AXP</span><span class="pos-pct">11.8%</span><span class="pos-change">held</span></div>
+        <div class="trader-top-row"><span class="pos-tkr">KO</span><span class="pos-pct">9.2%</span><span class="pos-change">held</span></div>
+        <div class="trader-top-row"><span class="pos-tkr">CVX</span><span class="pos-pct">6.4%</span><span class="pos-change up">added +2%</span></div>
+      </div>
+    </div>
+
+    <div class="trader">
+      <div class="trader-rank">/ 08</div>
+      <div class="trader-name">Michael Burry</div>
+      <div class="trader-fund">Scion Asset Management · CIK 0001649339</div>
+      <div class="trader-cat">VALUE</div>
+      <div class="trader-tagline">"Big Short legend · contrarian's contrarian · concentrated bets"</div>
+      <div class="trader-top">
+        <div class="trader-top-row"><span class="pos-tkr">JD</span><span class="pos-pct">18.5%</span><span class="pos-change up">new</span></div>
+        <div class="trader-top-row"><span class="pos-tkr">BABA</span><span class="pos-pct">16.2%</span><span class="pos-change up">added</span></div>
+        <div class="trader-top-row"><span class="pos-tkr">BIDU</span><span class="pos-pct">14.7%</span><span class="pos-change">held</span></div>
+      </div>
+    </div>
+
+    <div class="trader">
+      <div class="trader-rank">/ 25</div>
+      <div class="trader-name">Nancy Pelosi</div>
+      <div class="trader-fund">House PTR · STOCK Act disclosure</div>
+      <div class="trader-cat">CONGRESSIONAL</div>
+      <div class="trader-tagline">"Last 5 trades: AB call, GOOGL ×3, AMZN buy · Jan 14-16, 2026"</div>
+      <div class="trader-top">
+        <div class="trader-top-row"><span class="pos-tkr">GOOGL</span><span class="pos-pct">$1M–$5M</span><span class="pos-change up">bought 3×</span></div>
+        <div class="trader-top-row"><span class="pos-tkr">AMZN</span><span class="pos-pct">$500K–$1M</span><span class="pos-change up">bought</span></div>
+        <div class="trader-top-row"><span class="pos-tkr">AB</span><span class="pos-pct">$15K–$50K</span><span class="pos-change up">call</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== SAMPLE NEWS CARDS ============== -->
+<section class="section">
+  <div class="section-head">
+    <div class="section-num">03 · NEWS CARD TREATMENT</div>
+    <h2 class="section-title">News that <em>moves the thesis</em></h2>
+    <p class="section-sub">Two-column dense grid. Source + timestamp in mono. Serif headline. Click whole card → source link in new tab.</p>
+  </div>
+
+  <div class="news-grid">
+    <a class="news-card">
+      <div class="news-meta-row">
+        <span>SEC.EDGAR · 2026.05.18</span>
+        <span><em>● TRACKED</em></span>
+      </div>
+      <h3 class="news-title">Situational Awareness LP files Q1 2026 13F — $13.68B AUM, <em>$8.5B in NEW puts</em></h3>
+      <p class="news-preview">Leopold Aschenbrenner's fund flips to long/short barbell. SMH ETF put $2B notional, NVDA put $1.57B. Top long still SanDisk at $1.11B.</p>
+      <div class="news-link">READ AT SOURCE</div>
+    </a>
+
+    <a class="news-card">
+      <div class="news-meta-row">
+        <span>THE INFORMATION · 2026.05.15</span>
+        <span><em>● TRACKED</em></span>
+      </div>
+      <h3 class="news-title">Anthropic eyeing <em>Q4 2026 IPO</em> — Wilson Sonsini hired, $19B annualized revenue</h3>
+      <p class="news-preview">Internal target Q4 2026, October at earliest. S-1 confidential filing rumored for July window. Metaculus prediction market: 66% odds before July 1.</p>
+      <div class="news-link">READ AT SOURCE</div>
+    </a>
+  </div>
+</section>
+
+<!-- ============== SAMPLE SCORECARD ============== -->
+<section class="section">
+  <div class="section-head">
+    <div class="section-num">04 · SCORECARD TABLE</div>
+    <h2 class="section-title">Numbers <em>that earned the spot</em></h2>
+    <p class="section-sub">All-mono table. Bull / bear color coding on metrics. Header all-caps with amber accent. Row hover = subtle amber wash.</p>
+  </div>
+
+  <div class="scoretable">
+    <table class="sc">
+      <thead>
+        <tr><th>#</th><th>Ticker</th><th>Alloc</th><th>Theme</th><th>5y ROIC</th><th>FCF margin</th><th>Net debt/EBITDA</th><th>Fwd P/E</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>01</td><td class="tkr">TSM</td><td class="alloc">14%</td><td>AI INFRA</td><td class="bull">35.1%</td><td class="bull">53%</td><td class="bull">net cash</td><td>21.2×</td></tr>
+        <tr><td>02</td><td class="tkr">LLY</td><td class="alloc">12%</td><td>HEALTHCARE</td><td class="bull">~40%</td><td class="bull">25%+</td><td>0.8×</td><td>26.7×</td></tr>
+        <tr><td>03</td><td class="tkr">MSFT</td><td class="alloc">11%</td><td>QUALITY</td><td class="bull">27%</td><td class="bull">35%</td><td class="bull">net cash</td><td>31×</td></tr>
+        <tr><td>04</td><td class="tkr">V</td><td class="alloc">10%</td><td>QUALITY</td><td class="bull">54%</td><td class="bull">49%</td><td class="bull">net cash</td><td>26×</td></tr>
+        <tr><td>05</td><td class="tkr">CEG</td><td class="alloc">10%</td><td>ENERGY</td><td>18%</td><td>n/a</td><td>2.3×</td><td class="bear">28×</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ============== DESIGN NOTES ============== -->
+<section class="section">
+  <div class="section-head">
+    <div class="section-num">// DESIGN_NOTES</div>
+    <h2 class="section-title">What <em>changed</em> &amp; why</h2>
+  </div>
+
+  <div class="notes">
+    <div class="note">
+      <div class="note-num">/ 01 · TYPOGRAPHY</div>
+      <div class="note-head">Newsreader serif + Space Grotesk + JetBrains Mono</div>
+      <div class="note-body">
+        <strong>Display</strong> swapped from Fraunces → <code>Newsreader</code> — more editorial, cleaner italic, less luxurious.
+        <strong>Body</strong> from Instrument Sans → <code>Space Grotesk</code> — geometric edge, cyberpunk-adjacent without being cyber-cliché.
+        <strong>Mono</strong> stays JetBrains Mono — terminal authenticity.
+        <strong>Hero</strong> uses serif italic for emphasis, mono for numbers — magazine page rhythm.
+      </div>
+    </div>
+
+    <div class="note">
+      <div class="note-num">/ 02 · COLOR — TWO-ACCENT SYSTEM</div>
+      <div class="note-head">Sodium-vapor amber + electric cyan</div>
+      <div class="note-body">
+        <strong>Primary accent</strong>: amber <code>#FFB000</code> (sodium-vapor lamp, Bloomberg terminal). Used everywhere — buttons, borders, ticker symbols.
+        <strong>Pulse accent</strong>: cyan <code>#00E5FF</code> — used <em>sparingly</em> only for <code>LIVE</code> indicators, the brand dot, "tracked" badges. The rarity is what makes it punch.
+        Avoid: purple gradients, matrix green, AI-slop neon explosions.
+      </div>
+    </div>
+
+    <div class="note">
+      <div class="note-num">/ 03 · LIGHT MODE</div>
+      <div class="note-head">Warm newsprint cream + bronze + deep teal</div>
+      <div class="note-body">
+        Light mode is NOT just inverted dark. Amber softens to bronze <code>#C25E00</code> for proper contrast on cream paper.
+        Cyan pulse becomes deep teal <code>#00798F</code>.
+        Scan-line texture removed entirely (white space breathes; scans on paper feel wrong).
+        Background = warm cream <code>#F5F1E6</code>, not bleached white. Newspaper aesthetic.
+        <br><br>
+        <strong>Toggle the theme</strong> at top-right to see the side-by-side.
+      </div>
+    </div>
+
+    <div class="note">
+      <div class="note-num">/ 04 · TEXTURE — RESTRAINED</div>
+      <div class="note-head">Scan lines at .04 opacity, only on dark</div>
+      <div class="note-body">
+        Most cyberpunk designs over-do scan lines, glitch animations, neon glows.
+        Here: scan lines barely visible (4% opacity), no animation, no glitch effects on hover. The only animation is the
+        <code>LIVE</code> dot pulse — once every 1.8 seconds.
+        Restraint = editorial polish. The cyberpunk language is in the typography, layout grid, and accent placement — not in motion design.
+      </div>
+    </div>
+
+    <div class="note">
+      <div class="note-num">/ 05 · LAYOUT — DENSE GRID</div>
+      <div class="note-head">Hairline 1px borders, no rounded corners</div>
+      <div class="note-body">
+        Every card has sharp 1px borders. Zero <code>border-radius</code>. Grid cells share borders for tight density (the picks row + news grid use a <code>1px gap</code> with <code>background:var(--line)</code> trick).
+        Magazine pages don't have rounded corners. Terminal interfaces don't either. Combining the two = no rounding.
+      </div>
+    </div>
+
+    <div class="note">
+      <div class="note-num">/ 06 · WHAT TO DECIDE</div>
+      <div class="note-head">Three open questions</div>
+      <div class="note-body">
+        <strong>① Accent color</strong> — keep amber+cyan, or switch primary to magenta / lime / kept-from-v1 warm gold?
+        <strong>② Hero treatment</strong> — current is large serif italic. Alternative = all-mono with rotating headlines.
+        <strong>③ Pick card weight</strong> — current is moderate density. Alternative = ultra-dense table-row treatment.
+        Reply and I'll spin a v2 variant on whichever direction wins.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== FOOTER ============== -->
+<footer class="foot">
+  <div>MOCKUP · CYBERPUNK EDITORIAL · v1 · <em>2026.05.20</em></div>
+  <div>NOT COMMITTED · NOT PUSHED · LOCAL ONLY</div>
+  <div>TOGGLE THEME ↑ TO PREVIEW LIGHT MODE</div>
+</footer>
+
+<script>
+function toggleTheme(){
+  const cur = document.documentElement.getAttribute('data-theme');
+  const next = cur === 'dark' ? 'light' : 'dark';
+  document.documentElement.setAttribute('data-theme', next);
+  try{ localStorage.setItem('dainer-mockup-theme', next); }catch(_){}
+}
+(function loadTheme(){
+  try{
+    const saved = localStorage.getItem('dainer-mockup-theme');
+    if (saved) document.documentElement.setAttribute('data-theme', saved);
+  }catch(_){}
+})();
+</script>
+</body>
+</html>
