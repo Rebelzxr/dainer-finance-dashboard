@@ -446,6 +446,36 @@ body > nav, body > header, body > section, body > footer, body > main, body > ar
 .news-link{font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--oxide);}
 .news-link::after{content:' ↗';}
 
+/* ==================== DAILY BRIEF ==================== */
+.tone-critical{border-color:color-mix(in srgb,var(--bear) 60%,var(--line-bright));}
+.tone-critical::before{background:var(--bear);}
+.tone-critical .news-meta em,.tone-critical .waypoint-id,.tone-critical .waypoint-val{color:var(--bear);}
+.tone-watch{border-color:color-mix(in srgb,var(--oxide) 60%,var(--line-bright));}
+.tone-watch::before{background:var(--oxide);}
+.tone-watch .news-meta em,.tone-watch .waypoint-id,.tone-watch .waypoint-val{color:var(--oxide);}
+.tone-good{border-color:color-mix(in srgb,var(--bull) 55%,var(--line-bright));}
+.tone-good::before{background:var(--bull);}
+.tone-good .news-meta em,.tone-good .waypoint-id,.tone-good .waypoint-val{color:var(--bull);}
+.tone-neutral{border-color:var(--line-bright);}
+
+.daily-preview{
+  border:1px solid var(--line-bright);
+  background:color-mix(in srgb,var(--bg-elev) 92%,transparent);
+  -webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);
+  padding:32px;
+}
+.daily-preview h3{font-family:var(--display);font-weight:500;font-size:28px;line-height:1.15;
+  letter-spacing:-.02em;color:var(--ink);margin-bottom:18px;}
+.daily-preview p{font-family:var(--body);font-size:14px;color:var(--ink-dim);line-height:1.6;}
+.daily-preview .status-tag{margin-top:0;margin-bottom:18px;}
+.daily-preview-list{display:flex;flex-direction:column;gap:10px;margin-top:18px;}
+.daily-preview-list li{font-family:var(--body);font-size:13px;color:var(--ink);line-height:1.6;
+  padding-left:18px;position:relative;}
+.daily-preview-list li::before{content:'';position:absolute;left:0;top:9px;width:8px;height:1px;background:var(--oxide);}
+.daily-cta{display:inline-block;margin-top:22px;font-family:var(--mono);font-size:10px;
+  letter-spacing:.2em;text-transform:uppercase;color:var(--oxide);}
+.daily-cta::after{content:' →';}
+
 /* ==================== TABLES ==================== */
 .scorecard{overflow-x:auto;border:1px solid var(--line-bright);
   background:color-mix(in srgb,var(--bg-elev) 92%,transparent);

@@ -1,0 +1,153 @@
+{
+  "updated": "2026-05-25",
+  "generated_at": "2026-05-25T08:00:00+08:00",
+  "status": "ready_for_first_daily_run",
+  "market_session": "First automated daily run pending",
+  "site_url": "https://rebelzxr.github.io/dainer-finance-dashboard/daily-brief.html",
+  "headline": "Daily brief page ready; first verified market run pending",
+  "summary": [
+    "This seed file defines the daily brief contract. It does not contain live market levels yet.",
+    "The automation should replace this file every morning after verifying market, macro, event, source, and portfolio-impact data.",
+    "Telegram should stay quiet unless a warning rule or big-news trigger is hit."
+  ],
+  "market_pulse": [
+    {
+      "label": "Market mode",
+      "value": "Pending",
+      "detail": "Next run checks SPY, QQQ, IWM, SMH, VIX, DXY, 10Y, BTC, and ETH.",
+      "tone": "neutral"
+    },
+    {
+      "label": "Breadth",
+      "value": "Pending",
+      "detail": "Next run checks index breadth, sector leadership, and new high/new low quality where reliable sources are available.",
+      "tone": "neutral"
+    },
+    {
+      "label": "Portfolio impact",
+      "value": "Pending",
+      "detail": "Next run maps any news to the US swing book, Malaysia book, dividend sleeve, and Leopold 13F tracker.",
+      "tone": "neutral"
+    },
+    {
+      "label": "Telegram",
+      "value": "Warning only",
+      "detail": "No routine daily spam. Send only if a critical warning, thesis break, large move, or major catalyst appears.",
+      "tone": "watch"
+    }
+  ],
+  "alerts": [
+    {
+      "level": "monitor",
+      "title": "No active warning until first automated run",
+      "detail": "The first scheduled run will decide whether Telegram needs to fire."
+    }
+  ],
+  "warning_rules": [
+    "Send Telegram if SPY or QQQ closes down 2%+ or VIX spikes 15%+ from prior close.",
+    "Send Telegram if any core holding has a thesis-breaking filing, earnings miss, guidance cut, regulator action, or major accident.",
+    "Send Telegram if 10Y yield moves 15bp+ in one session and rate-sensitive quality names are under pressure.",
+    "Send Telegram if TSM, LLY, MSFT, CEG, ETN, ANET, VRTX, SMH, or key Malaysia names move 5%+ with verified news.",
+    "Send Telegram if SEC EDGAR publishes a relevant new 13F, S-1, 8-K, 6-K, or major insider/PTR filing tied to tracked names."
+  ],
+  "event_calendar": [
+    {
+      "date": "2026-05-27",
+      "event": "Next site research refresh target",
+      "why_it_matters": "Current dainer-finance news and picks files mark this as the next weekly refresh.",
+      "source": "data/news.json"
+    },
+    {
+      "date": "2026-08-14",
+      "event": "Q2 2026 13F deadline",
+      "why_it_matters": "Next major read on Situational Awareness LP and famous-trader positioning.",
+      "source": "picks/leopold-13f.html"
+    }
+  ],
+  "thesis_change_log": [
+    {
+      "ticker": "TSM",
+      "status": "no_change",
+      "note": "Largest US swing holding remains a foundry-monopoly thesis until verified new data says otherwise."
+    },
+    {
+      "ticker": "LLY",
+      "status": "watch",
+      "note": "Keep GLP-1 outcomes and supply signals on the daily catalyst radar."
+    },
+    {
+      "ticker": "CEG",
+      "status": "watch",
+      "note": "Track hyperscaler PPA, power pricing, and regulatory headlines."
+    },
+    {
+      "ticker": "Leopold 13F",
+      "status": "calendar",
+      "note": "Next filing deadline is 2026-08-14. No daily action unless a new filing or related news appears."
+    }
+  ],
+  "valuation_snapshot": [
+    {
+      "ticker": "TSM",
+      "sleeve": "US swing",
+      "allocation": "14%",
+      "check": "Forward valuation, capex, 2nm ramp, CoWoS capacity",
+      "status": "pending_live_check"
+    },
+    {
+      "ticker": "LLY",
+      "sleeve": "US swing",
+      "allocation": "12%",
+      "check": "Forward valuation, GLP-1 data, supply ramp, competitor pressure",
+      "status": "pending_live_check"
+    },
+    {
+      "ticker": "MSFT",
+      "sleeve": "US swing",
+      "allocation": "11%",
+      "check": "Cloud growth, AI capex margin pressure, OpenAI exposure",
+      "status": "pending_live_check"
+    },
+    {
+      "ticker": "MAYBANK",
+      "sleeve": "Malaysia watch",
+      "allocation": "reference only",
+      "check": "Dividend yield, NIM, credit quality, BNM rate path",
+      "status": "pending_live_check"
+    }
+  ],
+  "source_ledger": [
+    {
+      "source": "SEC EDGAR",
+      "use": "13F, S-1, 8-K, 6-K, ownership and filing verification",
+      "required": true
+    },
+    {
+      "source": "Company investor relations",
+      "use": "Earnings releases, guidance, presentations, transcripts where available",
+      "required": true
+    },
+    {
+      "source": "Reuters / Bloomberg / FT / WSJ / The Information",
+      "use": "Market-moving news confirmation; prefer primary filings when available",
+      "required": false
+    },
+    {
+      "source": "TradingView / Yahoo Finance / Nasdaq / Barchart",
+      "use": "Price action, sector ETF moves, technical read, watchlist movement",
+      "required": false
+    },
+    {
+      "source": "Bursa Malaysia / The Edge Malaysia",
+      "use": "Malaysia holdings, filings, earnings, and local market catalysts",
+      "required": false
+    }
+  ],
+  "publish_contract": {
+    "public_json": "data/daily-brief.json",
+    "public_page": "daily-brief.html",
+    "local_archive": "/Users/dainer/Desktop/DAINER OS/finance-data/daily-briefs/YYYY-MM-DD.md",
+    "telegram_policy": "warning_or_big_news_only",
+    "git_policy": "commit and push dainer-finance main after verification"
+  }
+}

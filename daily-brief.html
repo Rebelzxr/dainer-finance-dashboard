@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Daily Brief · DAINER Finance</title>
+<meta name="description" content="Daily market brief for the DAINER Finance dashboard. Verified market pulse, warnings, events, thesis changes, valuation checks, and source ledger.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@200;300;400;500;700&family=Bitter:wght@300;400;500;700&display=swap" rel="stylesheet">
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body class="has-mars-hero">
+
+<header class="mission">
+  <div class="mission-cells">
+    <span class="mission-brand">DAINER·<em>FIN</em></span>
+    <a href="index.html">Dashboard</a>
+    <a href="daily-brief.html" class="active">Daily Brief</a>
+    <a href="picks/swing-3-5yr.html" class="nav-cell-hide">US Picks</a>
+    <a href="picks/swing-msia.html" class="nav-cell-hide">Malaysia</a>
+    <a href="picks/dividends.html" class="nav-cell-hide">Dividends</a>
+    <a href="picks/famous-traders.html">Traders</a>
+    <a href="calculator.html" class="nav-cell-hide">Calculator</a>
+    <a href="newsletter/index.html">Newsletter</a>
+  </div>
+  <div class="mission-cells">
+    <span class="nav-cell-hide">SOL <em data-sol>1247</em></span>
+    <span class="live nav-cell-hide">UPLINK</span>
+    <span class="nav-cell-hide">RUN <em data-runtime>02:47:11</em></span>
+    <button class="theme-btn" onclick="toggleTheme()">DRK / <span style="color:var(--oxide)">LGT</span></button>
+  </div>
+</header>
+
+<header class="hero">
+  <div class="hero-stack">
+    <div>
+      <div class="hero-tag">⊕ DAILY BRIEF · VERIFIED MARKET READ</div>
+      <h1 class="hero-title" data-i18n="dailyHeroTitle">
+        <span class="lbl">// DAILY UPLINK · MARKET INTEL</span>
+        One page for<br>
+        the daily <em>signal</em>.
+      </h1>
+      <p class="hero-sub" id="brief-summary-lead">
+        Market pulse, warnings, events, thesis changes, valuation checks, and sources. Routine updates live here. Telegram only fires for warnings or big news.
+      </p>
+    </div>
+
+    <aside class="hero-panel">
+      <div class="hero-panel-head">
+        <span>// DAILY READOUT</span>
+        <span class="live" style="color:var(--oxide)">LIVE</span>
+      </div>
+      <div class="hero-panel-body">
+        <div class="hero-panel-label">HIGHEST ALERT</div>
+        <div class="hero-panel-val" id="brief-alert-level">--</div>
+        <div class="hero-panel-sub" id="brief-alert-detail">Loading daily brief...</div>
+        <hr class="hero-panel-rule">
+        <div class="hero-panel-grid">
+          <div><span>SESSION</span><span id="brief-session">--</span></div>
+          <div><span>UPDATED</span><span id="brief-updated">--</span></div>
+          <div><span>SOURCES</span><span id="brief-source-count">--</span></div>
+          <div><span>TELEGRAM</span><span id="brief-telegram-policy">Warnings</span></div>
+        </div>
+      </div>
+    </aside>
+  </div>
+</header>
+
+<section class="waypoint-strip reveal">
+  <div class="waypoint-grid" id="pulse-grid"></div>
+</section>
+
+<section class="section">
+  <div class="sec-head reveal">
+    <div>
+      <div class="sec-tag">// PROBE 01 · TODAY'S SUMMARY</div>
+      <div class="sec-tag-tail" id="brief-status">LOADING</div>
+    </div>
+    <h2 class="sec-title" data-i18n="dailySummaryTitle">What changed<br><em>overnight</em>.</h2>
+  </div>
+
+  <div class="exec-grid reveal">
+    <div class="exec-card">
+      <h4>Daily brief</h4>
+      <h3 id="brief-headline">Loading...</h3>
+      <ul id="brief-summary-list"></ul>
+    </div>
+    <div class="exec-card">
+      <h4>Warning rules</h4>
+      <h3>When Telegram fires</h3>
+      <ul id="warning-rules"></ul>
+    </div>
+  </div>
+</section>
+
+<section class="section section-tight">
+  <div class="sec-head reveal">
+    <div>
+      <div class="sec-tag">// PROBE 02 · WARNINGS</div>
+      <div class="sec-tag-tail">BIG NEWS ONLY</div>
+    </div>
+    <h2 class="sec-title" data-i18n="dailyAlertsTitle">Alerts that<br><em>matter</em>.</h2>
+  </div>
+  <div class="news-grid reveal-stagger" id="alerts-grid"></div>
+</section>
+
+<section class="section section-tight">
+  <div class="sec-head reveal">
+    <div>
+      <div class="sec-tag">// PROBE 03 · EVENTS</div>
+      <div class="sec-tag-tail">NEXT CATALYSTS</div>
+    </div>
+    <h2 class="sec-title" data-i18n="dailyCalendarTitle">Calendar and<br><em>deadlines</em>.</h2>
+  </div>
+  <div class="scorecard reveal">
+    <table class="sc" id="event-table">
+      <thead>
+        <tr><th>Date</th><th>Event</th><th>Why it matters</th><th>Source</th></tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div>
+</section>
+
+<section class="section section-tight">
+  <div class="sec-head reveal">
+    <div>
+      <div class="sec-tag">// PROBE 04 · PORTFOLIO IMPACT</div>
+      <div class="sec-tag-tail">THESIS CHANGE LOG</div>
+    </div>
+    <h2 class="sec-title" data-i18n="dailyPortfolioTitle">What changed in<br><em>the book</em>.</h2>
+  </div>
+  <div class="news-grid reveal-stagger" id="thesis-grid"></div>
+</section>
+
+<section class="section section-tight">
+  <div class="sec-head reveal">
+    <div>
+      <div class="sec-tag">// PROBE 05 · VALUATION</div>
+      <div class="sec-tag-tail">FAST CHECK</div>
+    </div>
+    <h2 class="sec-title" data-i18n="dailyValuationTitle">Valuation<br><em>watch</em>.</h2>
+  </div>
+  <div class="scorecard reveal">
+    <table class="sc" id="valuation-table">
+      <thead>
+        <tr><th>Ticker</th><th>Sleeve</th><th>Allocation</th><th>Daily check</th><th>Status</th></tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div>
+</section>
+
+<section class="section section-tight">
+  <div class="sec-head reveal">
+    <div>
+      <div class="sec-tag">// PROBE 06 · SOURCES</div>
+      <div class="sec-tag-tail">VERIFY FIRST</div>
+    </div>
+    <h2 class="sec-title" data-i18n="dailySourceTitle">Source<br><em>ledger</em>.</h2>
+  </div>
+  <div class="news-grid reveal-stagger" id="source-grid"></div>
+</section>
+
+<footer class="footer">
+  <div class="footer-grid">
+    <div>
+      <h4>Automation contract</h4>
+      <p data-i18n="dailyAutomationContract">Daily job researches, verifies, writes <span id="contract-json">data/daily-brief.json</span>, archives the full local report in DAINER OS, commits and pushes the finance site, then sends Telegram only for warnings or big news.</p>
+      <span class="status-tag" id="contract-status">STATUS: WAITING FIRST RUN</span>
+    </div>
+    <div>
+      <h4>Site map</h4>
+      <ul>
+        <li><a href="index.html">Dashboard</a></li>
+        <li><a href="daily-brief.html">Daily Brief</a></li>
+        <li><a href="picks/swing-3-5yr.html">US 3-5yr swing</a></li>
+        <li><a href="picks/swing-msia.html">Malaysia swing</a></li>
+        <li><a href="picks/dividends.html">Dividend income</a></li>
+        <li><a href="picks/famous-traders.html">Famous traders</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Connect</h4>
+      <ul>
+        <li><a href="newsletter/feed.xml">RSS feed</a></li>
+        <li><a href="https://github.com/Rebelzxr/dainer-finance-dashboard">GitHub source</a></li>
+      </ul>
+      <p style="margin-top:14px;">// DAILY UPLINK · warning-only Telegram policy</p>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/main.js"></script>
+<script>
+function escapeHtml(value){
+  return String(value ?? '').replace(/[&<>"']/g, (ch) => ({
+    '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;'
+  }[ch]));
+}
+
+function toneClass(tone){
+  const key = String(tone || 'neutral').toLowerCase();
+  if (['critical','danger','high'].includes(key)) return 'tone-critical';
+  if (['warning','warn','watch'].includes(key)) return 'tone-watch';
+  if (['good','green','ok'].includes(key)) return 'tone-good';
+  return 'tone-neutral';
+}
+
+function strongestAlert(alerts){
+  const rank = {critical:4, warning:3, monitor:2, info:1};
+  return (alerts || []).slice().sort((a,b) => (rank[b.level] || 0) - (rank[a.level] || 0))[0] || {
+    level:'info', title:'No alerts', detail:'No alert data loaded.'
+  };
+}
+
+function renderCards(items, targetId, type){
+  const target = document.getElementById(targetId);
+  target.innerHTML = (items || []).map((item) => {
+    const meta = type === 'source'
+      ? `${item.required ? 'REQUIRED' : 'OPTIONAL'} // SOURCE`
+      : `${item.level || item.status || 'MONITOR'} // ${item.ticker || 'DAILY'}`;
+    const title = item.title || item.ticker || item.source || 'Untitled';
+    const body = item.detail || item.note || item.use || '';
+    return `
+      <div class="news-log ${toneClass(item.level || item.status)}">
+        <div class="news-meta"><span>${escapeHtml(meta)}</span><em>TRACKED</em></div>
+        <h3 class="news-head">${escapeHtml(title)}</h3>
+        <p class="news-text">${escapeHtml(body)}</p>
+      </div>
+    `;
+  }).join('');
+}
+
+function setDynamicText(id, value){
+  const el = document.getElementById(id);
+  if (!el) return;
+  el.textContent = value;
+  el.dataset.i18nOriginalText = el.textContent.trim();
+}
+
+async function loadDailyBrief(){
+  const response = await fetch('data/daily-brief.json');
+  if (!response.ok) throw new Error('daily brief unavailable');
+  const data = await response.json();
+  const alert = strongestAlert(data.alerts);
+
+  setDynamicText('brief-summary-lead', data.summary?.[0] || data.headline || '');
+  setDynamicText('brief-alert-level', String(alert.level || '--').toUpperCase());
+  setDynamicText('brief-alert-detail', alert.title || alert.detail || '');
+  setDynamicText('brief-session', data.market_session || '--');
+  setDynamicText('brief-updated', data.updated || '--');
+  setDynamicText('brief-source-count', `${(data.source_ledger || []).length} tracked`);
+  setDynamicText('brief-telegram-policy', data.publish_contract?.telegram_policy || 'warning only');
+  setDynamicText('brief-status', String(data.status || 'loaded').replace(/_/g, ' ').toUpperCase());
+  setDynamicText('brief-headline', data.headline || 'Daily brief');
+  setDynamicText('contract-json', data.publish_contract?.public_json || 'data/daily-brief.json');
+  setDynamicText('contract-status', `STATUS: ${String(data.status || 'loaded').replace(/_/g, ' ').toUpperCase()}`);
+
+  document.getElementById('brief-summary-list').innerHTML = (data.summary || []).map((line) => `<li>${escapeHtml(line)}</li>`).join('');
+  document.getElementById('warning-rules').innerHTML = (data.warning_rules || []).map((line) => `<li>${escapeHtml(line)}</li>`).join('');
+
+  document.getElementById('pulse-grid').innerHTML = (data.market_pulse || []).map((item, index) => `
+    <div class="waypoint ${toneClass(item.tone)}">
+      <div class="waypoint-id">PULSE-${String(index + 1).padStart(2, '0')}</div>
+      <div class="waypoint-label">${escapeHtml(item.label)}</div>
+      <div class="waypoint-val">${escapeHtml(item.value)}</div>
+      <div class="waypoint-sub">${escapeHtml(item.detail)}</div>
+    </div>
+  `).join('');
+
+  renderCards(data.alerts, 'alerts-grid', 'alert');
+  renderCards(data.thesis_change_log, 'thesis-grid', 'thesis');
+  renderCards(data.source_ledger, 'source-grid', 'source');
+
+  document.querySelector('#event-table tbody').innerHTML = (data.event_calendar || []).map((row) => `
+    <tr>
+      <td class="tkr">${escapeHtml(row.date)}</td>
+      <td>${escapeHtml(row.event)}</td>
+      <td>${escapeHtml(row.why_it_matters)}</td>
+      <td>${escapeHtml(row.source)}</td>
+    </tr>
+  `).join('');
+
+  document.querySelector('#valuation-table tbody').innerHTML = (data.valuation_snapshot || []).map((row) => `
+    <tr>
+      <td class="tkr">${escapeHtml(row.ticker)}</td>
+      <td class="theme">${escapeHtml(row.sleeve)}</td>
+      <td class="alloc">${escapeHtml(row.allocation)}</td>
+      <td>${escapeHtml(row.check)}</td>
+      <td>${escapeHtml(row.status)}</td>
+    </tr>
+  `).join('');
+}
+
+loadDailyBrief().catch(() => {
+  document.getElementById('brief-headline').textContent = 'Daily brief unavailable';
+  document.getElementById('brief-summary-list').innerHTML = '<li>Could not load data/daily-brief.json.</li>';
+});
+</script>
+</body>
+</html>

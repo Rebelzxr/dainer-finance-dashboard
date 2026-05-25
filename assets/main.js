@@ -20,6 +20,7 @@ const I18N = {
   zh: {
     // Nav
     Dashboard:'总览',
+    'Daily Brief':'每日简报',
     'US Picks':'美国精选',
     Malaysia:'马来西亚',
     Dividends:'股息',
@@ -92,6 +93,7 @@ const I18N = {
     '30+ tracked':'30+ 只',
     '26 watched':'26 位',
     'Sunday weekly':'每周日',
+    'Daily + Sunday':'每日 + 周日',
     '3-5 yrs':'3-5 年',
     '+7 days':'+7 天',
     '10 total':'共 10 只',
@@ -104,9 +106,19 @@ const I18N = {
 
     // Hero kickers / labels (sec-tag + hero-tag)
     '⊕ DAINER FINANCE · MISSION LOG · v0.2':'⊕ DAINER FINANCE · 任务日志 · v0.2',
+    '⊕ DAILY BRIEF · VERIFIED MARKET READ':'⊕ 每日简报 · 已验证市场读数',
     '⊕ REPORT 002 · v2 · US SWING 3-5YR':'⊕ 研究 002 · v2 · 美股 3-5 年波段',
     '// DEPLOY LOG · DASHBOARD':'// 部署日志 · 总览',
+    '// DAILY UPLINK · MARKET INTEL':'// 每日连接 · 市场情报',
     '// PROBE 002 · PRIMARY HOLDINGS':'// 探针 002 · 主要持仓',
+    '// PROBE 00 · DAILY BRIEF':'// 探针 00 · 每日简报',
+    '// PROBE 01 · TODAY’S SUMMARY':'// 探针 01 · 今日摘要',
+    "// PROBE 01 · TODAY'S SUMMARY":'// 探针 01 · 今日摘要',
+    '// PROBE 02 · WARNINGS':'// 探针 02 · 风险提醒',
+    '// PROBE 03 · EVENTS':'// 探针 03 · 事件',
+    '// PROBE 04 · PORTFOLIO IMPACT':'// 探针 04 · 组合影响',
+    '// PROBE 05 · VALUATION':'// 探针 05 · 估值',
+    '// PROBE 06 · SOURCES':'// 探针 06 · 来源',
     '// PROBE 01 · THE REPORTS':'// 探针 01 · 研究目录',
     '// PROBE 02 · THIS WEEK’S READ':'// 探针 02 · 本周一读',
     "// PROBE 02 · THIS WEEK'S READ":'// 探针 02 · 本周一读',
@@ -120,6 +132,12 @@ const I18N = {
 
     // Section tag tails
     '5 ACTIVE · STATUS GREEN':'5 份活跃 · 状态正常',
+    'WARNING-ONLY TELEGRAM':'仅重要风险发 Telegram',
+    'BIG NEWS ONLY':'只看重大新闻',
+    'NEXT CATALYSTS':'下一个催化',
+    'THESIS CHANGE LOG':'论点变化日志',
+    'FAST CHECK':'快速检查',
+    'VERIFY FIRST':'先验证',
     'ISSUE 001 · 2026.05.20':'第 001 期 · 2026.05.20',
     'WIRE · WEEKLY':'电讯 · 每周',
     'DECADE-LONG SHIFTS':'十年级位移',
@@ -179,6 +197,7 @@ const I18N = {
 
     // Footer h4
     About:'关于',
+    'Automation contract':'自动化合约',
     'Site map':'站点地图',
     Connect:'联系',
     'Source files':'原始文件',
@@ -206,10 +225,34 @@ const I18N = {
     // Status tag
     'STATUS: VERIFIED · 5 theme files · 4 of 5 SEC-sourced':'状态：已验证 · 5 个主题文件 · 4 个 SEC 来源',
 
+    // Daily brief structural labels
+    '// DAILY READOUT':'// 每日读数',
+    'HIGHEST ALERT':'最高提醒',
+    SESSION:'交易段',
+    UPDATED:'更新时间',
+    SOURCES:'来源',
+    TELEGRAM:'Telegram',
+    'Daily brief':'每日简报',
+    'Warning rules':'提醒规则',
+    'When Telegram fires':'什么时候发 Telegram',
+    'MARKET MODE':'市场状态',
+    BREADTH:'广度',
+    'PORTFOLIO IMPACT':'组合影响',
+    TRACKED:'已跟踪',
+
     // Codex i18n coverage expansion
     "dashboardHeroTitle":"<span class=\"lbl\">// 部署日志 · 总览</span>一个建造者的<br><em>金融</em>与<br>资本<em>视角</em>。",
     "dashboardHeroSub":"这里放我的<em>标的</em>、<em>每周阅读</em>和数学计算，为未来 5 年复利做开放笔记。5 份研究、26 位投资人跟踪、一本公开笔记。<em>免费，无付费墙，不是建议。</em>",
     "dashboardReportsTitle":"三个视角，<br><em>一本账本</em>。",
+    "dashboardDailyTitle":"每日<em>读数</em>，<br>不制造噪音。",
+    "dailyHeroTitle":"<span class=\"lbl\">// 每日连接 · 市场情报</span>一页看清<br>每天的<em>信号</em>。",
+    "dailySummaryTitle":"隔夜<br><em>改变了什么</em>。",
+    "dailyAlertsTitle":"真正需要<br><em>注意</em>的提醒。",
+    "dailyCalendarTitle":"日历与<br><em>关键日期</em>。",
+    "dailyPortfolioTitle":"账本里的<br><em>变化</em>。",
+    "dailyValuationTitle":"估值<br><em>观察</em>。",
+    "dailySourceTitle":"来源<br><em>账本</em>。",
+    "dailyAutomationContract":"每日任务会研究、验证、写入 <span id=\"contract-json\">data/daily-brief.json</span>，把完整本地报告存进 DAINER OS，提交并推送金融网站；只有风险提醒或重大新闻才发 Telegram。",
     "dashboardLatestTitle":"最新<em>一期</em>。",
     "dashboardNewsTitle":"真正<em>改变 thesis</em>的新闻。",
     "navUsTitle":"美国波段 <em>3-5 年</em>",

@@ -5,6 +5,7 @@ const BASE = process.env.BASE || 'http://127.0.0.1:8765';
 const chromePath = '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome';
 const pages = [
   ['/index.html', 30],
+  ['/daily-brief.html', 30],
   ['/picks/swing-3-5yr.html', 30],
   ['/picks/swing-msia.html', 30],
   ['/picks/dividends.html', 30],
@@ -16,6 +17,25 @@ const pages = [
 ];
 
 const documentedEnglishIslands = {
+  '/daily-brief.html': [
+    '#brief-summary-lead',
+    '#brief-alert-detail',
+    '#brief-session',
+    '#brief-updated',
+    '#brief-source-count',
+    '#brief-telegram-policy',
+    '#brief-status',
+    '#brief-headline',
+    '#pulse-grid',
+    '#brief-summary-list',
+    '#warning-rules',
+    '#alerts-grid',
+    '#event-table',
+    '#thesis-grid',
+    '#valuation-table',
+    '#source-grid',
+    '#contract-status'
+  ],
   '/picks/famous-traders.html': [
     '.trader-top',
     '.trader-name',

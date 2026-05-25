@@ -16,6 +16,7 @@ A public finance notebook for markets, swing picks, dividend income, trader trac
 | Page | What it is |
 | --- | --- |
 | [`index.html`](index.html) | Dashboard overview, latest issue, navigation cards, and news log |
+| [`daily-brief.html`](daily-brief.html) | Daily market brief with warnings, events, thesis changes, valuation checks, and source ledger |
 | [`picks/swing-3-5yr.html`](picks/swing-3-5yr.html) | US 3-5 year swing report |
 | [`picks/swing-msia.html`](picks/swing-msia.html) | Malaysia 3-5 year swing report |
 | [`picks/dividends.html`](picks/dividends.html) | Dividend income report with country-aware tax notes |
@@ -44,6 +45,7 @@ A public finance notebook for markets, swing picks, dividend income, trader trac
 ```text
 dainer-finance-dashboard/
 ├── index.html
+├── daily-brief.html
 ├── calculator.html
 ├── picks/
 │   ├── swing-3-5yr.html
@@ -57,6 +59,7 @@ dainer-finance-dashboard/
 │   └── feed.xml
 ├── data/
 │   ├── famous-traders.json
+│   ├── daily-brief.json
 │   ├── news.json
 │   ├── picks.json
 │   ├── portfolio.json

@@ -17,6 +17,7 @@
   <div class="mission-cells">
     <span class="mission-brand">DAINER·<em>FIN</em></span>
     <a href="index.html" class="active">Dashboard</a>
+    <a href="daily-brief.html">Daily Brief</a>
     <a href="picks/swing-3-5yr.html" class="nav-cell-hide">US Picks</a>
     <a href="picks/swing-msia.html" class="nav-cell-hide">Malaysia</a>
     <a href="picks/dividends.html" class="nav-cell-hide">Dividends</a>
@@ -61,7 +62,7 @@
           <div><span>REPORTS</span><span>5 active</span></div>
           <div><span>POSITIONS</span><span>30+ tracked</span></div>
           <div><span>TRADERS</span><span>26 watched</span></div>
-          <div><span>CADENCE</span><span>Sunday weekly</span></div>
+          <div><span>CADENCE</span><span>Daily + Sunday</span></div>
           <div><span>HORIZON</span><span>3-5 yrs</span></div>
           <div><span>NEXT SYNC</span><span>+7 days</span></div>
         </div>
@@ -101,6 +102,33 @@
       <div class="waypoint-label">AI agents per report</div>
       <div class="waypoint-val count" data-target="5">5</div>
       <div class="waypoint-sub">// parallel research per theme</div>
+    </div>
+  </div>
+</section>
+
+<section id="daily" class="section">
+  <div class="sec-head reveal">
+    <div>
+      <div class="sec-tag">// PROBE 00 · DAILY BRIEF</div>
+      <div class="sec-tag-tail">WARNING-ONLY TELEGRAM</div>
+    </div>
+    <h2 class="sec-title" data-i18n="dashboardDailyTitle">Daily <em>read</em>,<br>no noise.</h2>
+  </div>
+
+  <div class="exec-grid reveal">
+    <div class="daily-preview">
+      <span class="status-tag" id="daily-preview-status">Loading</span>
+      <h3 id="daily-preview-headline">Loading daily brief...</h3>
+      <p id="daily-preview-summary">Market pulse, warnings, events, thesis changes, valuation checks, and source ledger.</p>
+      <ul class="daily-preview-list" id="daily-preview-list"></ul>
+      <a class="daily-cta" href="daily-brief.html">Open daily brief</a>
+    </div>
+    <div class="daily-preview">
+      <span class="status-tag" id="daily-alert-status">Telegram policy</span>
+      <h3 id="daily-alert-title">Warnings and big news only</h3>
+      <p id="daily-alert-detail">Routine daily updates stay on the site. Telegram fires only for warnings, thesis breaks, major catalysts, or large verified market moves.</p>
+      <ul class="daily-preview-list" id="daily-alert-list"></ul>
+      <a class="daily-cta" href="daily-brief.html#alerts-grid">View alert rules</a>
     </div>
   </div>
 </section>
@@ -222,6 +250,7 @@
       <h4>Site map</h4>
       <ul>
         <li><a href="index.html">Dashboard</a></li>
+        <li><a href="daily-brief.html">Daily Brief</a></li>
         <li><a href="picks/swing-3-5yr.html">US 3-5yr swing</a></li>
         <li><a href="picks/swing-msia.html">Malaysia swing</a></li>
         <li><a href="picks/dividends.html">Dividend income</a></li>
@@ -244,6 +273,48 @@
 
 <script src="assets/main.js"></script>
 <script>
+function escapeHtml(value){
+  return String(value ?? '').replace(/[&<>"']/g, (ch) => ({
+    '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;'
+  }[ch]));
+}
+
+// Load daily brief preview from data/daily-brief.json
+(async function loadDailyPreview(){
+  try {
+    const r = await fetch('data/daily-brief.json');
+    if (!r.ok) throw new Error();
+    const d = await r.json();
+    const zh = typeof currentLanguage === 'function' && currentLanguage() === 'zh';
+    const alert = (d.alerts || [])[0] || {};
+    const zhPulse = [
+      {label:'市场状态', value:'待首次运行', detail:'下一次自动任务会检查 SPY、QQQ、IWM、SMH、VIX、DXY、10Y、BTC 和 ETH。'},
+      {label:'市场宽度', value:'待首次运行', detail:'会检查指数宽度、板块强弱、新高新低质量，以及可靠来源能拿到的数据。'},
+      {label:'组合影响', value:'待首次运行', detail:'会把新闻映射到美股组合、马来西亚组合、股息篮子和 Leopold 13F 追踪。'}
+    ];
+    const zhRules = [
+      'SPY 或 QQQ 单日跌 2%+，或 VIX 较前收盘跳升 15%+。',
+      '核心持仓出现 thesis 破坏级别的文件、业绩、指引、监管或事故。',
+      '10Y 美债单日移动 15bp+，且利率敏感质量股承压。'
+    ];
+    document.getElementById('daily-preview-status').textContent = String(d.status || 'loaded').replace(/_/g, ' ').toUpperCase();
+    document.getElementById('daily-preview-headline').textContent = zh ? '每日简报页面已就绪，等待首次验证运行' : (d.headline || 'Daily brief');
+    document.getElementById('daily-preview-summary').textContent = zh ? '这个页面会放市场状态、风险提醒、事件、thesis 变化、估值检查和来源台账。' : (d.summary?.[0] || 'Daily brief loaded.');
+    document.getElementById('daily-preview-list').innerHTML = (zh ? zhPulse : (d.market_pulse || []).slice(0, 3)).map(item => `
+      <li><em>${escapeHtml(item.label)}:</em> ${escapeHtml(item.value)} — ${escapeHtml(item.detail)}</li>
+    `).join('');
+    document.getElementById('daily-alert-title').textContent = zh ? '只在风险和大新闻时发 Telegram' : (alert.title || 'Warnings and big news only');
+    document.getElementById('daily-alert-detail').textContent = zh ? '普通更新留在网站。只有风险、thesis 破坏、重大催化或大幅市场波动才通知。' : (alert.detail || 'No active warning.');
+    document.getElementById('daily-alert-list').innerHTML = (zh ? zhRules : (d.warning_rules || []).slice(0, 3)).map(rule => `
+      <li>${escapeHtml(rule)}</li>
+    `).join('');
+    if (typeof applyLanguage === 'function') applyLanguage(currentLanguage());
+  } catch(e) {
+    document.getElementById('daily-preview-headline').textContent = 'Daily brief unavailable';
+    document.getElementById('daily-preview-list').innerHTML = '<li>Could not load data/daily-brief.json.</li>';
+  }
+})();
+
 // Load news from data/news.json
 (async function loadNews(){
   try {
