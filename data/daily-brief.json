@@ -1,6 +1,6 @@
 {
-  "updated": "2026-05-25",
-  "generated_at": "2026-05-25T08:00:00+08:00",
+  "updated": "2026-05-26",
+  "generated_at": "2026-05-26T08:00:00+08:00",
   "status": "ready_for_first_daily_run",
   "market_session": "First automated daily run pending",
   "site_url": "https://rebelzxr.github.io/dainer-finance-dashboard/daily-brief.html",
@@ -8,7 +8,7 @@
   "summary": [
     "This seed file defines the daily brief contract. It does not contain live market levels yet.",
     "The automation should replace this file every morning after verifying market, macro, event, source, and portfolio-impact data.",
-    "Telegram should stay quiet unless a warning rule or big-news trigger is hit."
+    "Telegram should send a daily title digest every morning, with urgent warnings pinned at the top when present."
   ],
   "market_pulse": [
     {
@@ -31,8 +31,8 @@
     },
     {
       "label": "Telegram",
-      "value": "Warning only",
-      "detail": "No routine daily spam. Send only if a critical warning, thesis break, large move, or major catalyst appears.",
+      "value": "Daily digest",
+      "detail": "Send a simple morning title list covering war, macro, oil, gas, copper, rates, FX, portfolio news, and urgent warnings.",
       "tone": "watch"
     }
   ],
@@ -50,6 +50,70 @@
     "Send Telegram if TSM, LLY, MSFT, CEG, ETN, ANET, VRTX, SMH, or key Malaysia names move 5%+ with verified news.",
     "Send Telegram if SEC EDGAR publishes a relevant new 13F, S-1, 8-K, 6-K, or major insider/PTR filing tied to tracked names."
   ],
+  "telegram_news_digest": {
+    "public_page": "telegram-news.html",
+    "public_text": "telegram-news.txt",
+    "send_policy": "send_daily_title_digest_plus_pin_warnings",
+    "format": "plain_text_for_telegram",
+    "max_titles": 40,
+    "rules": [
+      "Send the daily title digest every morning even when there is no urgent alert.",
+      "Put warning or critical items at the top with [WARNING] or [CRITICAL].",
+      "Include war/geopolitics, macro/rates, oil, gas, copper, broader commodities, FX, equities, portfolio names, Malaysia market, and major earnings or filings.",
+      "Keep each item to one title plus one short impact tag. No long article summaries in Telegram.",
+      "If the message is too long for Telegram, send the top digest and attach/link telegram-news.txt for the full list."
+    ],
+    "categories": [
+      {
+        "category": "War / geopolitics",
+        "why_watch": "Can move oil, gas, defense, shipping, gold, USD, and risk sentiment.",
+        "titles": [
+          {
+            "title": "Pending first verified run: war and geopolitics title scan",
+            "impact": "oil / gas / gold / defense / shipping",
+            "level": "monitor",
+            "source": "pending"
+          }
+        ]
+      },
+      {
+        "category": "Macro / rates / FX",
+        "why_watch": "Drives equity multiples, USD/MYR, bond yields, gold, BTC, and quality-growth pressure.",
+        "titles": [
+          {
+            "title": "Pending first verified run: macro, rates, inflation, Fed, DXY, and USD/MYR scan",
+            "impact": "stocks / bonds / USD / MYR / gold",
+            "level": "monitor",
+            "source": "pending"
+          }
+        ]
+      },
+      {
+        "category": "Commodities",
+        "why_watch": "Oil, gas, copper, uranium, and gold can signal inflation, growth, war risk, and industrial demand.",
+        "titles": [
+          {
+            "title": "Pending first verified run: oil, natural gas, copper, gold, uranium, and broad commodity scan",
+            "impact": "energy / miners / inflation / cyclicals",
+            "level": "monitor",
+            "source": "pending"
+          }
+        ]
+      },
+      {
+        "category": "Stocks / portfolio",
+        "why_watch": "Maps major news to DAINER Finance holdings and watchlists.",
+        "titles": [
+          {
+            "title": "Pending first verified run: TSM, LLY, MSFT, CEG, ETN, ANET, VRTX, SMH, Malaysia names, and 13F tracker scan",
+            "impact": "portfolio / watchlist / thesis",
+            "level": "monitor",
+            "source": "pending"
+          }
+        ]
+      }
+    ]
+  },
   "event_calendar": [
     {
       "date": "2026-05-27",
@@ -146,8 +210,10 @@
   "publish_contract": {
     "public_json": "data/daily-brief.json",
     "public_page": "daily-brief.html",
+    "telegram_news_page": "telegram-news.html",
+    "telegram_news_text": "telegram-news.txt",
     "local_archive": "/Users/dainer/Desktop/DAINER OS/finance-data/daily-briefs/YYYY-MM-DD.md",
-    "telegram_policy": "warning_or_big_news_only",
+    "telegram_policy": "daily_news_title_digest_plus_warning_pins",
     "git_policy": "commit and push dainer-finance main after verification"
   }
 }

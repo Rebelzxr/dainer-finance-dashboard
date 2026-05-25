@@ -110,7 +110,7 @@
   <div class="sec-head reveal">
     <div>
       <div class="sec-tag">// PROBE 00 · DAILY BRIEF</div>
-      <div class="sec-tag-tail">WARNING-ONLY TELEGRAM</div>
+      <div class="sec-tag-tail">DAILY TELEGRAM DIGEST</div>
     </div>
     <h2 class="sec-title" data-i18n="dashboardDailyTitle">Daily <em>read</em>,<br>no noise.</h2>
   </div>
@@ -124,11 +124,11 @@
       <a class="daily-cta" href="daily-brief.html">Open daily brief</a>
     </div>
     <div class="daily-preview">
-      <span class="status-tag" id="daily-alert-status">Telegram policy</span>
-      <h3 id="daily-alert-title">Warnings and big news only</h3>
-      <p id="daily-alert-detail">Routine daily updates stay on the site. Telegram fires only for warnings, thesis breaks, major catalysts, or large verified market moves.</p>
+      <span class="status-tag" id="daily-alert-status">Telegram digest</span>
+      <h3 id="daily-alert-title">Daily news titles, warnings pinned first</h3>
+      <p id="daily-alert-detail">Telegram now gets the daily title list: war, macro, oil, gas, copper, commodities, FX, stocks, Malaysia, and portfolio-moving news.</p>
       <ul class="daily-preview-list" id="daily-alert-list"></ul>
-      <a class="daily-cta" href="daily-brief.html#alerts-grid">View alert rules</a>
+      <a class="daily-cta" href="telegram-news.html">Open Telegram digest</a>
     </div>
   </div>
 </section>
@@ -286,16 +286,15 @@ function escapeHtml(value){
     if (!r.ok) throw new Error();
     const d = await r.json();
     const zh = typeof currentLanguage === 'function' && currentLanguage() === 'zh';
-    const alert = (d.alerts || [])[0] || {};
     const zhPulse = [
       {label:'市场状态', value:'待首次运行', detail:'下一次自动任务会检查 SPY、QQQ、IWM、SMH、VIX、DXY、10Y、BTC 和 ETH。'},
       {label:'市场宽度', value:'待首次运行', detail:'会检查指数宽度、板块强弱、新高新低质量，以及可靠来源能拿到的数据。'},
       {label:'组合影响', value:'待首次运行', detail:'会把新闻映射到美股组合、马来西亚组合、股息篮子和 Leopold 13F 追踪。'}
     ];
     const zhRules = [
-      'SPY 或 QQQ 单日跌 2%+，或 VIX 较前收盘跳升 15%+。',
-      '核心持仓出现 thesis 破坏级别的文件、业绩、指引、监管或事故。',
-      '10Y 美债单日移动 15bp+，且利率敏感质量股承压。'
+      '战争 / 地缘：影响油、气、黄金、国防、航运和风险偏好。',
+      '宏观 / 利率 / FX：影响估值、美元、马币、债券、黄金和 BTC。',
+      '商品：跟踪油、天然气、铜、黄金、铀和通胀信号。'
     ];
     document.getElementById('daily-preview-status').textContent = String(d.status || 'loaded').replace(/_/g, ' ').toUpperCase();
     document.getElementById('daily-preview-headline').textContent = zh ? '每日简报页面已就绪，等待首次验证运行' : (d.headline || 'Daily brief');
@@ -303,9 +302,10 @@ function escapeHtml(value){
     document.getElementById('daily-preview-list').innerHTML = (zh ? zhPulse : (d.market_pulse || []).slice(0, 3)).map(item => `
       <li><em>${escapeHtml(item.label)}:</em> ${escapeHtml(item.value)} — ${escapeHtml(item.detail)}</li>
     `).join('');
-    document.getElementById('daily-alert-title').textContent = zh ? '只在风险和大新闻时发 Telegram' : (alert.title || 'Warnings and big news only');
-    document.getElementById('daily-alert-detail').textContent = zh ? '普通更新留在网站。只有风险、thesis 破坏、重大催化或大幅市场波动才通知。' : (alert.detail || 'No active warning.');
-    document.getElementById('daily-alert-list').innerHTML = (zh ? zhRules : (d.warning_rules || []).slice(0, 3)).map(rule => `
+    document.getElementById('daily-alert-title').textContent = zh ? '每天发新闻标题，风险放最上面' : 'Daily news titles, warnings pinned first';
+    document.getElementById('daily-alert-detail').textContent = zh ? 'Telegram 会收到战争、宏观、油气、铜、商品、FX、股票、马来西亚和组合相关新闻标题。' : 'Telegram gets the daily title list: war, macro, oil, gas, copper, commodities, FX, stocks, Malaysia, and portfolio-moving news.';
+    const digestRules = (d.telegram_news_digest?.categories || []).slice(0, 3).map(item => `${item.category}: ${item.why_watch}`);
+    document.getElementById('daily-alert-list').innerHTML = (zh ? zhRules : digestRules).map(rule => `
       <li>${escapeHtml(rule)}</li>
     `).join('');
     if (typeof applyLanguage === 'function') applyLanguage(currentLanguage());

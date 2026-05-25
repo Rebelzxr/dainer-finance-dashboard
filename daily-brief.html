@@ -22,6 +22,7 @@
     <a href="picks/swing-msia.html" class="nav-cell-hide">Malaysia</a>
     <a href="picks/dividends.html" class="nav-cell-hide">Dividends</a>
     <a href="picks/famous-traders.html">Traders</a>
+    <a href="telegram-news.html">Telegram News</a>
     <a href="calculator.html" class="nav-cell-hide">Calculator</a>
     <a href="newsletter/index.html">Newsletter</a>
   </div>
@@ -43,7 +44,7 @@
         the daily <em>signal</em>.
       </h1>
       <p class="hero-sub" id="brief-summary-lead">
-        Market pulse, warnings, events, thesis changes, valuation checks, and sources. Routine updates live here. Telegram only fires for warnings or big news.
+        Market pulse, warnings, events, thesis changes, valuation checks, source ledger, and a Telegram-ready title digest for war, macro, commodities, FX, and portfolio-moving news.
       </p>
     </div>
 
@@ -88,8 +89,8 @@
       <ul id="brief-summary-list"></ul>
     </div>
     <div class="exec-card">
-      <h4>Warning rules</h4>
-      <h3>When Telegram fires</h3>
+      <h4>Telegram digest</h4>
+      <h3>Daily titles, warnings pinned first</h3>
       <ul id="warning-rules"></ul>
     </div>
   </div>
@@ -98,7 +99,22 @@
 <section class="section section-tight">
   <div class="sec-head reveal">
     <div>
-      <div class="sec-tag">// PROBE 02 · WARNINGS</div>
+      <div class="sec-tag">// PROBE 02 · TELEGRAM TITLES</div>
+      <div class="sec-tag-tail">DAILY DIGEST</div>
+    </div>
+    <h2 class="sec-title" data-i18n="dailyTelegramTitle">Titles for<br><em>Telegram</em>.</h2>
+  </div>
+  <div class="news-grid reveal-stagger" id="telegram-digest-grid"></div>
+  <div class="reveal" style="margin-top:22px;">
+    <a class="daily-cta" href="telegram-news.html">Open simple Telegram page</a>
+    <a class="daily-cta" href="telegram-news.txt" style="margin-left:18px;">Open text file</a>
+  </div>
+</section>
+
+<section class="section section-tight">
+  <div class="sec-head reveal">
+    <div>
+      <div class="sec-tag">// PROBE 03 · WARNINGS</div>
       <div class="sec-tag-tail">BIG NEWS ONLY</div>
     </div>
     <h2 class="sec-title" data-i18n="dailyAlertsTitle">Alerts that<br><em>matter</em>.</h2>
@@ -109,7 +125,7 @@
 <section class="section section-tight">
   <div class="sec-head reveal">
     <div>
-      <div class="sec-tag">// PROBE 03 · EVENTS</div>
+      <div class="sec-tag">// PROBE 04 · EVENTS</div>
       <div class="sec-tag-tail">NEXT CATALYSTS</div>
     </div>
     <h2 class="sec-title" data-i18n="dailyCalendarTitle">Calendar and<br><em>deadlines</em>.</h2>
@@ -127,7 +143,7 @@
 <section class="section section-tight">
   <div class="sec-head reveal">
     <div>
-      <div class="sec-tag">// PROBE 04 · PORTFOLIO IMPACT</div>
+      <div class="sec-tag">// PROBE 05 · PORTFOLIO IMPACT</div>
       <div class="sec-tag-tail">THESIS CHANGE LOG</div>
     </div>
     <h2 class="sec-title" data-i18n="dailyPortfolioTitle">What changed in<br><em>the book</em>.</h2>
@@ -138,7 +154,7 @@
 <section class="section section-tight">
   <div class="sec-head reveal">
     <div>
-      <div class="sec-tag">// PROBE 05 · VALUATION</div>
+      <div class="sec-tag">// PROBE 06 · VALUATION</div>
       <div class="sec-tag-tail">FAST CHECK</div>
     </div>
     <h2 class="sec-title" data-i18n="dailyValuationTitle">Valuation<br><em>watch</em>.</h2>
@@ -156,7 +172,7 @@
 <section class="section section-tight">
   <div class="sec-head reveal">
     <div>
-      <div class="sec-tag">// PROBE 06 · SOURCES</div>
+      <div class="sec-tag">// PROBE 07 · SOURCES</div>
       <div class="sec-tag-tail">VERIFY FIRST</div>
     </div>
     <h2 class="sec-title" data-i18n="dailySourceTitle">Source<br><em>ledger</em>.</h2>
@@ -168,7 +184,7 @@
   <div class="footer-grid">
     <div>
       <h4>Automation contract</h4>
-      <p data-i18n="dailyAutomationContract">Daily job researches, verifies, writes <span id="contract-json">data/daily-brief.json</span>, archives the full local report in DAINER OS, commits and pushes the finance site, then sends Telegram only for warnings or big news.</p>
+      <p data-i18n="dailyAutomationContract">Daily job researches, verifies, writes <span id="contract-json">data/daily-brief.json</span> plus telegram-news.txt, archives the full local report in DAINER OS, commits and pushes the finance site, then sends the Telegram title digest every morning with warnings pinned first.</p>
       <span class="status-tag" id="contract-status">STATUS: WAITING FIRST RUN</span>
     </div>
     <div>
@@ -176,6 +192,7 @@
       <ul>
         <li><a href="index.html">Dashboard</a></li>
         <li><a href="daily-brief.html">Daily Brief</a></li>
+        <li><a href="telegram-news.html">Telegram News</a></li>
         <li><a href="picks/swing-3-5yr.html">US 3-5yr swing</a></li>
         <li><a href="picks/swing-msia.html">Malaysia swing</a></li>
         <li><a href="picks/dividends.html">Dividend income</a></li>
@@ -188,7 +205,7 @@
         <li><a href="newsletter/feed.xml">RSS feed</a></li>
         <li><a href="https://github.com/Rebelzxr/dainer-finance-dashboard">GitHub source</a></li>
       </ul>
-      <p style="margin-top:14px;">// DAILY UPLINK · warning-only Telegram policy</p>
+      <p style="margin-top:14px;">// DAILY UPLINK · Telegram title digest</p>
     </div>
   </div>
 </footer>
@@ -234,6 +251,24 @@ function renderCards(items, targetId, type){
   }).join('');
 }
 
+function renderTelegramDigest(digest){
+  const target = document.getElementById('telegram-digest-grid');
+  const categories = digest?.categories || [];
+  target.innerHTML = categories.map((category) => {
+    const titles = (category.titles || []).map((item) => `
+      <li><strong>${escapeHtml(item.title)}</strong><br><span>${escapeHtml(item.impact || '')}</span></li>
+    `).join('');
+    return `
+      <div class="news-log tone-watch">
+        <div class="news-meta"><span>${escapeHtml(category.category)}</span><em>TELEGRAM</em></div>
+        <h3 class="news-head">${escapeHtml(category.category)}</h3>
+        <p class="news-text">${escapeHtml(category.why_watch || '')}</p>
+        <ul class="daily-preview-list">${titles}</ul>
+      </div>
+    `;
+  }).join('');
+}
+
 function setDynamicText(id, value){
   const el = document.getElementById(id);
   if (!el) return;
@@ -272,6 +307,7 @@ async function loadDailyBrief(){
   `).join('');
 
   renderCards(data.alerts, 'alerts-grid', 'alert');
+  renderTelegramDigest(data.telegram_news_digest);
   renderCards(data.thesis_change_log, 'thesis-grid', 'thesis');
   renderCards(data.source_ledger, 'source-grid', 'source');
 

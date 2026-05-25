@@ -27,6 +27,7 @@ const documentedEnglishIslands = {
     '#brief-status',
     '#brief-headline',
     '#pulse-grid',
+    '#telegram-digest-grid',
     '#brief-summary-list',
     '#warning-rules',
     '#alerts-grid',

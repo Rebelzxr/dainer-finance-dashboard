@@ -1,0 +1,25 @@
+DAINER FINANCE NEWS DIGEST
+Status: ready for first verified daily run
+
+Telegram rule:
+Send this title digest every morning. Pin [WARNING] and [CRITICAL] items first, but do not suppress normal war, macro, commodities, FX, and portfolio-moving titles.
+
+Sections to include:
+1. War / geopolitics
+   - Pending first verified run: war and geopolitics title scan
+   - Impact tags: oil, gas, gold, defense, shipping, USD, risk sentiment
+
+2. Macro / rates / FX
+   - Pending first verified run: macro, rates, inflation, Fed, DXY, and USD/MYR scan
+   - Impact tags: stocks, bonds, USD, MYR, gold, BTC
+
+3. Commodities
+   - Pending first verified run: oil, natural gas, copper, gold, uranium, and broad commodity scan
+   - Impact tags: energy, miners, inflation, cyclicals
+
+4. Stocks / portfolio
+   - Pending first verified run: TSM, LLY, MSFT, CEG, ETN, ANET, VRTX, SMH, Malaysia names, and 13F tracker scan
+   - Impact tags: portfolio, watchlist, thesis
+
+Full page:
+https://rebelzxr.github.io/dainer-finance-dashboard/telegram-news.html

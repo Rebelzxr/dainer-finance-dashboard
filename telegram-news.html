@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Telegram News Digest · DAINER Finance</title>
+<meta name="description" content="Telegram-ready DAINER Finance daily news title digest covering war, macro, commodities, FX, stocks, and portfolio-moving headlines.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@200;300;400;500;700&family=Bitter:wght@300;400;500;700&display=swap" rel="stylesheet">
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<link rel="stylesheet" href="assets/style.css">
+<style>
+.telegram-page{max-width:900px;margin:120px auto 70px;padding:0 24px;position:relative;z-index:2;}
+.telegram-box{border:1px solid var(--line-bright);background:color-mix(in srgb,var(--bg-elev) 94%,transparent);padding:28px;}
+.telegram-kicker{font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--oxide);margin-bottom:14px;}
+.telegram-title{font-family:var(--display);font-size:clamp(34px,5vw,68px);line-height:.95;font-weight:500;color:var(--ink);margin-bottom:18px;}
+.telegram-sub{font-family:var(--body);font-size:15px;line-height:1.7;color:var(--ink-dim);max-width:760px;margin-bottom:26px;}
+.telegram-pre{white-space:pre-wrap;font-family:var(--mono);font-size:13px;line-height:1.65;color:var(--ink);background:color-mix(in srgb,var(--bg) 78%,transparent);border:1px solid var(--line);padding:22px;overflow:auto;}
+.telegram-link{display:inline-block;margin-top:18px;font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--oxide);}
+</style>
+</head>
+<body class="has-mars-hero">
+<header class="mission">
+  <div class="mission-cells">
+    <span class="mission-brand">DAINER·<em>FIN</em></span>
+    <a href="index.html">Dashboard</a>
+    <a href="daily-brief.html">Daily Brief</a>
+    <a href="telegram-news.html" class="active">Telegram News</a>
+    <a href="picks/swing-3-5yr.html" class="nav-cell-hide">US Picks</a>
+    <a href="picks/swing-msia.html" class="nav-cell-hide">Malaysia</a>
+    <a href="calculator.html" class="nav-cell-hide">Calculator</a>
+  </div>
+  <div class="mission-cells">
+    <span class="nav-cell-hide">SOL <em data-sol>1247</em></span>
+    <span class="live nav-cell-hide">UPLINK</span>
+    <button class="theme-btn" onclick="toggleTheme()">DRK / <span style="color:var(--oxide)">LGT</span></button>
+  </div>
+</header>
+
+<main class="telegram-page">
+  <div class="telegram-box">
+    <div class="telegram-kicker">// TELEGRAM DIGEST · DAILY TITLES</div>
+    <h1 class="telegram-title">News titles<br>worth seeing.</h1>
+    <p class="telegram-sub">This is the simple Telegram-ready version: war, macro, oil, gas, copper, commodities, FX, stocks, Malaysia, and portfolio-moving titles. Warnings go first, but normal daily titles still get sent.</p>
+    <pre class="telegram-pre" id="telegram-text">Loading telegram-news.txt...</pre>
+    <a class="telegram-link" href="daily-brief.html">Open full daily brief</a>
+  </div>
+</main>
+
+<script src="assets/main.js"></script>
+<script>
+fetch('telegram-news.txt')
+  .then((response) => response.ok ? response.text() : Promise.reject())
+  .then((text) => { document.getElementById('telegram-text').textContent = text; })
+  .catch(() => { document.getElementById('telegram-text').textContent = 'Telegram news digest unavailable.'; });
+</script>
+</body>
+</html>
