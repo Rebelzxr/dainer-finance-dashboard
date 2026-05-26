@@ -1,25 +1,17 @@
-DAINER FINANCE NEWS DIGEST
-Status: ready for first verified daily run
+DAINER FINANCE NEWS DIGEST — 26 May 2026, 14:20 MYT
 
-Telegram rule:
-Send this title digest every morning. Pin [WARNING] and [CRITICAL] items first, but do not suppress normal war, macro, commodities, FX, and portfolio-moving titles.
+[WARNING] US carried out new defensive strikes in southern Iran while peace talks continue — oil / gas / gold / defense / shipping
+[ENERGY] Brent is back under $100 but still headline-driven; reopening Hormuz is not the same as normal tanker flow — oil / inflation / Asia
+[FX] Dollar steadies as markets price some Iran deal optimism but not a durable de-escalation — USD / MYR / EM currencies
+[RATES] US 10Y near 4.50% and 2Y near 4.06%; energy inflation and fiscal risk keep rate pressure alive — bonds / growth stocks
+[GOLD] Gold slipped while oil rose; higher energy prices keep the inflation/rates channel alive — gold / real yields
+[COPPER] Copper pulled back with dollar/oil moves, but LME available stocks are near a 10-week low — copper / miners / industrials
+[GAS/LNG] Hormuz still matters for LNG; Asia remains exposed until tankers, insurance and flows normalize — natural gas / LNG / utilities
+[MALAYSIA] Bursa opened lower on profit-taking after crude weakness; Maybank up, TNB/CIMB/IHH lower — Malaysia equities
+[PORTFOLIO] TSM/SMH watch: Taiwan AI chip smuggling crackdown keeps export-control risk in the semiconductor thesis — semis / AI supply chain
+[PORTFOLIO] LLY watch: retatrutide Phase 3 weight-loss data remains bullish; valuation and supply are the watch items — healthcare / GLP-1
 
-Sections to include:
-1. War / geopolitics
-   - Pending first verified run: war and geopolitics title scan
-   - Impact tags: oil, gas, gold, defense, shipping, USD, risk sentiment
-
-2. Macro / rates / FX
-   - Pending first verified run: macro, rates, inflation, Fed, DXY, and USD/MYR scan
-   - Impact tags: stocks, bonds, USD, MYR, gold, BTC
-
-3. Commodities
-   - Pending first verified run: oil, natural gas, copper, gold, uranium, and broad commodity scan
-   - Impact tags: energy, miners, inflation, cyclicals
-
-4. Stocks / portfolio
-   - Pending first verified run: TSM, LLY, MSFT, CEG, ETN, ANET, VRTX, SMH, Malaysia names, and 13F tracker scan
-   - Impact tags: portfolio, watchlist, thesis
+Sources used: Reuters via MarketScreener, AP, Axios, NST, Energy News / Reuters-linked commodity report, Tom's Hardware, Axios Lilly.
 
 Full page:
 https://rebelzxr.github.io/dainer-finance-dashboard/telegram-news.html

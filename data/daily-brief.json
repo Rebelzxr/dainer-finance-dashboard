@@ -1,14 +1,14 @@
 {
   "updated": "2026-05-26",
   "generated_at": "2026-05-26T08:00:00+08:00",
-  "status": "ready_for_first_daily_run",
-  "market_session": "First automated daily run pending",
+  "status": "manual_digest_sent",
+  "market_session": "Manual digest sent 2026-05-26 14:20 MYT",
   "site_url": "https://rebelzxr.github.io/dainer-finance-dashboard/daily-brief.html",
   "headline": "Daily brief page ready; first verified market run pending",
   "summary": [
-    "This seed file defines the daily brief contract. It does not contain live market levels yet.",
-    "The automation should replace this file every morning after verifying market, macro, event, source, and portfolio-impact data.",
-    "Telegram should send a daily title digest every morning, with urgent warnings pinned at the top when present."
+    "Manual Telegram news digest sent after the scheduled finance automation did not produce the expected news message.",
+    "The digest now includes war, macro, oil, gas, copper, rates, FX, Malaysia, and portfolio-moving titles.",
+    "The automation should replace this file every morning after verifying market, macro, event, source, and portfolio-impact data."
   ],
   "market_pulse": [
     {
@@ -39,8 +39,8 @@
   "alerts": [
     {
       "level": "monitor",
-      "title": "No active warning until first automated run",
-      "detail": "The first scheduled run will decide whether Telegram needs to fire."
+      "title": "Manual digest sent; scheduled finance run needs follow-up",
+      "detail": "TODO Telegram is working, but the finance digest had no run artifact. Dedicated digest sender added."
     }
   ],
   "warning_rules": [
@@ -69,10 +69,10 @@
         "why_watch": "Can move oil, gas, defense, shipping, gold, USD, and risk sentiment.",
         "titles": [
           {
-            "title": "Pending first verified run: war and geopolitics title scan",
+            "title": "US carried out new defensive strikes in southern Iran while peace talks continue",
             "impact": "oil / gas / gold / defense / shipping",
-            "level": "monitor",
-            "source": "pending"
+            "level": "warning",
+            "source": "Reuters / AP"
           }
         ]
       },
@@ -81,10 +81,10 @@
         "why_watch": "Drives equity multiples, USD/MYR, bond yields, gold, BTC, and quality-growth pressure.",
         "titles": [
           {
-            "title": "Pending first verified run: macro, rates, inflation, Fed, DXY, and USD/MYR scan",
+            "title": "Dollar steadies while US 10Y holds near 4.50% as oil/inflation risk remains",
             "impact": "stocks / bonds / USD / MYR / gold",
             "level": "monitor",
-            "source": "pending"
+            "source": "Reuters"
           }
         ]
       },
@@ -93,10 +93,10 @@
         "why_watch": "Oil, gas, copper, uranium, and gold can signal inflation, growth, war risk, and industrial demand.",
         "titles": [
           {
-            "title": "Pending first verified run: oil, natural gas, copper, gold, uranium, and broad commodity scan",
+            "title": "Brent trades below $100 but remains tied to Hormuz deal risk; copper pulls back while LME stocks stay tight",
             "impact": "energy / miners / inflation / cyclicals",
             "level": "monitor",
-            "source": "pending"
+            "source": "Reuters / AP / Axios"
           }
         ]
       },
@@ -105,10 +105,10 @@
         "why_watch": "Maps major news to DAINER Finance holdings and watchlists.",
         "titles": [
           {
-            "title": "Pending first verified run: TSM, LLY, MSFT, CEG, ETN, ANET, VRTX, SMH, Malaysia names, and 13F tracker scan",
+            "title": "TSM/SMH export-control risk and LLY retatrutide momentum stay on watch",
             "impact": "portfolio / watchlist / thesis",
             "level": "monitor",
-            "source": "pending"
+            "source": "Tom's Hardware / Axios"
           }
         ]
       }
