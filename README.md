@@ -1,11 +1,12 @@
 # DAINER Finance Dashboard
 
-A public finance notebook for markets, swing picks, dividend income, trader tracking, and compounding math. Free, static, and open source.
+A public portfolio automation showcase for markets, swing picks, dividend income, trader tracking, and compounding math. Free, static, and open source.
 
 - **Live site:** https://rebelzxr.github.io/dainer-finance-dashboard/
 - **Source:** https://github.com/Rebelzxr/dainer-finance-dashboard
 - **Deploy:** GitHub Pages from `main` / repository root
 - **Newsletter:** weekly, free, signup form embedded on the site via Formspree
+- **Operator cadence:** local weekly LaunchAgent, Monday 08:30 Malaysia time
 
 > Not financial advice. This is an open research notebook. Verify live numbers and source filings before making any allocation decision.
 
@@ -16,8 +17,6 @@ A public finance notebook for markets, swing picks, dividend income, trader trac
 | Page | What it is |
 | --- | --- |
 | [`index.html`](index.html) | Dashboard overview, latest issue, navigation cards, and news log |
-| [`daily-brief.html`](daily-brief.html) | Daily market brief with warnings, events, thesis changes, valuation checks, and source ledger |
-| [`telegram-news.html`](telegram-news.html) | Simple Telegram-ready title digest for war, macro, commodities, FX, stocks, and portfolio-moving news |
 | [`picks/swing-3-5yr.html`](picks/swing-3-5yr.html) | US 3-5 year swing report |
 | [`picks/swing-msia.html`](picks/swing-msia.html) | Malaysia 3-5 year swing report |
 | [`picks/dividends.html`](picks/dividends.html) | Dividend income report with country-aware tax notes |
@@ -27,6 +26,14 @@ A public finance notebook for markets, swing picks, dividend income, trader trac
 | [`newsletter/index.html`](newsletter/index.html) | Newsletter archive and signup |
 | [`newsletter/2026-05-20.html`](newsletter/2026-05-20.html) | Issue #001 |
 | [`newsletter/feed.xml`](newsletter/feed.xml) | RSS feed |
+
+Internal/unlisted artifacts:
+
+| Page | What it is |
+| --- | --- |
+| [`daily-brief.html`](daily-brief.html) | Internal daily market brief artifact; no public nav link; `noindex` |
+| [`telegram-news.html`](telegram-news.html) | Internal Telegram digest artifact; no public nav link; `noindex` |
+| [`telegram-news.txt`](telegram-news.txt) | Plain text digest used by Telegram sender |
 
 ---
 
@@ -46,10 +53,10 @@ A public finance notebook for markets, swing picks, dividend income, trader trac
 ```text
 dainer-finance-dashboard/
 ├── index.html
-├── daily-brief.html
-├── telegram-news.html
-├── telegram-news.txt
 ├── calculator.html
+├── daily-brief.html          # internal/unlisted
+├── telegram-news.html        # internal/unlisted
+├── telegram-news.txt         # internal sender artifact
 ├── picks/
 │   ├── swing-3-5yr.html
 │   ├── swing-msia.html
@@ -76,11 +83,50 @@ dainer-finance-dashboard/
 │   ├── mars-horizon.jpg
 │   └── mars-sandstorm.webm
 ├── scripts/
+│   ├── WEEKLY_OPERATOR_PROMPT.md
 │   ├── i18n-keys.js
 │   ├── i18n-verify.js
+│   ├── weekly-operator.sh
 │   └── tax-tools.test.js
+├── launchd/
+│   └── com.dainer.finance.weekly.plist
 └── README.md
 ```
+
+---
+
+## Weekly Operator
+
+The public website is showcase-first. Daily news and Telegram pages stay internal/unlisted because stale daily pages weaken the public proof-of-work.
+
+The weekly operator is defined by:
+
+```text
+scripts/WEEKLY_OPERATOR_PROMPT.md
+scripts/weekly-operator.sh
+launchd/com.dainer.finance.weekly.plist
+```
+
+Installed LaunchAgent target:
+
+```text
+~/Library/LaunchAgents/com.dainer.finance.weekly.plist
+```
+
+Schedule:
+
+```text
+Monday 08:30 MYT
+```
+
+Operator contract:
+
+- Research weekly market/portfolio changes.
+- Update public reports only when there is a material thesis, valuation, filing, or investment-direction change.
+- Keep `daily-brief.html` and `telegram-news.html` unlisted/internal.
+- Verify JSON, i18n, and tax calculator tests.
+- Commit and push to `origin main` only when changes are verified.
+- Send Dainer a Telegram status with commit hash, source gaps, changed files, and one-line portfolio direction.
 
 ---
 

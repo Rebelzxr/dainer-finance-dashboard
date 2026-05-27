@@ -250,8 +250,8 @@ const I18N = {
     TRACKED:'已跟踪',
 
     // Codex i18n coverage expansion
-    "dashboardHeroTitle":"<span class=\"lbl\">// 部署日志 · 总览</span>一个建造者的<br><em>金融</em>与<br>资本<em>视角</em>。",
-    "dashboardHeroSub":"这里放我的<em>标的</em>、<em>每周阅读</em>和数学计算，为未来 5 年复利做开放笔记。5 份研究、26 位投资人跟踪、一本公开笔记。<em>免费，无付费墙，不是建议。</em>",
+    "dashboardHeroTitle":"<span class=\"lbl\">// 部署日志 · 总览</span>公开构建的<br>组合<br><em>研究系统</em>。",
+    "dashboardHeroSub":"这里展示我如何结构化投资研究、跟踪公开申报、发布静态仪表盘，并用每周 operator loop 更新组合方向。<em>免费，无付费墙，不是建议。</em>",
     "dashboardReportsTitle":"三个视角，<br><em>一本账本</em>。",
     "dashboardDailyTitle":"每日<em>读数</em>，<br>不制造噪音。",
     "dailyHeroTitle":"<span class=\"lbl\">// 每日连接 · 市场情报</span>一页看清<br>每天的<em>信号</em>。",
@@ -632,7 +632,7 @@ const I18N = {
     "Malaysia Swing · 11 picks":"马来西亚波段 · 11 个标的",
     "Dividend income · 21 picks":"股息收入 · 21 个标的",
     "Compound calculator":"复利计算器",
-    "dashboardAboutCopy":"DAINER Finance 是一个操盘者关于市场、标的和资本的开放笔记。公开构建。不是财务建议，只是研究产物。每个标的都可从引用来源独立核验。",
+    "dashboardAboutCopy":"DAINER Finance 是一个操盘者关于市场、标的和资本系统的公开 proof-of-work。公开构建。不是财务建议，只是研究产物。每个标的都可从引用来源独立核验。",
     "usAnthropicSeriesG":"<em>Series G：</em>2026 年 2 月完成，post-money $380B",
     "usAnthropicRevenue":"<em>收入：</em>截至 2026 年 3 月年化 $19B，高于 1 月 $9B",
     "usAnthropicCounsel":"<em>法律顾问：</em>聘请 Wilson Sonsini（Google + LinkedIn 也用过同一家）",
