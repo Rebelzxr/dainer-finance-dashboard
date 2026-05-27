@@ -1,46 +1,51 @@
 {
-  "updated": "2026-05-26",
-  "generated_at": "2026-05-26T08:00:00+08:00",
-  "status": "manual_digest_sent",
-  "market_session": "Manual digest sent 2026-05-26 14:20 MYT",
+  "updated": "2026-05-27",
+  "generated_at": "2026-05-27T14:24:00+08:00",
+  "status": "ready_to_publish",
+  "market_session": "US close 2026-05-26 (Tue); brief prepared 2026-05-27 MYT",
   "site_url": "https://rebelzxr.github.io/dainer-finance-dashboard/daily-brief.html",
-  "headline": "Daily brief page ready; first verified market run pending",
+  "headline": "Nasdaq + S&P at records; Iran/Hormuz risk keeps oil/inflation tail risk live",
   "summary": [
-    "Manual Telegram news digest sent after the scheduled finance automation did not produce the expected news message.",
-    "The digest now includes war, macro, oil, gas, copper, rates, FX, Malaysia, and portfolio-moving titles.",
-    "The automation should replace this file every morning after verifying market, macro, event, source, and portfolio-impact data."
+    "US (May 26 close): S&P 500 +0.6% to 7,519.12; Nasdaq +1.2% to 26,656.18 (record); Dow -0.2% to 50,461.68; Russell 2000 +1.8% to 2,920.54.",
+    "Top risk: US–Iran conflict + Hormuz shipping uncertainty driving oil volatility and inflation expectations.",
+    "Malaysia: Bursa Malaysia closed May 27 (Aidiladha); BEA releases GDP (2nd est) + Personal Income & Outlays (Apr; includes PCE) on May 28 US time."
   ],
   "market_pulse": [
     {
       "label": "Market mode",
-      "value": "Pending",
-      "detail": "Next run checks SPY, QQQ, IWM, SMH, VIX, DXY, 10Y, BTC, and ETH.",
-      "tone": "neutral"
+      "value": "Risk-on (AI-led) despite war risk",
+      "detail": "Nasdaq and S&P hit records; Dow lagged. Oil/war headlines remain the regime risk.",
+      "tone": "watch"
     },
     {
-      "label": "Breadth",
-      "value": "Pending",
-      "detail": "Next run checks index breadth, sector leadership, and new high/new low quality where reliable sources are available.",
-      "tone": "neutral"
+      "label": "Rates / inflation channel",
+      "value": "Eased (qualitative)",
+      "detail": "AP reported Treasury yields eased on hopes of Iran de-escalation; official daily series lag latest session.",
+      "tone": "watch"
     },
     {
       "label": "Portfolio impact",
-      "value": "Pending",
-      "detail": "Next run maps any news to the US swing book, Malaysia book, dividend sleeve, and Leopold 13F tracker.",
-      "tone": "neutral"
+      "value": "Semis tailwind; LLY filing noted",
+      "detail": "Semis/AI bid supports TSM/SMH sensitivity; LLY financing/filing ties to Centessa acquisition terms.",
+      "tone": "watch"
     },
     {
       "label": "Telegram",
       "value": "Daily digest",
-      "detail": "Send a simple morning title list covering war, macro, oil, gas, copper, rates, FX, portfolio news, and urgent warnings.",
-      "tone": "watch"
+      "detail": "Daily title list updated for 2026-05-27; send via scripts/send-telegram-digest.py.",
+      "tone": "warning"
     }
   ],
   "alerts": [
     {
-      "level": "monitor",
-      "title": "Manual digest sent; scheduled finance run needs follow-up",
-      "detail": "TODO Telegram is working, but the finance digest had no run artifact. Dedicated digest sender added."
+      "level": "critical",
+      "title": "Iran strikes / Hormuz shipping risk keeps oil shock tail risk high",
+      "detail": "US reported 'self-defense' strikes in southern Iran (missile launch sites / minelaying boats). Oil moves remain headline-driven."
+    },
+    {
+      "level": "warning",
+      "title": "Source health: official daily yield/spot datasets lag the latest session",
+      "detail": "Official daily sources checked (e.g., FRED/EIA pages) showed last-updated data through May 22; latest-session official levels unavailable."
     }
   ],
   "warning_rules": [
@@ -69,10 +74,16 @@
         "why_watch": "Can move oil, gas, defense, shipping, gold, USD, and risk sentiment.",
         "titles": [
           {
-            "title": "US carried out new defensive strikes in southern Iran while peace talks continue",
-            "impact": "oil / gas / gold / defense / shipping",
-            "level": "warning",
-            "source": "Reuters / AP"
+            "title": "US military says it carried out 'self-defense' strikes in Iran, including on missile launch sites",
+            "impact": "oil / shipping / risk",
+            "level": "critical",
+            "source": "AP"
+          },
+          {
+            "title": "Russia fired more than 100 drones and two ballistic missiles at Ukraine overnight",
+            "impact": "risk / defense",
+            "level": "monitor",
+            "source": "AP"
           }
         ]
       },
@@ -81,10 +92,16 @@
         "why_watch": "Drives equity multiples, USD/MYR, bond yields, gold, BTC, and quality-growth pressure.",
         "titles": [
           {
-            "title": "Dollar steadies while US 10Y holds near 4.50% as oil/inflation risk remains",
-            "impact": "stocks / bonds / USD / MYR / gold",
+            "title": "US close (May 26): S&P +0.6% record; Nasdaq +1.2% record; Dow -0.2%; Russell 2000 +1.8%",
+            "impact": "equities / sentiment",
             "level": "monitor",
-            "source": "Reuters"
+            "source": "AP"
+          },
+          {
+            "title": "BEA May 28: GDP (2nd estimate) + Personal Income & Outlays (Apr; includes PCE)",
+            "impact": "rates / inflation",
+            "level": "monitor",
+            "source": "BEA"
           }
         ]
       },
@@ -93,10 +110,28 @@
         "why_watch": "Oil, gas, copper, uranium, and gold can signal inflation, growth, war risk, and industrial demand.",
         "titles": [
           {
-            "title": "Brent trades below $100 but remains tied to Hormuz deal risk; copper pulls back while LME stocks stay tight",
-            "impact": "energy / miners / inflation / cyclicals",
+            "title": "Reuters: Brent crude jumped about 4% after US strikes in Iran set back hopes for Hormuz reopening (May 26)",
+            "impact": "oil / inflation",
+            "level": "warning",
+            "source": "Reuters (MarketScreener mirror)"
+          },
+          {
+            "title": "Reuters: Oil pulled back in Asia as traders watched US–Iran talks after renewed hostilities (May 27)",
+            "impact": "oil volatility",
             "level": "monitor",
-            "source": "Reuters / AP / Axios"
+            "source": "Reuters (MarketScreener mirror)"
+          },
+          {
+            "title": "Reuters: LME 3-month copper near two-week peak around $13,688.50/t",
+            "impact": "copper / miners",
+            "level": "monitor",
+            "source": "Reuters (EnergyNews mirror)"
+          },
+          {
+            "title": "Reuters: Gold edges higher on weaker dollar; focus on US–Iran talks and Fed outlook",
+            "impact": "gold / hedges",
+            "level": "monitor",
+            "source": "Reuters (MarketScreener mirror)"
           }
         ]
       },
@@ -105,10 +140,34 @@
         "why_watch": "Maps major news to DAINER Finance holdings and watchlists.",
         "titles": [
           {
-            "title": "TSM/SMH export-control risk and LLY retatrutide momentum stay on watch",
-            "impact": "portfolio / watchlist / thesis",
+            "title": "Reuters: Micron hit $1T market cap; UBS raised target to $1,625 from $535",
+            "impact": "semis / SMH / TSM",
             "level": "monitor",
-            "source": "Tom's Hardware / Axios"
+            "source": "Reuters (Investing.com mirror)"
+          },
+          {
+            "title": "LLY 8-K: ~$8.94B net proceeds notes offering; Centessa-linked special mandatory redemption terms",
+            "impact": "LLY / financing / deal",
+            "level": "monitor",
+            "source": "SEC EDGAR"
+          }
+        ]
+      },
+      {
+        "category": "Malaysia / Asia",
+        "why_watch": "Local market closures, OPR path, and Asia risk can affect MY watchlist and USD/MYR.",
+        "titles": [
+          {
+            "title": "Bursa Malaysia closed May 27 for Aidiladha; resumes May 28",
+            "impact": "Malaysia equities / liquidity",
+            "level": "monitor",
+            "source": "The Star"
+          },
+          {
+            "title": "BNM MPC kept OPR at 2.75% (May 7 decision)",
+            "impact": "banks / MYR",
+            "level": "monitor",
+            "source": "Bernama"
           }
         ]
       }
@@ -117,9 +176,15 @@
   "event_calendar": [
     {
       "date": "2026-05-27",
-      "event": "Next site research refresh target",
-      "why_it_matters": "Current dainer-finance news and picks files mark this as the next weekly refresh.",
-      "source": "data/news.json"
+      "event": "Bursa Malaysia closed (Aidiladha)",
+      "why_it_matters": "No Malaysia cash equity session; liquidity/price discovery resumes May 28.",
+      "source": "The Star"
+    },
+    {
+      "date": "2026-05-28",
+      "event": "BEA: GDP (2nd est) + Personal Income & Outlays (Apr; includes PCE)",
+      "why_it_matters": "Key rates/FX catalyst; inflation prints feed into Fed path and equity multiples.",
+      "source": "bea.gov"
     },
     {
       "date": "2026-08-14",
@@ -132,17 +197,17 @@
     {
       "ticker": "TSM",
       "status": "no_change",
-      "note": "Largest US swing holding remains a foundry-monopoly thesis until verified new data says otherwise."
+      "note": "No thesis change today; monitor semis sentiment + oil/rates channel."
     },
     {
       "ticker": "LLY",
       "status": "watch",
-      "note": "Keep GLP-1 outcomes and supply signals on the daily catalyst radar."
+      "note": "LLY 8-K (May 20) details a large notes offering; monitor Centessa acquisition timing/terms and any integration/regulatory headlines."
     },
     {
       "ticker": "CEG",
       "status": "watch",
-      "note": "Track hyperscaler PPA, power pricing, and regulatory headlines."
+      "note": "No thesis change today; keep hyperscaler PPA/power pricing/regulatory headlines on watch."
     },
     {
       "ticker": "Leopold 13F",
@@ -190,6 +255,21 @@
       "source": "Company investor relations",
       "use": "Earnings releases, guidance, presentations, transcripts where available",
       "required": true
+    },
+    {
+      "source": "BEA / BLS / Fed / Treasury / EIA",
+      "use": "Official macro, inflation, rates, and energy data when available",
+      "required": true
+    },
+    {
+      "source": "AP",
+      "use": "Index closes and high-level market narrative",
+      "required": false
+    },
+    {
+      "source": "Reuters (mirrors)",
+      "use": "Market-moving headlines when official sources unavailable",
+      "required": false
     },
     {
       "source": "Reuters / Bloomberg / FT / WSJ / The Information",

@@ -1,17 +1,16 @@
-DAINER FINANCE NEWS DIGEST — 26 May 2026, 14:20 MYT
+DAINER FINANCE NEWS DIGEST — 27 May 2026, 14:24 MYT
 
-[WARNING] US carried out new defensive strikes in southern Iran while peace talks continue — oil / gas / gold / defense / shipping
-[ENERGY] Brent is back under $100 but still headline-driven; reopening Hormuz is not the same as normal tanker flow — oil / inflation / Asia
-[FX] Dollar steadies as markets price some Iran deal optimism but not a durable de-escalation — USD / MYR / EM currencies
-[RATES] US 10Y near 4.50% and 2Y near 4.06%; energy inflation and fiscal risk keep rate pressure alive — bonds / growth stocks
-[GOLD] Gold slipped while oil rose; higher energy prices keep the inflation/rates channel alive — gold / real yields
-[COPPER] Copper pulled back with dollar/oil moves, but LME available stocks are near a 10-week low — copper / miners / industrials
-[GAS/LNG] Hormuz still matters for LNG; Asia remains exposed until tankers, insurance and flows normalize — natural gas / LNG / utilities
-[MALAYSIA] Bursa opened lower on profit-taking after crude weakness; Maybank up, TNB/CIMB/IHH lower — Malaysia equities
-[PORTFOLIO] TSM/SMH watch: Taiwan AI chip smuggling crackdown keeps export-control risk in the semiconductor thesis — semis / AI supply chain
-[PORTFOLIO] LLY watch: retatrutide Phase 3 weight-loss data remains bullish; valuation and supply are the watch items — healthcare / GLP-1
-
-Sources used: Reuters via MarketScreener, AP, Axios, NST, Energy News / Reuters-linked commodity report, Tom's Hardware, Axios Lilly.
+[CRITICAL] US military says it carried out “self-defense” strikes in Iran, including on missile launch sites — oil / shipping / risk
+[WARNING] Reuters: Brent crude jumped ~4% after US strikes in Iran set back hopes for Hormuz re-opening (May 26) — oil / inflation
+[WAR] Russia fired more than 100 drones and two ballistic missiles at Ukraine overnight — risk / defense
+[MARKETS] May 26 US close: S&P +0.6% (record); Nasdaq +1.2% (record); Dow -0.2%; Russell 2000 +1.8% — risk sentiment
+[MACRO] BEA May 28: GDP (2nd estimate) + Personal Income & Outlays (Apr; includes PCE) — rates catalyst
+[ENERGY] Reuters: oil pulled back in Asia as traders watch US–Iran talks after renewed hostilities (May 27) — oil volatility
+[COPPER] Reuters: LME 3-month copper near $13,688/t (near two-week peak) — copper / miners
+[GOLD] Reuters: gold edges higher on weaker dollar; focus on US–Iran talks and Fed outlook — gold / hedges
+[PORTFOLIO] LLY 8-K: ~$8.94B net proceeds notes offering; Centessa-linked special mandatory redemption terms — LLY / financing / deal
+[SEMIS] Reuters: Micron hit $1T market cap; UBS raised target to $1,625 from $535 — SMH / TSM tailwind
+[MALAYSIA] Bursa Malaysia closed May 27 (Aidiladha); resumes May 28 — Malaysia equities / liquidity
 
 Full page:
 https://rebelzxr.github.io/dainer-finance-dashboard/telegram-news.html
