@@ -10,6 +10,10 @@ STAMP="$(date '+%Y-%m-%d-%H%M%S')"
 LOG_FILE="$LOG_DIR/weekly-operator-$STAMP.log"
 TELEGRAM_HELPER="$OS_ROOT/scripts/cron/_telegram.py"
 
+export HOME="${HOME:-/Users/dainer}"
+export CODEX_HOME="${CODEX_HOME:-/Users/dainer/.codex}"
+export PATH="/Users/dainer/.npm-global/bin:/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:$PATH"
+
 mkdir -p "$LOG_DIR"
 
 send_status() {
@@ -51,4 +55,3 @@ else
 fi
 
 exit "$STATUS"
-
